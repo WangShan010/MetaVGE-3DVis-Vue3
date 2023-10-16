@@ -72,7 +72,7 @@ export default {
     coordinatePost() {
         this.loading = true
       let that = this
-      axios.post(`http://8.141.168.107:9001/aspectAnalyze`, this.coordinates).then(res => {
+      axios.post(`http://8.146.208.114:9001/aspectAnalyze`, this.coordinates).then(res => {
         console.log("添加数据返回结果为：", res)
         this.tifId = res.data;
         let geoTiff = res.data;//返回的的结果ID
@@ -82,7 +82,7 @@ export default {
     //添加到球上
     async addResult(geoTiff) {
       //获取tif
-      const response = await fetch(`http://8.141.168.107:9001/static/tempoutput/${geoTiff}`);
+      const response = await fetch(`http://8.146.208.114:9001/static/tempoutput/${geoTiff}`);
       //通过geotiff.js解析tif
       const arrayBuffer = await response.arrayBuffer();
       const tiff = await GeoTIFF.fromArrayBuffer(arrayBuffer);
@@ -137,7 +137,7 @@ export default {
               lonlat: lonlat,
               fileName: 'aspect.tif'
             }
-            axios.post(`http://8.141.168.107:9001/readingPixel`, store).then(res => {
+            axios.post(`http://8.146.208.114:9001/readingPixel`, store).then(res => {
               console.log("添加数据返回结果为：", res)
               that.pixelValue = res.data;//返回的的结果ID
               that.simpleLabel(lonlat, that.pixelValue, height)
@@ -169,7 +169,7 @@ export default {
     },
     //导出tif
     downTif() {
-      window.open(`http://8.141.168.107:9001/tempoutput/${this.tifId}`);
+      window.open(`http://8.146.208.114:9001/tempoutput/${this.tifId}`);
     },
     //清空图像
     removeImage() {

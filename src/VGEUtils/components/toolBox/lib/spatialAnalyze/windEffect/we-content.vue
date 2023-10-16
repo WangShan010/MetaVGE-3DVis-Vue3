@@ -74,7 +74,7 @@ export default {
     //传参数(坐标值)给后端
     coordinatePost() {
       let that = this
-      axios.post(`http://8.141.168.107:9001/windEffect`, this.postData).then(res => {
+      axios.post(`http://8.146.208.114:9001/windEffect`, this.postData).then(res => {
         console.log("添加数据返回结果为：", res)
         this.downLoad = res.data;
         console.log(this.downLoad[0])
@@ -83,7 +83,7 @@ export default {
       });
     },
     downTif(num) {
-      window.open(`http://8.141.168.107:9001/static/tempoutput/${this.downLoad[num]}`);
+      window.open(`http://8.146.208.114:9001/static/tempoutput/${this.downLoad[num]}`);
     },
     //查询tif像素值
     readingPixel() {
@@ -103,7 +103,7 @@ export default {
               lonlat: lonlat,
               fileName: 'clipDEM_windEffect.tif'
             }
-            axios.post(`http://8.141.168.107:9001/readingPixel`, store).then(res => {
+            axios.post(`http://8.146.208.114:9001/readingPixel`, store).then(res => {
               console.log("添加数据返回结果为：", res)
               that.pixelValue = res.data;//返回的的结果ID
               that.simpleLabel(lonlat, that.pixelValue, height)
@@ -159,7 +159,7 @@ export default {
     //添加到球上
     async addResult(num) {
       //获取tif
-      const response = await fetch(`http://8.141.168.107:9001/static/tempoutput/${this.downLoad[num]}`);
+      const response = await fetch(`http://8.146.208.114:9001/static/tempoutput/${this.downLoad[num]}`);
       // const response = await fetch(`http://localhost:3000/Resources/tempoutput/viewshed.tif`);
       // const response = await fetch(`./static/slope.tif`);
       //通过geotiff.js解析tif

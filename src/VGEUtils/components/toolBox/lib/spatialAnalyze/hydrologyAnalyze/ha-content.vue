@@ -102,12 +102,12 @@ export default {
         async addResult() {
             if (this.coordinates) {
                 this.remove();
-                this.result = (await axios.post(`http://8.141.168.107:9001/${this.analyze}`, {
+                this.result = (await axios.post(`http://8.146.208.114:9001/${this.analyze}`, {
                     coordinates: this.coordinates,
                     params: this.params
                 })).data;
                 for (const value of this.result) {
-                    const file = `http://8.141.168.107:9001/static/tempoutput/${value}`;
+                    const file = `http://8.146.208.114:9001/static/tempoutput/${value}`;
                     if (value.split('.')[1] === 'tif') {
                         const response = await fetch(file);
                         // 解析tif
@@ -163,14 +163,14 @@ export default {
         },
         download() {
             for (const value of this.result) {
-                window.open(`http://8.141.168.107:9001/static/tempoutput/${value}`)
+                window.open(`http://8.146.208.114:9001/static/tempoutput/${value}`)
             }
         },
         readingPixel() {
             let drawer = new VGEEarth.DrawShape(VGEEarth.getMainViewer());
             drawer.drawPoint({
                 coordinateType: 'cartographicObj', endCallback: async (e) => {
-                    const {data: pixelValue} = await axios.post(`http://8.141.168.107:9001/readingPixel`, {
+                    const {data: pixelValue} = await axios.post(`http://8.146.208.114:9001/readingPixel`, {
                         lonlat: [e[0].longitude, e[0].latitude],
                         fileName: `${this.analyze}.tif`
                     })

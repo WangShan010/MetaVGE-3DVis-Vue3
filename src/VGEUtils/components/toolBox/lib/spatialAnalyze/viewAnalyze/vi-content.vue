@@ -100,7 +100,7 @@ export default {
               lonlat: lonlat,
               fileName: 'viewshed.tif'
             }
-            axios.post(`http://8.141.168.107:9001/readingPixel`, store).then(res => {
+            axios.post(`http://8.146.208.114:9001/readingPixel`, store).then(res => {
               console.log("添加数据返回结果为：", res)
               that.pixelValue = res.data;//返回的的结果ID
               that.simpleLabel(lonlat, that.pixelValue, height)
@@ -172,7 +172,7 @@ export default {
       console.log( [this.coordinates,that.point[0],that.point[1],
         that.WatcherHigh,that.WatchHigh,that.VisualRange])
       //服务器地址
-      axios.post(`http://8.141.168.107:9001/viewAnalyze`, [this.coordinates,that.point[0][0],that.point[0][1],
+      axios.post(`http://8.146.208.114:9001/viewAnalyze`, [this.coordinates,that.point[0][0],that.point[0][1],
         that.WatcherHigh,that.WatchHigh,that.VisualRange]).then(res => {
         this.tifId = res.data;
         let geoTiff = res.data;//返回的的结果ID
@@ -185,7 +185,7 @@ export default {
       //获取tif
       //http://122.227.134.126:98/Resources/gaozhiguo-data/tempoutput/
       //http://127.0.0.1:5003/static/tempoutput/${geoTiff}
-      const response = await fetch(`http://8.141.168.107:9001/static/tempoutput/${geoTiff}`);
+      const response = await fetch(`http://8.146.208.114:9001/static/tempoutput/${geoTiff}`);
       // const response = await fetch(`http://localhost:3000/Resources/tempoutput/${geoTiff}`);
       console.log(response)
       //通过geotiff.js解析tif
