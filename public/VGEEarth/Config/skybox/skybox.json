@@ -1,0 +1,260 @@
+{
+  "baseUrl": "./VGEEarth/Config/skybox/",
+  "farSkyBoxList": [
+    {
+      "name": "默认天空盒",
+      "sources": {
+        "positiveX": "farSkyBoxs/01/tycho2t3_80_px.jpg",
+        "negativeX": "farSkyBoxs/01/tycho2t3_80_mx.jpg",
+        "positiveY": "farSkyBoxs/01/tycho2t3_80_py.jpg",
+        "negativeY": "farSkyBoxs/01/tycho2t3_80_my.jpg",
+        "positiveZ": "farSkyBoxs/01/tycho2t3_80_pz.jpg",
+        "negativeZ": "farSkyBoxs/01/tycho2t3_80_mz.jpg"
+      }
+    },
+    {
+      "name": "星空天空盒1",
+      "sources": {
+        "positiveX": "farSkyBoxs/02/px.jpg",
+        "positiveY": "farSkyBoxs/02/py.jpg",
+        "positiveZ": "farSkyBoxs/02/pz.jpg",
+        "negativeX": "farSkyBoxs/02/nx.jpg",
+        "negativeY": "farSkyBoxs/02/ny.jpg",
+        "negativeZ": "farSkyBoxs/02/nz.jpg"
+      }
+    },
+    {
+      "name": "星空天空盒2",
+      "sources": {
+        "positiveX": "farSkyBoxs/03/px.jpg",
+        "positiveY": "farSkyBoxs/03/py.jpg",
+        "positiveZ": "farSkyBoxs/03/pz.jpg",
+        "negativeX": "farSkyBoxs/03/nx.jpg",
+        "negativeY": "farSkyBoxs/03/ny.jpg",
+        "negativeZ": "farSkyBoxs/03/nz.jpg"
+      }
+    }
+  ],
+  "groundSkyBoxList": [
+    {
+      "name": "天空盒1",
+      "sources": {
+        "positiveX": "groundSkyBoxs/01/px.png",
+        "positiveY": "groundSkyBoxs/01/py.png",
+        "positiveZ": "groundSkyBoxs/01/pz.png",
+        "negativeX": "groundSkyBoxs/01/nx.png",
+        "negativeY": "groundSkyBoxs/01/ny.png",
+        "negativeZ": "groundSkyBoxs/01/nz.png"
+      }
+    },
+    {
+      "name": "天空盒2",
+      "sources": {
+        "positiveX": "groundSkyBoxs/02/px.jpg",
+        "positiveY": "groundSkyBoxs/02/py.jpg",
+        "positiveZ": "groundSkyBoxs/02/pz.jpg",
+        "negativeX": "groundSkyBoxs/02/nx.jpg",
+        "negativeY": "groundSkyBoxs/02/ny.jpg",
+        "negativeZ": "groundSkyBoxs/02/nz.jpg"
+      }
+    },
+    {
+      "name": "天空盒3",
+      "sources": {
+        "positiveX": "groundSkyBoxs/03/px.jpg",
+        "positiveY": "groundSkyBoxs/03/py.jpg",
+        "positiveZ": "groundSkyBoxs/03/pz.jpg",
+        "negativeX": "groundSkyBoxs/03/nx.jpg",
+        "negativeY": "groundSkyBoxs/03/ny.jpg",
+        "negativeZ": "groundSkyBoxs/03/nz.jpg"
+      }
+    },
+    {
+      "name": "天空盒4",
+      "sources": {
+        "positiveX": "groundSkyBoxs/04/Right.jpg",
+        "negativeX": "groundSkyBoxs/04/Left.jpg",
+        "positiveY": "groundSkyBoxs/04/Front.jpg",
+        "negativeY": "groundSkyBoxs/04/Back.jpg",
+        "positiveZ": "groundSkyBoxs/04/Up.jpg",
+        "negativeZ": "groundSkyBoxs/04/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒5",
+      "sources": {
+        "positiveX": "groundSkyBoxs/05/Right.jpg",
+        "negativeX": "groundSkyBoxs/05/Left.jpg",
+        "positiveY": "groundSkyBoxs/05/Front.jpg",
+        "negativeY": "groundSkyBoxs/05/Back.jpg",
+        "positiveZ": "groundSkyBoxs/05/Up.jpg",
+        "negativeZ": "groundSkyBoxs/05/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒6",
+      "sources": {
+        "positiveX": "groundSkyBoxs/06/Right.jpg",
+        "negativeX": "groundSkyBoxs/06/Left.jpg",
+        "positiveY": "groundSkyBoxs/06/Front.jpg",
+        "negativeY": "groundSkyBoxs/06/Back.jpg",
+        "positiveZ": "groundSkyBoxs/06/Up.jpg",
+        "negativeZ": "groundSkyBoxs/06/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒7",
+      "sources": {
+        "positiveX": "groundSkyBoxs/07/Right.png",
+        "negativeX": "groundSkyBoxs/07/Left.png",
+        "positiveY": "groundSkyBoxs/07/Front.png",
+        "negativeY": "groundSkyBoxs/07/Back.png",
+        "positiveZ": "groundSkyBoxs/07/Up.png",
+        "negativeZ": "groundSkyBoxs/07/Down.png"
+      }
+    },
+    {
+      "name": "天空盒8",
+      "sources": {
+        "positiveX": "groundSkyBoxs/08/Right.jpg",
+        "negativeX": "groundSkyBoxs/08/Left.jpg",
+        "positiveY": "groundSkyBoxs/08/Front.jpg",
+        "negativeY": "groundSkyBoxs/08/Back.jpg",
+        "positiveZ": "groundSkyBoxs/08/Up.jpg",
+        "negativeZ": "groundSkyBoxs/08/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒9",
+      "sources": {
+        "positiveX": "groundSkyBoxs/09/Right.jpg",
+        "negativeX": "groundSkyBoxs/09/Left.jpg",
+        "positiveY": "groundSkyBoxs/09/Front.jpg",
+        "negativeY": "groundSkyBoxs/09/Back.jpg",
+        "positiveZ": "groundSkyBoxs/09/Up.jpg",
+        "negativeZ": "groundSkyBoxs/09/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒10",
+      "sources": {
+        "positiveX": "groundSkyBoxs/10/Right.jpg",
+        "negativeX": "groundSkyBoxs/10/Left.jpg",
+        "positiveY": "groundSkyBoxs/10/Front.jpg",
+        "negativeY": "groundSkyBoxs/10/Back.jpg",
+        "positiveZ": "groundSkyBoxs/10/Up.jpg",
+        "negativeZ": "groundSkyBoxs/10/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒11",
+      "sources": {
+        "positiveX": "groundSkyBoxs/11/Right.jpg",
+        "negativeX": "groundSkyBoxs/11/Left.jpg",
+        "positiveY": "groundSkyBoxs/11/Front.jpg",
+        "negativeY": "groundSkyBoxs/11/Back.jpg",
+        "positiveZ": "groundSkyBoxs/11/Up.jpg",
+        "negativeZ": "groundSkyBoxs/11/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒12",
+      "sources": {
+        "positiveX": "groundSkyBoxs/12/Right.jpg",
+        "negativeX": "groundSkyBoxs/12/Left.jpg",
+        "positiveY": "groundSkyBoxs/12/Front.jpg",
+        "negativeY": "groundSkyBoxs/12/Back.jpg",
+        "positiveZ": "groundSkyBoxs/12/Up.jpg",
+        "negativeZ": "groundSkyBoxs/12/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒13",
+      "sources": {
+        "positiveX": "groundSkyBoxs/13/Right.jpg",
+        "negativeX": "groundSkyBoxs/13/Left.jpg",
+        "positiveY": "groundSkyBoxs/13/Front.jpg",
+        "negativeY": "groundSkyBoxs/13/Back.jpg",
+        "positiveZ": "groundSkyBoxs/13/Up.jpg",
+        "negativeZ": "groundSkyBoxs/13/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒14",
+      "sources": {
+        "positiveX": "groundSkyBoxs/14/Right.jpg",
+        "negativeX": "groundSkyBoxs/14/Left.jpg",
+        "positiveY": "groundSkyBoxs/14/Front.jpg",
+        "negativeY": "groundSkyBoxs/14/Back.jpg",
+        "positiveZ": "groundSkyBoxs/14/Up.jpg",
+        "negativeZ": "groundSkyBoxs/14/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒15",
+      "sources": {
+        "positiveX": "groundSkyBoxs/15/Right.jpg",
+        "negativeX": "groundSkyBoxs/15/Left.jpg",
+        "positiveY": "groundSkyBoxs/15/Front.jpg",
+        "negativeY": "groundSkyBoxs/15/Back.jpg",
+        "positiveZ": "groundSkyBoxs/15/Up.jpg",
+        "negativeZ": "groundSkyBoxs/15/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒16",
+      "sources": {
+        "positiveX": "groundSkyBoxs/16/Right.jpg",
+        "negativeX": "groundSkyBoxs/16/Left.jpg",
+        "positiveY": "groundSkyBoxs/16/Front.jpg",
+        "negativeY": "groundSkyBoxs/16/Back.jpg",
+        "positiveZ": "groundSkyBoxs/16/Up.jpg",
+        "negativeZ": "groundSkyBoxs/16/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒17",
+      "sources": {
+        "positiveX": "groundSkyBoxs/17/Right.jpg",
+        "negativeX": "groundSkyBoxs/17/Left.jpg",
+        "positiveY": "groundSkyBoxs/17/Front.jpg",
+        "negativeY": "groundSkyBoxs/17/Back.jpg",
+        "positiveZ": "groundSkyBoxs/17/Up.jpg",
+        "negativeZ": "groundSkyBoxs/17/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒18",
+      "sources": {
+        "positiveX": "groundSkyBoxs/18/Right.jpg",
+        "negativeX": "groundSkyBoxs/18/Left.jpg",
+        "positiveY": "groundSkyBoxs/18/Front.jpg",
+        "negativeY": "groundSkyBoxs/18/Back.jpg",
+        "positiveZ": "groundSkyBoxs/18/Up.jpg",
+        "negativeZ": "groundSkyBoxs/18/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒19",
+      "sources": {
+        "positiveX": "groundSkyBoxs/19/Right.jpg",
+        "negativeX": "groundSkyBoxs/19/Left.jpg",
+        "positiveY": "groundSkyBoxs/19/Front.jpg",
+        "negativeY": "groundSkyBoxs/19/Back.jpg",
+        "positiveZ": "groundSkyBoxs/19/Up.jpg",
+        "negativeZ": "groundSkyBoxs/19/Down.jpg"
+      }
+    },
+    {
+      "name": "天空盒20",
+      "sources": {
+        "positiveX": "groundSkyBoxs/20/Right.jpg",
+        "negativeX": "groundSkyBoxs/20/Left.jpg",
+        "positiveY": "groundSkyBoxs/20/Front.jpg",
+        "negativeY": "groundSkyBoxs/20/Back.jpg",
+        "positiveZ": "groundSkyBoxs/20/Up.jpg",
+        "negativeZ": "groundSkyBoxs/20/Down.jpg"
+      }
+    }
+  ]
+}

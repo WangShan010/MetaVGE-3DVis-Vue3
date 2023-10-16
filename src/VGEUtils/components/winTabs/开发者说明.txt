@@ -1,0 +1,2 @@
+这个组件是基于 ElementPro 的 Tabs 组件，
+配合 Vue3DraggableResizable 进行封装的

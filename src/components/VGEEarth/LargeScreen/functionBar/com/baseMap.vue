@@ -1,0 +1,109 @@
+<template>
+  <div class="base-map" v-if="show">
+    <div class="tool-title">
+      <div>
+        <img src="../../assets/img/base-map.png" alt="">
+        <span>底图</span>
+      </div>
+      <img class="close-btn" src="../../assets/img/close.png" alt="" @click="close">
+    </div>
+    <div class="tool-body">
+      <div class="maps">
+        <div class='map-selected'>
+          <div><img src="../../assets/img/map-gothe.png" alt=""></div>
+          <div>高德影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-OSM.png" alt=""></div>
+          <div>OSM影像</div>
+        </div>
+        <div>
+          <div>
+            <img src="../../assets/img/map-gothe.png" alt="">
+          </div>
+          <div>天地图影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-tencent.png" alt=""></div>
+          <div>腾讯影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-gothe.png" alt=""></div>
+          <div>高德影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-OSM.png" alt=""></div>
+          <div>OSM影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-gothe.png" alt=""></div>
+          <div>天地图影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-tencent.png" alt=""></div>
+          <div>腾讯影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-gothe.png" alt=""></div>
+          <div>高德影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-OSM.png" alt=""></div>
+          <div>OSM影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-gothe.png" alt=""></div>
+          <div>天地图影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-tencent.png" alt=""></div>
+          <div>腾讯影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-gothe.png" alt=""></div>
+          <div>高德影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-OSM.png" alt=""></div>
+          <div>OSM影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-gothe.png" alt=""></div>
+          <div>天地图影像</div>
+        </div>
+        <div>
+          <div><img src="../../assets/img/map-gothe.png" alt=""></div>
+          <div>天地图影像</div>
+        </div>
+      </div>
+      <div class="show-terrain">
+        <a-checkbox>
+          显示地形
+        </a-checkbox>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'baseMap',
+  methods: {
+    close() {
+    }
+  },
+  computed: {
+    show() {
+      return false;
+    }
+  }
+};
+</script>
+
+
+<style scoped lang='less'>
+@import "../../assets/css/common-theme.less";
+@import "../../assets/css/green-theme.less";
+@import "../../assets/css/yellow-theme.less";
+</style>
+

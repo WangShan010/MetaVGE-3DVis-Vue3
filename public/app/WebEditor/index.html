@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代码编辑器</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/monaco-editor/0.43.0/min/vs/loader.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #App {
+            height: 100%;
+            display: flex;
+        }
+
+
+        #editor {
+            height: 100%;
+            width: 1200px;
+            display: none;
+            border: 1px solid grey
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        #codeBtn {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            border: rgba(225, 224, 219, 0.6) 1px solid;
+            border-radius: 4px;
+            padding: 4px;
+            background: rgba(12, 168, 163, 0.7);
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        #htmlView {
+            height: 100%;
+            width: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="App">
+    <div id="editor"></div>
+    <div class="content">
+        <div id="codeBtn">查看源码</div>
+        <iframe id="htmlView"></iframe>
+    </div>
+</div>
+<script type="module">
+    window.demoServer = 'http://8.146.208.114:3000/VGEEarth-SDK';
+    // window.demoServer = 'http://127.0.0.1:3008';
+
+    import { getDemoList, buildHtml, getHtmlContent } from './src/main.js';
+
+    require.config({paths: {vs: 'https://cdn.bootcdn.net/ajax/libs/monaco-editor/0.43.0/min/vs'}});
+
+    let htmlText = '';
+    let editor = null;
+
+    async function init() {
+
+        // 获取get参数
+        const url = new URL(window.location.href);
+        const demoPid = Number(url.searchParams.get('demo')) || 0;
+
+        if (htmlText === '') {
+            const demoList = await getDemoList();
+            const demoPath = decodeURI(new URL(demoList.find(item => item.pid === demoPid).htmlUrl, window.demoServer + '/Demo').href).replace('index.html', '');
+
+            const htmlPath = decodeURI(new URL(demoList.find(item => item.pid === demoPid).htmlUrl, window.demoServer+ '/Demo').href);
+            const jsPath = demoPath + 'index.js';
+
+            let jsText = await getHtmlContent(jsPath);
+
+            jsText = '    ' + jsText.replaceAll(`\n`, `\n    `);
+
+            jsText = jsText.replaceAll(`./`, demoPath + `/`);
+
+
+            htmlText = await getHtmlContent(htmlPath);
+            htmlText = htmlText.replace(`<script type="module" src="index.js"><\/script>`, `<script type="module">\n\n` + jsText + `\n<\/script>`);
+            htmlText = htmlText.replace(`<script src="index.js" type="module"><\/script>`, `<script type="module">\n\n` + jsText + `\n<\/script>`);
+
+            htmlText = htmlText.replaceAll(`../../../Ext/`, 'https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/');
+            htmlText = htmlText.replaceAll(`../../../Src/dist/`, `https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/VGEEarth/LTS-2023-10-10/`);
+
+            htmlText = htmlText.replaceAll('="./', '="' + htmlPath.replace('index.html', ''));
+
+        }
+        buildHtml(htmlText);
+
+
+        require(['vs/editor/editor.main'], function () {
+            editor?.dispose();
+            editor = monaco.editor.create(document.getElementById('editor'), {
+                value: [htmlText].join('\n'),
+                language: 'html'
+            });
+            editor.trigger('anyString', 'editor.action.formatDocument');
+
+            editor.onDidChangeModelContent(function () {
+                const htmlText = editor.getValue();
+                buildHtml(htmlText);
+            });
+        });
+    }
+
+
+    document.querySelector('#codeBtn').addEventListener('click', function () {
+        const editorDiv = document.getElementById('editor');
+        if (editorDiv.style.display === 'block') {
+            editorDiv.style.display = 'none';
+        } else {
+            editorDiv.style.display = 'block';
+            init();
+        }
+    });
+
+    window.addEventListener('load', () => init());
+</script>
+</body>
+</html>

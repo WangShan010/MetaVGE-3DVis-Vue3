@@ -1,0 +1,354 @@
+[
+  {
+    "groupName": "信息弹框",
+    "plotList": [
+      {
+        "code": "winInfo-Bubble-1",
+        "name": "气泡窗口-1",
+        "type": "winInfo",
+        "symbolUrl": "./VGEEarth/Config/plotTool/custom/信息.png",
+        "paramList": [
+          {
+            "name": "标题",
+            "value": "默认标题",
+            "defaultLabel": true
+          },
+          {
+            "name": "内容",
+            "value": "默认内容"
+          }
+        ]
+      },
+      {
+        "code": "winInfo-Bubble-2",
+        "type": "winInfo",
+        "name": "气泡窗口-2",
+        "paramList": [
+          {
+            "name": "标题",
+            "value": "默认标题",
+            "defaultLabel": true
+          },
+          {
+            "name": "内容",
+            "value": "默认内容"
+          }
+        ]
+      },
+      {
+        "code": "winInfo-device",
+        "type": "winInfo",
+        "name": "设备状态窗口",
+        "paramList": [
+          {
+            "name": "标题",
+            "value": "默认标题"
+          },
+          {
+            "name": "内容",
+            "value": "默认内容"
+          },
+          {
+            "name": "颜色",
+            "value": "green",
+            "select": [
+              {
+                "key": 1,
+                "value": "green",
+                "label": "绿色"
+              },
+              {
+                "key": 2,
+                "value": "yellow",
+                "label": "黄色"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "code": "winInfo-HLS",
+        "type": "winInfo",
+        "name": "HLS视频窗口",
+        "paramList": [
+          {
+            "name": "标题",
+            "value": "HLS窗口"
+          },
+          {
+            "name": "视频",
+            "value": "http://220.161.87.62:8800/hls/0/index.m3u8"
+          }
+        ]
+      },
+      {
+        "code": "winInfo-SimpleLabel",
+        "type": "winInfo",
+        "name": "简单标注点",
+        "paramList": [
+          {
+            "name": "内容",
+            "value": "默认内容"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "groupName": "单体模型",
+    "plotList": [
+      {
+        "code": "m00",
+        "name": "无人机",
+        "type": "modelEntity",
+        "modelUrl": "./VGEEarth/Src/dist/glb/动态轨迹线/wrj.glb"
+      },
+      {
+        "code": "m01",
+        "name": "舰船",
+        "type": "modelEntity",
+        "modelUrl": "http://localhost:3000/Resources/PlotManager/plotList/模型标绘/基础模型/ship.gltf"
+      },
+      {
+        "code": "m02",
+        "name": "侦查机",
+        "type": "modelEntity",
+        "modelUrl": "http://localhost:3000/Resources/PlotManager/plotList/模型标绘/基础模型/plane.glb"
+      }
+    ]
+  },
+  {
+    "groupName": "粒子系统",
+    "plotList": [
+      {
+        "code": "particleSystem-fire",
+        "name": "火焰效果",
+        "type": "particleSystem",
+        "paramList": [
+          {
+            "name": "粒子数量",
+            "value": "",
+            "placeholder": "0-1000"
+          },
+          {
+            "name": "粒子大小",
+            "value": "",
+            "placeholder": "0-60"
+          },
+          {
+            "name": "最小速度",
+            "value": "",
+            "placeholder": "0-30"
+          },
+          {
+            "name": "最大速度",
+            "value": "",
+            "placeholder": "0-30"
+          },
+          {
+            "name": "初始比例",
+            "value": "",
+            "placeholder": "0-10"
+          },
+          {
+            "name": "终止比例",
+            "value": "",
+            "placeholder": "0-10"
+          },
+          {
+            "name": "最小生命周期",
+            "value": "",
+            "placeholder": "0.1-5.0"
+          },
+          {
+            "name": "最大生命周期",
+            "value": "",
+            "placeholder": "0.1-5.0"
+          }
+        ]
+      },
+      {
+        "code": "particleSystem-fountain",
+        "name": "喷泉效果",
+        "type": "particleSystem",
+        "paramList": [
+          {
+            "name": "粒子数量",
+            "value": "",
+            "placeholder": "0-1000"
+          },
+          {
+            "name": "粒子大小",
+            "value": "",
+            "placeholder": "0-60"
+          },
+          {
+            "name": "最小速度",
+            "value": "",
+            "placeholder": "0-30"
+          },
+          {
+            "name": "最大速度",
+            "value": "",
+            "placeholder": "0-30"
+          },
+          {
+            "name": "初始比例",
+            "value": "",
+            "placeholder": "0-10"
+          },
+          {
+            "name": "终止比例",
+            "value": "",
+            "placeholder": "0-10"
+          },
+          {
+            "name": "重力大小",
+            "value": "",
+            "placeholder": "-20-20"
+          },
+          {
+            "name": "最小生命周期",
+            "value": "",
+            "placeholder": "0.1-5.0"
+          },
+          {
+            "name": "最大生命周期",
+            "value": "",
+            "placeholder": "0.1-5.0"
+          }
+        ]
+      },
+      {
+        "code": "particleSystem-smoke",
+        "name": "烟雾效果",
+        "type": "particleSystem",
+        "paramList": [
+          {
+            "name": "风向",
+            "value": "",
+            "select": [
+              {
+                "key": 0,
+                "value": {
+                  "heading": 180,
+                  "pitch": 0
+                },
+                "label": "无风"
+              },
+              {
+                "key": 1,
+                "value": {
+                  "heading": 270,
+                  "pitch": 60
+                },
+                "label": "北风"
+              },
+              {
+                "key": 2,
+                "value": {
+                  "heading": 315,
+                  "pitch": 60
+                },
+                "label": "东北风"
+              },
+              {
+                "key": 3,
+                "value": {
+                  "heading": 360,
+                  "pitch": 60
+                },
+                "label": "东风"
+              },
+              {
+                "key": 4,
+                "value": {
+                  "heading": 405,
+                  "pitch": 60
+                },
+                "label": "东南风"
+              },
+              {
+                "key": 5,
+                "value": {
+                  "heading": 450,
+                  "pitch": 60
+                },
+                "label": "南风"
+              },
+              {
+                "key": 6,
+                "value": {
+                  "heading": 135,
+                  "pitch": 60
+                },
+                "label": "西南风"
+              },
+              {
+                "key": 7,
+                "value": {
+                  "heading": 180,
+                  "pitch": 60
+                },
+                "label": "西风"
+              },
+              {
+                "key": 8,
+                "value": {
+                  "heading": 225,
+                  "pitch": 60
+                },
+                "label": "西北风"
+              }
+            ]
+          },
+          {
+            "name": "粒子数量",
+            "value": "",
+            "placeholder": "0-1000"
+          },
+          {
+            "name": "粒子大小",
+            "value": "",
+            "placeholder": "0-60"
+          },
+          {
+            "name": "最小速度",
+            "value": "",
+            "placeholder": "0-30"
+          },
+          {
+            "name": "最大速度",
+            "value": "",
+            "placeholder": "0-30"
+          },
+          {
+            "name": "初始比例",
+            "value": "",
+            "placeholder": "0-10"
+          },
+          {
+            "name": "终止比例",
+            "value": "",
+            "placeholder": "0-10"
+          },
+          {
+            "name": "重力大小",
+            "value": "",
+            "placeholder": "-20-20"
+          },
+          {
+            "name": "最小生命周期",
+            "value": "",
+            "placeholder": "0.1-5.0"
+          },
+          {
+            "name": "最大生命周期",
+            "value": "",
+            "placeholder": "0.1-5.0"
+          }
+        ]
+      }
+    ]
+  }
+]

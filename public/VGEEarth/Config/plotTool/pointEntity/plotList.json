@@ -1,0 +1,32 @@
+[
+  {
+    "code": "pointEntity-001",
+    "type": "pointEntity",
+    "label": "加油站",
+    "symbolUrl": "./VGEEarth/Config/plotTool/pointEntity/icon/加油站.png"
+  },
+  {
+    "code": "pointEntity-002",
+    "type": "pointEntity",
+    "label": "学校",
+    "symbolUrl": "./VGEEarth/Config/plotTool/pointEntity/icon/学校.png"
+  },
+  {
+    "code": "pointEntity-003",
+    "type": "pointEntity",
+    "label": "房屋",
+    "symbolUrl": "./VGEEarth/Config/plotTool/pointEntity/icon/房屋.png"
+  },
+  {
+    "code": "pointEntity-004",
+    "type": "pointEntity",
+    "label": "挖掘机",
+    "symbolUrl": "./VGEEarth/Config/plotTool/pointEntity/icon/挖掘机.png"
+  },
+  {
+    "code": "pointEntity-005",
+    "type": "pointEntity",
+    "label": "医院",
+    "symbolUrl": "./VGEEarth/Config/plotTool/pointEntity/icon/医院.png"
+  }
+]

@@ -1,0 +1,8 @@
+[
+  {"label": "箭头线", "type": "PolylineArrowMaterial", "url": "./VGEEarth/Config/plotTool/lineEntity/img/箭头线.png"},
+  {"label": "传输线", "type": "PolylineEnergyTransMaterial", "url": "./VGEEarth/Config/plotTool/lineEntity/img/传输线.png"},
+  {"label": "发光线", "type": "PolylineLightingMaterial", "url": "./VGEEarth/Config/plotTool/lineEntity/img/发光线.png"},
+  {"label": "脉冲线", "type": "PolylineLinkPulseMaterial", "url": "./VGEEarth/Config/plotTool/lineEntity/img/脉冲线.png"},
+  {"label": "精灵线", "type": "PolylineSpriteMaterial", "url": "./VGEEarth/Config/plotTool/lineEntity/img/精灵线.png"},
+  {"label": "超级线", "type": "PolylineSuperMaterial", "url": "./VGEEarth/Config/plotTool/lineEntity/img/精灵线.png"}
+]

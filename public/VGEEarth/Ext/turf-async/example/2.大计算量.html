@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../index.js"></script>
+</head>
+<body>
+
+<h1>Turf 的多线程运算</h1>
+<button onclick="runTurf(geoJson)">执行 turf 运算</button>
+<button onclick="runTurfAsync(geoJson)">执行 turf 运算</button>
+
+<h3 style="color: #66c03b">当前计算：<span id="task">空闲</span></h3>
+<h3 style="color: #66c03b">UI 渲染线程：当前时间为 <span id="time"></span></h3>
+<h3 style="color: #4800a0">运算结果：<span id="result">...</span></h3>
+
+<script>
+
+    async function main() {
+        await showCurrentTime();
+        await turfAsync.init();
+        window.geoJson = await fetch('https://fgyao.oss-cn-beijing.aliyuncs.com/turf-async/example/geojson/中国.json').then(res => res.json());
+    }
+
+
+    async function showCurrentTime() {
+        // 实时显示当前时间
+        setInterval(() => {
+            document.getElementById('time').textContent = new Date();
+        }, 10);
+    }
+
+    async function runTurf(geoJson) {
+        document.getElementById('task').textContent = '原生 turf 计算量过大，页面阻塞卡死';
+        await new Promise(resolve => setTimeout(e => resolve(), 100));
+        console.time('turf');
+        let b1 = turf.buffer(geoJson, 500, {units: 'miles'});
+        console.log(b1);
+        console.timeEnd('turf');
+        document.getElementById('task').textContent = '空闲';
+        document.getElementById('result').textContent = JSON.stringify(b1);
+    }
+
+
+    async function runTurfAsync(geoJson) {
+        document.getElementById('task').textContent = 'turfAsync 多线程运算中，页面渲染流畅';
+        console.time('turfAsync');
+        let b2 = await turfAsync.buffer(geoJson, 500, {units: 'miles'});
+        console.log(b2);
+        console.timeEnd('turfAsync');
+        document.getElementById('task').textContent = '空闲';
+        document.getElementById('result').textContent = JSON.stringify(b2);
+    }
+
+
+    main();
+</script>
+</body>
+</html>

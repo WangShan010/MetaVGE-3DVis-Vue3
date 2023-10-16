@@ -1,0 +1,26 @@
+.iconBtnGroup {
+    position: absolute;
+    top: 0;
+    text-align: right;
+    z-index: 11;
+    right: 0;
+}
+
+
+.iconBtn {
+    color: #ffffff;
+    padding: 3px;
+    border: none;
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    line-height: 14px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+.iconBtn:hover {
+    background-color: #336968
+}

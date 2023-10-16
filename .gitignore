@@ -1,0 +1,8 @@
+
+# Editor directories and files
+.vscode
+.idea
+
+node_modules/
+VGEEarth-SDK/
+dist/
