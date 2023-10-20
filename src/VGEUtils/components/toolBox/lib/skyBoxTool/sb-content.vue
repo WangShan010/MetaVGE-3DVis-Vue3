@@ -7,7 +7,7 @@
 <template>
   <win-tabs :initCSS="{width: 310,height: 190,left:400,top:120}" @close="close">
     <tab-pane label="天空盒">
-      <div>
+      <div @mousedown.stop>
         <div>
           <el-row class="form-item">
             <el-col :span="8">
@@ -55,7 +55,7 @@
 
 <script>
 
-import {tabPane, winTabs} from "@/VGEUtils/components/winTabs/index.js";
+import { tabPane, winTabs } from '@/VGEUtils/components/winTabs/index.js';
 
 let SkyBox;
 let measureTool;
@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     async loadConfig() {
-      let {data: skybox} = await axios.get( new URL('/VGEEarth/Config/skybox/skybox.json', import.meta.url).href);
+      let {data: skybox} = await axios.get(new URL('/VGEEarth/Config/skybox/skybox.json', import.meta.url).href);
       let baseUrl = skybox.baseUrl;
 
       let farSkyBoxList = [];
