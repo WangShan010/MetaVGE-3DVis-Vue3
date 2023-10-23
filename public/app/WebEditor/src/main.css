@@ -1,0 +1,43 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#App {
+    height: 100%;
+    display: flex;
+}
+
+
+#editor {
+    height: 100%;
+    width: 1200px;
+    display: none;
+    border: 1px solid grey
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#codeBtn {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    border: rgba(225, 224, 219, 0.6) 1px solid;
+    border-radius: 4px;
+    padding: 4px;
+    background: rgba(12, 168, 163, 0.7);
+    cursor: pointer;
+    z-index: 20;
+}
+
+#htmlView {
+    height: 100%;
+    width: 100%;
+    border: 0;
+}

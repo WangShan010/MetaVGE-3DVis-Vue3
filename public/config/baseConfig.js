@@ -50,35 +50,7 @@ const cesium3DTileSetList = [
                 height: 35
             }
         }
-    },
-    // {
-    //     pid: 'b0c24b7d-5970-f574-a7f2-5ef0851dfcc0',
-    //     name: '小区',
-    //     catalog: '三维模型',
-    //     dataType: '3DTiles',
-    //     defaultLoad: true,
-    //     properties: {
-    //         url: 'http://211.149.185.229:8081/data/offset_3dtiles/tileset.json',
-    //         maximumScreenSpaceError: 1,
-    //         offset: {
-    //             height: -470
-    //         }
-    //     }
-    // }
-    {
-        pid: '22993869-44d3-a445-8c88-f36fb18d65bc',
-        name: '案例-1',
-        catalog: '三维模型',
-        dataType: 'Cesium3DTile',
-        defaultLoad: false,
-        properties: {
-            url: 'http://127.0.0.1:3000/DBService/OSGB0327_b3dm/tileset.json',
-            maximumScreenSpaceError: 1,
-            offset: {
-                height: 35
-            }
-        }
-    },
+    }
 ];
 const geoJsonList = [
     {
