@@ -5,9 +5,7 @@
 ****************************************************************************/
 
 <template>
-
-    <SBContent  v-if="show"></SBContent>
-
+  <SBContent v-if="show"></SBContent>
 </template>
 
 <script>
@@ -15,10 +13,10 @@ import SBContent from './sb-content.vue';
 
 export default {
   name: 'skyBoxTool',
-  components: {SBContent},
+  components: { SBContent },
   computed: {
     show() {
-      return this.$store.getters.comStatus("skyBoxTool")
+      return this.$store.getters.comStatus('skyBoxTool');
     }
   }
 };

@@ -9,7 +9,7 @@ import VGEUtils from '@/VGEUtils/components/VGEUtils.vue';
 
 export default {
   name: 'blank',
-  components: {VGEUtils}
+  components: { VGEUtils }
 };
 </script>
 

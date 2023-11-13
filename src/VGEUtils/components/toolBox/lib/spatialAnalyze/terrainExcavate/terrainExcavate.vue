@@ -1,7 +1,5 @@
 <template>
-
     <te-content v-if="show"></te-content>
-
 </template>
 <script>
 

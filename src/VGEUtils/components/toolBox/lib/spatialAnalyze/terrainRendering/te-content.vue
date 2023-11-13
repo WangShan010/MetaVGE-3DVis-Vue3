@@ -1,5 +1,5 @@
 <template>
-  <win-tabs :initCSS="{width: 320,height: 280,left:500,top:330}" @close="close" v-loading="loading"  element-loading-text="拼命加载中">
+  <win-tabs :initCSS="{width: 340,height: 330,left:500,top:330}" @close="close" v-loading="loading"  element-loading-text="拼命加载中">
     <tab-pane label="地貌渲染">
       <div>
         <label>颜色分级:</label>
@@ -19,11 +19,20 @@
         <el-switch v-model="openState" active-color="#13ce66"></el-switch>
       </div>
       <div>
-        <div style="text-align: center" class="btn">
+        <div style="text-align: center" class="te-content">
+            <div class="mes" :class="{mes_red:area>1500}">
+                <span v-if="area">提示：您已框选 {{ area }} 平方千米。</span>
+                <span v-if="area>1500 && tifId===''">面积数值过大，可能会导致计算时间较长！</span>
+            </div>
           <button class="btn btn-info btn-sm" @click="excavate">绘制区域</button>
           <button class="btn btn-warning btn-sm" @click="removeImage">重置</button>
           <button class="btn btn-warning btn-sm" @click="downTif">导出</button>
           <button class="btn btn-warning btn-sm" @click="readingPixel">取值</button>
+          <button class="btn btn-warning btn-sm" @click="help">帮助</button>
+        </div>
+        <br>
+        <div id="helpInfo" v-show="helpShow">
+          地貌渲染功能,自定义高度分级(米)和颜色后,绘制矩形区域生成地貌高度分类图
         </div>
       </div>
     </tab-pane>
@@ -44,17 +53,24 @@ export default {
   components: {winTabs, tabPane},
   data: function () {
     return {
-        loading: false,
+      loading: false,
       coordinates: [],
       tifId: '',
       pixelValue: 0,
       height: 0,
       studentList: [
-        {min: '', max: '', color: ''}
+        { min: 0, max: 1000, color: '#006400' },
+        { min: 1000, max: 2000, color: '#00FF00' },
+        { min: 2000, max: 3000, color: '#FFFF00' },
+        { min: 3000, max: 4000, color: '#FFA500' },
+        { min: 4000, max: 9000, color: '#FF0000' } ,
       ],
-      openState: true,//自动配色开关
+      openState: false,//自动配色开关
       colors: '',
       rgbColors: '',
+      area:0,
+      legendArr :  [],
+      helpShow:false
     }
   },
   mounted() {
@@ -95,13 +111,42 @@ export default {
     subList(index) {
       this.studentList.splice(index, 1)
     },
+
+      //添加矩形线
+      addPolygon(arr){
+          window.earth.viewer3D.entities.add({
+              id: 'areaPolygon',
+              name: 'areaPolygon',
+              polyline: {
+                  id: 'glowingLine',
+                  width: 12,
+                  positions: Cesium.Cartesian3.fromDegreesArray(arr),
+                  material: new VGEEarth.Material.Polyline.PolylineLinkPulseMaterial({
+                      color: Cesium.Color.AQUA,
+                      duration: 5000,
+                  }),
+                  clampToGround: true
+              }
+          });
+      },
     //绘制
     excavate() {
+      this.removeImage();
       let that = this;
+
       //绘制矩形
       let drawer = new VGEEarth.DrawShape(VGEEarth.getMainViewer());
       drawer.drawRectangle({
-        coordinateType: 'cartographicPoiArr', endCallback: (e) => {
+        coordinateType: 'cartographicPoiArr',
+        moveCallback: (e) => {
+              const area = turf.area(turf.polygon([e]));
+              this.area = Math.floor(area / 1000 / 1000);
+
+              if (area > 5_0000_0000) {
+                  console.log('面积过大，超过 1500 平方千米');
+              }
+          },
+        endCallback: (e) => {
           let postionArr = [];
           //剪掉最后一个闭环坐标
           for (let i = 0; i < e.length - 1; i++) {
@@ -111,6 +156,13 @@ export default {
           }
           this.coordinates = [postionArr[0] + "," + postionArr[3] + "," + postionArr[1] + "," + postionArr[10] + "[EPSG:4326]"]
           that.coordinatePost();
+
+            let arr = [e[0][0],e[0][1],
+                e[1][0],e[1][1],
+                e[2][0],e[2][1],
+                e[3][0],e[3][1],
+                e[0][0],e[0][1]]
+            that.addPolygon(arr)
         }
       });
     },
@@ -123,6 +175,7 @@ export default {
         //颜色参数转换
         for (let i = 0; i < this.studentList.length; i++) {
           this.colors = this.colorRgb(this.studentList[i].color)
+          // console.log(this.colors)
           this.rgbColors = this.rgbColors + this.studentList[i].min + ',' + this.studentList[i].max + ',' + this.colors + ';'
         }
         this.rgbColors = this.rgbColors.replaceAll('rgba(', '');
@@ -155,6 +208,7 @@ export default {
     },
     //添加到球上
     async addResult(geoTiff) {
+      let that = this;
       //获取tif
       const response = await fetch(`http://8.146.208.114:9001/static/tempoutput/${geoTiff}`);
       //通过geotiff.js解析tif
@@ -165,6 +219,7 @@ export default {
       // 读取像素信息
       const [red = [], green = [], blue = []] = await image.readRasters();
       // 将像素信息写入canvas
+      // console.log('R',red)
       const canvas = document.createElement("canvas");
       let width = image.getWidth();
       let height = image.getHeight();
@@ -193,6 +248,30 @@ export default {
       imageStores.imageStore.push(tifImage);
       // console.log(imageStores.imageStore);
       this.loading = false
+
+      // 遍历 studentList，将其转化为所需的格式并存储在 legendArr 中
+      this.legendArr = this.studentList.map(item => {
+        const text = `${item.min}-${item.max}米`;
+        // 将颜色转换为 rgba 格式
+        const color = that.hexToRgba(item.color);
+        return { text, color };
+      });
+
+      if (that.openState === false) {
+        //打开图例
+        this.$store.commit('setLegendCurrent', {
+          title: '坡度分析', list: that.legendArr, img: null
+        });
+      } else {
+        return
+      }
+    },
+    hexToRgba(hex) {
+      const bigint = parseInt(hex.slice(1), 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return `rgba(${r}, ${g}, ${b}, 1)`;
     },
     //查询一点像素值
     readingPixel() {
@@ -220,10 +299,16 @@ export default {
               that.simpleLabel(lonlat, that.pixelValue, height)
               // that.addPoint(lon, lat, height,that.pixelValue)
             });
-          },
-          errCallback: function () {
           }
         })
+      }
+    },
+    //帮助信息
+    help(){
+      if (this.helpShow){
+        this.helpShow = false
+      }else {
+        this.helpShow = true
       }
     },
     //添加的信息窗口
@@ -275,6 +360,7 @@ export default {
     },
     //清空
     removeImage() {
+        this.area = 0;
       imageStores.imageStore.forEach(item => {
         // global.item = item;
         earth.viewer3D.imageryLayers.remove(item);
@@ -294,19 +380,32 @@ label {
   color: #009b94;
 }
 
-.el-switch >>> .el-switch__core {
+::v-deep(.el-switch .el-switch__core) {
   width: 30px !important;
   height: 15px;
 }
 
-.el-switch >>> .el-switch__core::after {
+::v-deep(.el-switch .el-switch__core::after ) {
   width: 14px;
   height: 14px;
   margin-top: -1px;
   margin-bottom: 2px;
 }
 
-.btn button {
+button {
   margin-right: 5px;
+}
+.te-content {
+    text-align: left;
+
+    .mes {
+        color: #009b94;
+        margin-left: 7px;
+        margin-bottom: 8px;
+    }
+
+    .mes_red {
+        color: #be9125;
+    }
 }
 </style>

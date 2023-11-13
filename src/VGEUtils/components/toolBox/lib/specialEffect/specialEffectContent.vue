@@ -44,7 +44,7 @@ export default {
     valueChange() {
       earth.viewer3D.scene.globe.terrainExaggeration = this.dxkzValue;
     },
-    valueChange1(){
+    valueChange1() {
       earth.viewer3D.scene.globe.translucency.frontFaceAlpha = this.dbtmValue;
     },
   }
@@ -63,12 +63,12 @@ export default {
   align-items: center;
 }
 
-.el-switch >>> .el-switch__core {
+::v-deep( .el-switch .el-switch__core) {
   width: 30px !important;
   height: 15px;
 }
 
-.el-switch >>> .el-switch__core::after {
+::v-deep(.el-switch  .el-switch__core::after) {
   width: 14px;
   height: 14px;
   margin-top: -1px;

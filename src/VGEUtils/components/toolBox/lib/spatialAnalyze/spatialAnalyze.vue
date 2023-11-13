@@ -1,7 +1,5 @@
 <template>
-
     <sa-content v-if="show"></sa-content>
-
 </template>
 
 <script>

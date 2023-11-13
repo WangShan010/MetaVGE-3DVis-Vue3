@@ -132,26 +132,6 @@ const geoJsonList = [
         properties: {
             url: `./app/demo/水体效果/第三方.geojson`
         }
-    },
-    {
-        name: '水体特效',
-        catalog: '特效',
-        dataType: 'water',
-        defaultLoad: true,
-        properties: {
-            geoJsonUrl: `./app/demo/水体效果/水域.geojson`,
-            height: 11.7
-        }
-    },
-    {
-        name: '长虹桥',
-        catalog: '特效',
-        dataType: 'water',
-        defaultLoad: true,
-        properties: {
-            geoJsonUrl: `./app/demo/水体效果/长虹桥.geojson`,
-            height: 11.7
-        }
     }
 ];
 const poiList = [];

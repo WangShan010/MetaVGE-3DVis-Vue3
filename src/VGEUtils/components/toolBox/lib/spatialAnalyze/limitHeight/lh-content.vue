@@ -1,7 +1,7 @@
 <template>
-  <win-tabs :initCSS="{width: 320,height: 280,left:500,top:330}" @close="close" :draggable="isDragging">
+  <win-tabs :initCSS="{width: 320,height: 180,left:500,top:330}" @close="close" :draggable="isDragging">
     <tab-pane label="限高分析">
-      <div>
+      <div @mousedown.stop>
         <div style="margin-bottom: 5px">
           <el-row>
             <el-col :span="8"><label class="label-container">高度</label></el-col>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import {tabPane, winTabs} from "@/VGEUtils/components/winTabs/index.js";
+import { tabPane, winTabs } from '@/VGEUtils/components/winTabs/index.js';
 
 
 let limitHeight;
@@ -41,17 +41,17 @@ export default {
     return {
       minHeight: 0,
       maxHeight: 0,
-      height: 200,
+      height: 38,
       isDragging: true
     };
   },
   methods: {
     handleMouseDown() {
-        this.isDragging = false; // 鼠标按下时设置 isDragging 为 true
+      this.isDragging = false; // 鼠标按下时设置 isDragging 为 true
     },
 
     handleMouseUp() {
-        this.isDragging = true; // 鼠标松开时设置 isDragging 为 false
+      this.isDragging = true; // 鼠标松开时设置 isDragging 为 false
     },
     setPolygon() {
       let that = this;
@@ -65,8 +65,8 @@ export default {
             if (index < points.length - 1) {
               degreesArray.push(item.longitude);
               degreesArray.push(item.latitude);
-              that.minHeight = Math.ceil(item.height - 150);
-              that.maxHeight = Math.ceil(item.height + 150);
+              that.minHeight = Math.ceil(item.height - 20);
+              that.maxHeight = Math.ceil(item.height + 20);
             }
           });
           limitHeight = new VGEEarth.LimitHeight(earth.viewer3D, degreesArray, 200);
@@ -82,6 +82,25 @@ export default {
     close() {
       this.$store.commit('setVGEEarthComAction', {name: 'limitHeight', on_off: 2});
     }
+  },
+  mounted() {
+    earth.viewer3D.scene.camera.flyTo({
+      "destination": {
+        "x": -2896007.698942079,
+        "y": 4718005.022260547,
+        "z": 3157850.6972098127
+      },
+      "cartographic": {
+        "longitude": 121.54245,
+        "latitude": 29.86759,
+        "height": 393.80544
+      },
+      "orientation": {
+        "heading": 5.230354012872745,
+        "pitch": -0.6630332728828456,
+        "roll": 0.000029945313731793988
+      }
+    });
   },
   unmounted() {
     this.removeAll();

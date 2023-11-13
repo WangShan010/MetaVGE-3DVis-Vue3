@@ -73,7 +73,7 @@ export default {
 
           if (horizontal < 180 && vertical < 180 && 0 < size) {
             if (viewShed) viewShed.clear();
-            viewShed = new VGEEarth.SpatialAnalysis.ViewShedStage(earth.viewer3D, {
+            viewShed = new VGEEarth.ViewShedStage(earth.viewer3D, {
               viewPosition: new Cesium.Cartesian3(points[0].x, points[0].y, points[0].z),
               viewPositionEnd: new Cesium.Cartesian3(points[1].x, points[1].y, points[1].z),
               horizontalViewAngle: horizontal,

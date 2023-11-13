@@ -1,7 +1,5 @@
 <template>
-
     <ppContent v-if="show"></ppContent>
-
 </template>
 
 <script>

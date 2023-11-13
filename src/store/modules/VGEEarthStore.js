@@ -1,12 +1,12 @@
 const VGEEarthStore = {
     state: {
-        // 当时组件的状态，是用于 Demo 演示，还是用在正真的生产环境下。
+        // 当时组件的状态，是用于 Demo 演示，还是用在真正的生产环境下。
         demoModel: true,
-        themeColor: "green",
+        themeColor: 'green',
         // 当前所显示的图例
         legendCurrent: {
-            title: "",
-            img: "",
+            title: '',
+            img: '',
             list: []
         },
         // 全部的图例数据
@@ -48,9 +48,9 @@ const VGEEarthStore = {
         },
         resetLegend(state) {
             state.legendCurrent = {
-                title: "",
+                title: '',
                 list: [],
-                img: ""
+                img: ''
             };
         },
 
@@ -62,7 +62,7 @@ const VGEEarthStore = {
          */
         setVGEEarthComAction({comActions}, {name, on_off}) {
             let effective = false;
-            if (typeof name === "string" && typeof on_off === "number") {
+            if (typeof name === 'string' && typeof on_off === 'number') {
                 for (let i = 0; i < comActions.length; i++) {
                     if (comActions[i].comName === name) {
                         comActions[i].open = on_off === 1 ? true : (on_off === 2 ? false : !comActions[i].open);
@@ -72,7 +72,7 @@ const VGEEarthStore = {
                 }
             }
             comActions = JSON.parse(JSON.stringify(comActions));
-            effective === false && console.log("无法识别的组件：", name);
+            effective === false && console.log('无法识别的组件：', name);
         },
         /**
          * 设置工具箱模块是否显示在左侧工具箱中
@@ -98,7 +98,7 @@ function saveComStatus(state) {
         e.open = false;
         return e;
     });
-    localStorage.setItem("VGEConfig", JSON.stringify({
+    localStorage.setItem('VGEConfig', JSON.stringify({
         Version: VGEEarth.ConfigTool.config.Version,
         comActions: cloneComActions
     }));

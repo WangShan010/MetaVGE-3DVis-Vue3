@@ -107,10 +107,8 @@ export default {
             }
         },
         removeAll() {
-            console.log(this.layers);
             for (let i = 0; i < this.layers.length; i++) {
                 const res = earth.viewer3D.imageryLayers.remove(this.layers[i].layer);
-                console.log(res);
             }
             this.setLayer(null);
             this.layers = [];

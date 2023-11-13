@@ -7,7 +7,7 @@
           <label class="label-container" style="line-height: 28px;">演进速度</label>
         </el-col>
         <el-col :span="7">
-          <input class="sm-input-long" style="float: none;width: 100px;height:30px" min="0" v-model="speed"/>
+          <input class="sm-input-long" style="float: none;width: 100px;height:30px" min="0" v-model="intervalDuration"/>
         </el-col>
       </el-row>
       <el-row style="padding-top: 15px">
@@ -24,14 +24,14 @@
         </el-col>
       </el-row>
 
-      <div>
-        <label v-show="isAnxianJh">原始数据版:</label>
-        <button class="btn btn-primary btn-sm" type="button" @click="loadData" v-if="isDataReady">载入数据</button>
-        <button class="btn btn-primary btn-sm" type="button" @click="startFlood" v-if="isStartUseble">开 始</button>
-        <button class="btn btn-primary btn-sm" type="button" @click="pauseFlood" v-if="isPauseseble">暂 停</button>
-        <button class="btn btn-primary btn-sm" type="button" @click="stopFlood" v-if="isStopble">结 束</button>
-        <label class="label-container" style="line-height: 28px;" v-if="isDownload">{{ progress }}</label>
-      </div>
+      <!--      <div>-->
+      <!--        <label v-show="isAnxianJh">原始数据版:</label>-->
+      <!--        <button class="btn btn-primary btn-sm" type="button" @click="loadData" v-if="isDataReady">载入数据</button>-->
+      <!--        <button class="btn btn-primary btn-sm" type="button" @click="startFlood" v-if="isStartUseble">开 始</button>-->
+      <!--        <button class="btn btn-primary btn-sm" type="button" @click="pauseFlood" v-if="isPauseseble">暂 停</button>-->
+      <!--        <button class="btn btn-primary btn-sm" type="button" @click="stopFlood" v-if="isStopble">结 束</button>-->
+      <!--        <label class="label-container" style="line-height: 28px;" v-if="isDownload">{{ progress }}</label>-->
+      <!--      </div>-->
 
       <!--简化版安县洪水-->
       <div v-show="isAnxianJh">
@@ -85,13 +85,13 @@ export default {
       progress: "1/148",
       floodDataSourceIndex: 0,
       floodLocation: [
-        {label: 'Austin', vispoint: Cesium.Cartesian3.fromDegrees(-97.719295, 30.243846, 3000), maxFrame: 735, step: 5},
         {
           label: '安县',
           vispoint: Cesium.Cartesian3.fromDegrees(104.353923555223318, 31.600620919559553, 3000),
           maxFrame: 2170,
           step: 10
         },
+        // {label: 'Austin', vispoint: Cesium.Cartesian3.fromDegrees(-97.719295, 30.243846, 3000), maxFrame: 735, step: 5},
         //{label: '江山'},
         //{label: '浑河'},
       ],
@@ -104,7 +104,7 @@ export default {
       isPlaying: false,
       intervalId: null,
       intervalDuration: 130, // 毫秒,洪水简化版数据加载间隔
-      isAnxianJh: false,
+      isAnxianJh: true,
       isDragging: true,
       stopExecution: false,
     }
@@ -114,6 +114,10 @@ export default {
     //   fetch(this.fileDirectory + `${i}0.geojson`) //提前缓存洪水数据
     //   console.log(i);
     // }
+    window.earth.viewer3D.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(104.35556649960914, 31.605304431049152, 20600),
+      // destination: Cesium.Cartesian3.fromDegrees(115.88359,22.034817, 20600),
+    });
   },
   methods: {
     requestGeojsonFloodData(url, floodFrame, max, step) {
@@ -277,7 +281,9 @@ export default {
     /**安县洪水简化版,加载洪水数据**/
     loadAndRenderGeoJSON(fileIndex) {
       let that = this
-      if (this.stopExecution) return; // 检查标志，停止执行
+      // if (this.stopExecution) {
+      //   return
+      // } // 检查标志，停止执行
       const floodUrl = this.fileDirectory;
       fetch(floodUrl + `${fileIndex}0.geojson`)
           .then((response) => response.json())
@@ -321,14 +327,20 @@ export default {
                 flat: true,
               }),
             });
-            if (this.stopExecution) return; // 检查标志，停止执行
+
+            if (that.stopExecution) {
+              return
+            } // 检查标志，停止执行
+
             earth.viewer3D.scene.primitives.add(primitive);
+
             if (floods.length > 3) {
               let a = floods.shift()
               earth.viewer3D.scene.primitives.remove(a);
             }
             floods.push(primitive)
           });
+      return "finish"
     },
     /**控制暂停/播放洪水过程-->play()/pause()**/
     togglePlay() {
@@ -341,6 +353,7 @@ export default {
     },
     /**播放洪水过程**/
     play() {
+      this.stopExecution = false
       this.intervalId = setInterval(() => {
         if (!this.isMaxIndex) {
           this.progressValue = (this.currentIndex + 1) / (this.fileCount - 1) * 100;
@@ -374,10 +387,10 @@ export default {
       if (this.floodDataSourceIndex === 1) {
         this.isAnxianJh = true
         // earth.openDeBug();
-        window.earth.viewer3D.camera.flyTo({
-          destination: Cesium.Cartesian3.fromDegrees(104.35556649960914, 31.605304431049152, 20600),
-          // destination: Cesium.Cartesian3.fromDegrees(115.88359,22.034817, 20600),
-        });
+        // window.earth.viewer3D.camera.flyTo({
+        //   destination: Cesium.Cartesian3.fromDegrees(104.35556649960914, 31.605304431049152, 20600),
+        //   // destination: Cesium.Cartesian3.fromDegrees(115.88359,22.034817, 20600),
+        // });
       } else {
         this.isAnxianJh = false
       }
@@ -387,10 +400,10 @@ export default {
       this.stopExecution = true; //添加洪水的函数退出执行
       this.currentIndex = 0;
       this.progressValue = 0;
-      this.pause();
       this.isPlaying = false;
+      this.pause();
       earth.viewer3D.scene.primitives.removeAll();
-      this.stopExecution = false; //恢复添加洪水的函数执行
+      // this.stopExecution = false; //恢复添加洪水的函数执行
     },
     /**根据水深计算颜色
      * @param depth 水的深度

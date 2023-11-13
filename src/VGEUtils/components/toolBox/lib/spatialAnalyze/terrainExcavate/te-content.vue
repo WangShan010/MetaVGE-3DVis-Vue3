@@ -2,15 +2,15 @@
 名称：地表开挖的逻辑 的逻辑处理
 最后修改日期：2022-04-28
 ****************************************************************************/
-<template>
 
-  <win-tabs :initCSS="{width: 320,height: 280,left:500,top:330}" @close="close">
+<template>
+  <win-tabs :initCSS="{width: 530,height: 220,left:500,top:330}" @close="close">
     <tab-pane label="地表开挖分析">
-      <div>
+      <div @mousedown.stop>
         <div style="margin-bottom: 5px">
           <el-row>
-            <el-col :span="8"><label class="label-container">开挖深度</label></el-col>
-            <el-col :span="13">
+            <el-col :span="4"><label class="label-container">开挖深度:</label></el-col>
+            <el-col :span="16">
               <el-input v-model.number="excavateDepth" size="small"></el-input>
             </el-col>
             <el-col :span="3" style="text-align: center"><label class="label-container">米</label></el-col>
@@ -19,8 +19,8 @@
 
         <div style="margin-bottom: 5px">
           <el-row>
-            <el-col :span="8"><label class="label-container">底部素材</label></el-col>
-            <el-col :span="13">
+            <el-col :span="4"><label class="label-container">底部素材:</label></el-col>
+            <el-col :span="20">
               <el-input v-model="bottomImage" size="small"></el-input>
             </el-col>
           </el-row>
@@ -29,15 +29,15 @@
 
         <div style="margin-bottom: 5px">
           <el-row>
-            <el-col :span="8"><label class="label-container">侧面素材</label></el-col>
-            <el-col :span="13">
+            <el-col :span="4"><label class="label-container">侧面素材:</label></el-col>
+            <el-col :span="20">
               <el-input v-model="sideImage" size="small"></el-input>
             </el-col>
           </el-row>
         </div>
 
         <div style="text-align: center;padding-top: 10px">
-          <button class="btn btn-info btn-sm" @click="excavate" style="margin-right: 10px;margin-left: 60px">绘制开挖区域</button>
+          <button class="btn btn-info btn-sm" @click="excavate" style="margin-right: 10px;">绘制开挖区域</button>
           <button class="btn btn-warning btn-sm" @click="reset">重置</button>
         </div>
       </div>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import {tabPane, winTabs} from "@/VGEUtils/components/winTabs/index.js";
+import { tabPane, winTabs } from '@/VGEUtils/components/winTabs/index.js';
 
 
 let excavator = null;
@@ -54,9 +54,9 @@ export default {
   name: 'te-content',
   data: function () {
     return {
-      excavateDepth: 200,
-      bottomImage: '',
-      sideImage: ''
+      excavateDepth: 100,
+      bottomImage: './VGEEarth/Src/LTS-2023-10-24/img/excavate/excavate_bottom_min.jpg',
+      sideImage: './VGEEarth/Src/LTS-2023-10-24/img/excavate/excavate_side_min.jpg'
     };
   },
   components: {winTabs, tabPane},
@@ -66,10 +66,10 @@ export default {
     },
     excavate() {
       let that = this;
-      let drawer = new VGEEarth.DrawShape(VGEEarth.getMainViewer());
-      drawer.drawPolygon({
+      // let drawer = new VGEEarth.DrawShape(VGEEarth.getMainViewer());
+        earth.drawShape.drawPolygon({
         coordinateType: 'cartographicPoiArr', endCallback: (e) => {
-          excavator = new VGEEarth.SpatialAnalysis.SurfaceExcavate(VGEEarth.getMainViewer());
+          excavator = new VGEEarth.SurfaceExcavate(VGEEarth.getMainViewer());
           let postionArr = [];
           //剪掉最后一个闭环坐标
           for (let i = 0; i < e.length - 1; i++) {
@@ -95,6 +95,7 @@ export default {
   },
   unmounted() {
     this.reset();
+    earth.drawShape.callStop();
   }
 };
 </script>

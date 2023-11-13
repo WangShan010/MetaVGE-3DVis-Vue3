@@ -119,18 +119,19 @@ export default {
     }
 
     .bottomBox {
-      margin-top: 14px;
+      margin-top: 7px;
+      margin-left: 5px;
       font-size: 16px;
       display: flex;
-      justify-content: flex-start;
       align-items: center;
+      justify-content: left;
 
 
       .colorBox {
         width: 24px;
         height: 15px;
         border: salmon solid 1px;
-        margin: 2px;
+        margin: 2px 5px 2px 2px;
         display: inline-block;
       }
 

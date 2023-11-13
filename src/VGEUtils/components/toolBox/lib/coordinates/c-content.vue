@@ -537,6 +537,7 @@ export default {
       }
       this.alert10.lat = lDu;
     },
+
     /**
      * 添加跟随鼠标的图标
      */

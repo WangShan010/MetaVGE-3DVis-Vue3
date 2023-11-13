@@ -29,25 +29,27 @@ export default {
     return {
       showTool: 0,
       postEffect: [
+        {value: {a: true}, name: '深度检测', class: 'depthTestAgainstTerrain', status: 0, iconUrl: new URL('./img/tool-specialEffect-5.png', import.meta.url).href},
+        {value: {a: false}, name: '显示帧率', class: 'FramesPerSecond', status: 0, iconUrl: new URL('./img/tool-specialEffect-5.png', import.meta.url).href},
+        {value: {a: false}, name: '视锥体', class: 'FrustumPlanes', status: 0, iconUrl: new URL('./img/tool-specialEffect-5.png', import.meta.url).href},
         {value: {a: false}, name: '泛光', class: 'light', status: 0, iconUrl: new URL('./img/tool-specialEffect-5.png', import.meta.url).href},
         {value: {a: false}, name: '阴影', class: 'shade', status: 0, iconUrl: new URL('./img/tool-specialEffect-6.png', import.meta.url).href},
         {value: {a: false}, name: '黑白', class: 'blackWhite', status: 0, iconUrl: new URL('./img/tool-specialEffect-7.png', import.meta.url).href},
         {value: {a: false}, name: '夜视', class: 'nightVision', status: 0, iconUrl: new URL('./img/tool-specialEffect-8.png', import.meta.url).href},
         {value: {a: false}, name: '亮度', class: 'brightness', status: 0, iconUrl: new URL('./img/tool-specialEffect-9.png', import.meta.url).href},
-        {value: {a: false}, name: '镜头耀斑', class: 'lenFlare', status: 0, iconUrl: new URL('./img/tool-specialEffect-10.png', import.meta.url).href},
+        // {value: {a: false}, name: '镜头耀斑', class: 'lenFlare', status: 0, iconUrl: new URL('./img/tool-specialEffect-10.png', import.meta.url).href},
         {value: {a: false}, name: '强制光照', class: 'forceLight', status: 0, iconUrl: new URL('./img/tool-specialEffect-11.png', import.meta.url).href},
         // { value: {a:false}, name: '环境遮蔽', class: 'ambientOcclusion', status: 0, iconUrl: new URL('./img/tool-specialEffect-12.png') },
         {value: {a: false}, name: '轮廓', class: 'outline', status: 0, iconUrl: new URL('./img/tool-specialEffect-13.png', import.meta.url).href},
         {value: {a: false}, name: '景深', class: 'depthField', status: 0, iconUrl: new URL('./img/tool-specialEffect-14.png', import.meta.url).href},
         {value: {a: false}, name: '地形三角网', class: 'dxsjw', status: 0, iconUrl: new URL('./img/tool-specialEffect-14.png', import.meta.url).href},
         {value: {a: false}, name: '地表透明', class: 'dbtm', status: 0, iconUrl: new URL('./img/tool-specialEffect-14.png', import.meta.url).href},
-        // {value: {a: false}, name: '地形夸张', class: 'dxkz', status: 0, iconUrl: new URL('./img/tool-specialEffect-14.png')}
       ],
       weatherEffect: [
         {value: {a: true}, name: '太阳', class: 'sun', status: 1, iconUrl: new URL('./img/tool-specialEffect-15.png', import.meta.url).href},
         {value: {a: true}, name: '月亮', class: 'moon', status: 1, iconUrl: new URL('./img/tool-specialEffect-16.png', import.meta.url).href},
         {value: {a: true}, name: '星空', class: 'star', status: 1, iconUrl: new URL('./img/tool-specialEffect-17.png', import.meta.url).href},
-        {value: {a: false}, name: '地面大气', class: 'groundAir', status: 0, iconUrl: new URL('./img/tool-specialEffect-18.png', import.meta.url).href},
+        {value: {a: true}, name: '地面大气', class: 'groundAir', status: 0, iconUrl: new URL('./img/tool-specialEffect-18.png', import.meta.url).href},
         {value: {a: false}, name: '下雪', class: 'snow', status: 0, iconUrl: new URL('./img/tool-specialEffect-19.png', import.meta.url).href},
         {value: {a: false}, name: '下雨', class: 'rain', status: 0, iconUrl: new URL('./img/tool-specialEffect-20.png', import.meta.url).href},
         {value: {a: false}, name: '雾天', class: 'fog', status: 0, iconUrl: new URL('./img/tool-specialEffect-21.png', import.meta.url).href},
@@ -101,19 +103,18 @@ export default {
       let s = this.$store.getters.comStatus('specialEffect');
 
       if (s) {
-        let flyToOpts = {
-          // destination:  Cesium.Cartesian3.fromDegrees(121.53806,29.87179,220),
-          destination: {
-            x: -2896888.0568035087, y: 4720239.53582123, z: 3159699.620720131
+        earth.viewer3D.camera.flyTo({
+          'destination': {
+            'x': -2895596.962457116,
+            'y': 4717490.945820842,
+            'z': 3158425.3777735666
           },
-          orientation: {
-            heading: 6.283185307179586,
-            pitch: -1.569999385845113,
-            roll: 0
-          },
-          duration: 1
-        };
-        earth.viewer3D.scene.camera.setView(flyToOpts);
+          'orientation': {
+            'heading': 3.8736780571268605,
+            'pitch': -0.13964038346926966,
+            'roll': 6.283183317671659
+          }
+        });
       }
 
       return s;
