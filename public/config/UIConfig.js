@@ -36,6 +36,7 @@ let UIConfig = {
         {name: '场景特效', type: 'ToolBoxItem', open: false, comName: 'specialEffect', config: {inToolBox: true, iconClass: 'vge-texiao'}},
         {name: '洪水演进', type: 'ToolBoxItem', open: false, comName: 'flood', config: {inToolBox: true, iconClass: 'vge-texiao'}},
         {name: '视频融合', type: 'ToolBoxItem', open: false, comName: 'videoShed', config: {inToolBox: false, iconClass: 'vge-texiao'}},
+        {name: '无人机', type: 'ToolBoxItem', open: false, comName: 'uvaTool', config: {inToolBox: true, iconClass: 'vge-jiejing'}},
         {name: '视图管理', type: 'ToolBoxItem', open: false, comName: 'linkView', config: {inToolBox: true, iconClass: 'vge-texiao'}},
         {name: '粒子系统', type: 'ToolBoxItem', open: false, comName: 'particleSystem', config: {inToolBox: true, iconClass: 'vge-texiao'}},
         {name: '插件管理', type: 'ToolBoxItem', open: false, comName: 'PluginManagement', config: {inToolBox: true, iconClass: 'vge-texiao'}},

@@ -1,0 +1,4 @@
+本目录是天空盒的配置文件及其图片路径
+   - 考虑到天空盒的图片较大，所以没有将图片的镜头资源留在工程目录下，需要自行下载
+   - 所以当前引用为在线路径，如果需要使用本地路径，需要修改`skybox.json`文件中的图片路径
+   - 下载地址：https://vge-webgl.oss-cn-beijing.aliyuncs.com/skybox/skybox.zip

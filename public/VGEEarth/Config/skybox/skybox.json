@@ -1,5 +1,5 @@
 {
-  "baseUrl": "./VGEEarth/Config/skybox/",
+  "baseUrl": "https://vge-webgl.oss-cn-beijing.aliyuncs.com/skybox/",
   "farSkyBoxList": [
     {
       "name": "默认天空盒",
