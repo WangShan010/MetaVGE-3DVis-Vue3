@@ -18,7 +18,7 @@ MetaVGE-3DVis-Vue3 是一个基于 WebGL 技术实现的三维地球 BS 端开�
 > 
 > 在线演示系统：http://8.146.208.114:3000/MetaVGE-3DVis-Vue3/index.html
 >
-> 在线演示视频下载：https://webgpu.top:3016/VGEEarth-PPT/VGEEarth-演示-720版.mp4
+> 在线演示视频：https://webgpu.top:3016/VGEEarth-PPT/VGEEarth-演示-720版.mp4
 >
 > 演示视频下载：https://webgpu.top:3016/VGEEarth-PPT/VGEEarth-演示-4k版.zip
 
