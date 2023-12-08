@@ -80,7 +80,7 @@ export default {
         {name: '散点图', iconSrc: './app/vge/echartsMapvLayerDemo/scatter.png'},
         {name: '迁徙图', iconSrc: './app/vge/echartsMapvLayerDemo/migrate.png'},
         {name: '大迁徙图', iconSrc: './app/vge/echartsMapvLayerDemo/big_migrate.png'},
-        {name: '强力图', iconSrc: './app/vge/echartsMapvLayerDemo/heat_map.png'},
+        // {name: '强力图', iconSrc: './app/vge/echartsMapvLayerDemo/heat_map.png'},
         {name: '强边界图', iconSrc: './app/vge/echartsMapvLayerDemo/strong_boundary.png'},
         {name: '蜂巢图', iconSrc: './app/vge/echartsMapvLayerDemo/beehive.png'},
         {name: '方格图', iconSrc: './app/vge/echartsMapvLayerDemo/square_graph.png'}
@@ -161,7 +161,6 @@ export default {
 
     .maps {
       display: flex;
-      justify-content: space-around;
       flex-wrap: wrap;
 
       & > div {

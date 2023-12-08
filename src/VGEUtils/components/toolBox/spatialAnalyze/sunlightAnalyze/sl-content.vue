@@ -1,5 +1,5 @@
 <template>
-    <win-tabs :initCSS="{width: 320,height:300,left:500,top:330}" @close="close" v-loading="loading"
+    <win-tabs :initCSS="{width: 350,height:300,left:500,top:330}" @close="close" v-loading="loading"
               element-loading-text="后台服务计算中...">
         <tab-pane label="日照分析">
             <div @mousedown.stop style="height: 100%;padding-top: 5px">
@@ -50,10 +50,14 @@
                             <span v-if="area>1000 && coordinates===''">面积数值过大，可能会导致计算时间较长！</span>
                         </div>
                         <button class="btn btn-info btn-sm" :disabled="!analyze" @click="excavate">绘制区域</button>
-                        <button class="btn btn-warning btn-sm" @click="remove">重置</button>
+                        <button class="btn btn-warning btn-sm" @click="reset">重置</button>
                         <button class="btn btn-warning btn-sm" @click="download">导出</button>
                         <button class="btn btn-warning btn-sm" @click="readingPixel">取值</button>
+                        <button class="btn btn-warning btn-sm" @click="helpShow=!helpShow">帮助</button>
                     </div>
+                </div>
+                <div id="helpInfo" v-show="helpShow" style="margin: 10px">
+                    {{ analyzes.find(entity => entity.value === analyze).intro }}
                 </div>
             </div>
         </tab-pane>
@@ -84,6 +88,7 @@ export default {
                 ndirs: 8
             },
             loading: false,
+            helpShow: false,
             coordinates: '',
             w: 0,
             s: 0,
@@ -93,10 +98,14 @@ export default {
             analyze: 'hillShade',
             analyzes: [{
                 value: 'hillShade',
-                label: '山体阴影'
+                label: '山体阴影',
+                intro: '计算山体阴影，绘制矩形区域后自动生成山体阴影系数栅格',
+                unity: '度'
             }, {
                 value: 'skyView',
-                label: '天空视图'
+                label: '天空视图',
+                intro: '计算天空视图，绘制矩形区域后自动生成天空视图系数栅格',
+                unity: '天空视图系数'
             }]
         };
     },
@@ -113,8 +122,7 @@ export default {
         //添加矩形线
         addPolygon(arr) {
             window.earth.viewer3D.entities.add({
-                id: 'areaPolygon_p',
-                name: 'areaPolygon_p',
+                id: 'tempPolygon_p',
                 polyline: {
                     id: 'glowingLine_p' +
                         '',
@@ -130,7 +138,8 @@ export default {
         },
         //删除矩形线
         delPolygon() {
-            window.earth.viewer3D.entities.removeById('areaPolygon_p');
+            window.earth.viewer3D.entities.removeById('areaPolygon');
+            window.earth.viewer3D.entities.removeById('tempPolygon_p');
         },
         excavate() {
             // this.loading = true;
@@ -205,14 +214,16 @@ export default {
                         // 读取像素
                         let [red = [], green = red, blue = red] = await image.readRasters();
 
+                        let _this = this;
                         function mapValuesTo01Range(arr) {
-                            let min = 0;
-                            let max = 0;
+                            let min = Number.MAX_VALUE;
+                            let max = Number.MIN_VALUE;
                             for (let i = 0; i < arr.length; i++) {
-                                if(isNaN(arr[i])) continue
+                                if (isNaN(arr[i])) continue
                                 min = min < arr[i] ? min : arr[i];
                                 max = max > arr[i] ? max : arr[i];
                             }
+                            if(_this.analyze === value.split('.')[0] || _this.analyze==='fillSink') _this.setLegend(min, max);
                             return arr.map(value => {
                                 let normalizedValue = (value - min) / (max - min);
                                 return parseInt(normalizedValue * 255);
@@ -255,7 +266,17 @@ export default {
                 this.loading = false
             } else window.alert('请绘制区域!');
         },
+        setLegend(min, max) {
+            let entity = this.analyzes.find(entity => entity.value === this.analyze)
+            this.$store.commit('setLegendCurrent', {
+                title: entity.label, list: {flag:true, min, max, unity: entity.unity}, img: null,
+            });
+        },
         remove() {
+            this.helpShow = false;
+            this.reset();
+        },
+        reset() {
             this.area = 0;
             entities.forEach(entity => {
                 entity.destroyWindow();

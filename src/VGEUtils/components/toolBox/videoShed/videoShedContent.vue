@@ -62,7 +62,7 @@
               ></el-switch>
             </el-form-item>
           </el-form>
-          <video src="https://vge-webgl.oss-cn-beijing.aliyuncs.com/Demo/lukou.mp4"
+          <video src="https://vge-webgl.oss-cn-beijing.aliyuncs.com/MetaVGE-3DVis-Vue3/Video/lukou.mp4"
               autoplay="autoplay"
               id="testVideo"
               controls

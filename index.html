@@ -3,69 +3,44 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico">
     <title>加载中...</title>
 
-
     <!-- MapV 需要在 SDK 引入之前载入 -->
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/MapV/^2.0.33/mapv.js"></script>
-    <script>!window.mapv && document.write(unescape(`<script src="/VGEEarth/Ext/MapV/^2.0.33/mapv.js"><\/script>`));</script>
-
+    <script src="/VGEEarth/Ext/MapV/^2.0.33/mapv.js"></script>
 
     <!-- Cesium 包 -->
-    <link rel="stylesheet" href="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/Cesium/^1.106/Widgets/widgets.css">
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/Cesium/^1.110/Cesium.js"></script>
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/Cesium-Navigation/^1.1.4/viewerCesiumNavigationMixin.js"></script>
-    <script>!window.Cesium && document.write(unescape(`
-        <link rel="stylesheet" href="/VGEEarth/Ext/Cesium/^1.110/Widgets/widgets.css">
-        <script src="/VGEEarth/Ext/Cesium/^1.110/Cesium.js"><\/script>
-        <script src="/VGEEarth/Ext/Cesium-Navigation/^1.1.4/viewerCesiumNavigationMixin.js"><\/script>
-    `));</script>
-
-
-    <!-- VGEEarth SDK 开发包 -->
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/VGEEarth/LTS-Master/VGEEarth.js"></script>
-    <script>!window.VGEEarth && document.write(unescape(`<script src="/VGEEarth/Src/LTS-2023-11-24/VGEEarth.js"><\/script>`));</script>
-
+    <script src="/VGEEarth/Ext/Cesium/^1.112/Cesium.js"></script>
+    <link rel="stylesheet" href="/VGEEarth/Ext/Cesium/^1.112/Widgets/widgets.css">
+    <script src="/VGEEarth/Ext/Cesium-Navigation/^1.1.4/viewerCesiumNavigationMixin.js"></script>
+    <script src="/VGEEarth/Src/LTS-Master/VGEEarth-LTS-2023-12-08.js"></script>
 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/Bootstrap/^3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/Bootstrap/^3.4.1/css/bootstrap-theme.min.css">
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/Bootstrap/^3.4.1/js/bootstrap.min.js"></script>
-    <script>!window.$().button && document.write(unescape(`<link rel="stylesheet" href="/VGEEarth/Ext/Bootstrap/^3.4.1/css/bootstrap.min.css">`));</script>
-    <script>!window.$().button && document.write(unescape(`<link rel="stylesheet" href="/VGEEarth/Ext/Bootstrap/^3.4.1/css/bootstrap-theme.min.css">`));</script>
-    <script>!window.$().button && document.write(unescape(`<script src="/VGEEarth/Ext/Bootstrap/^3.4.1/js/bootstrap.min.js"><\/script>`));</script>
+    <script src="/VGEEarth/Ext/Bootstrap/^3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/VGEEarth/Ext/Bootstrap/^3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/VGEEarth/Ext/Bootstrap/^3.4.1/css/bootstrap-theme.min.css">
 
 
     <!-- videojs -->
-    <link rel="stylesheet" href="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/videojs/^7.8.2/video.css">
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/videojs/^7.8.2/video.js"></script>
-    <script>!window.videojs && document.write(unescape(`<link rel="stylesheet" href="/VGEEarth/Ext/videojs/^7.8.2/video.css">`));</script>
-    <script>!window.videojs && document.write(unescape(`<script src="/VGEEarth/Ext/videojs/^7.8.2/video.js"><\/script>`));</script>
+    <script src="/VGEEarth/Ext/videojs/^7.8.2/video.js"></script>
+    <link rel="stylesheet" href="/VGEEarth/Ext/videojs/^7.8.2/video.css">
 
+    <!--加入Echarts模块-->
+    <script src="/VGEEarth/Ext/echarts/^5.3.4/echarts.min.js"></script>
+    <script src="/VGEEarth/Ext/echarts-liquidfill/^3.1.0/echarts-liquidfill.min.js"></script>
 
-    <!-- 加入Echarts 模块-->
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/echarts/^5.3.4/echarts.min.js"></script>
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/echarts-liquidfill/^3.1.0/echarts-liquidfill.min.js"></script>
-    <script>!window.echarts && document.write(unescape(`
-    <script src="/VGEEarth/Ext/echarts/^5.3.4/echarts.min.js"><\/script>
-    <script src="/VGEEarth/Ext/echarts-liquidfill/^3.1.0/echarts-liquidfill.min.js"><\/script>
-    `));</script>
+    <script src="/VGEEarth/Ext/geotiff/geotiff.js"></script>
+    <script src="/VGEEarth/Ext/axios/^1.4.0/axios.min.js"></script>
+    <script src="/VGEEarth/Ext/proj4/^2.9.0/proj4.js"></script>
 
-
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/geotiff/geotiff.js"></script>
-    <script>!window.GeoTIFF && document.write(unescape(`<script src="/VGEEarth/Ext/geotiff/geotiff.js"><\/script>`));</script>
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/axios/^1.4.0/axios.min.js"></script>
-    <script>!window.axios && document.write(unescape(`<script src="/VGEEarth/Ext/axios/^1.4.0/axios.min.js"><\/script>`));</script>
-    <script src="https://vge-webgl-page.oss-cn-beijing.aliyuncs.com/WebPublic/proj4/^2.9.0/proj4.js"></script>
-    <script>!window.proj4 && document.write(unescape(`<script src="/VGEEarth/Ext/proj4/^2.9.0/proj4.js"><\/script>`));</script>
+    <script>
+        console.log(`%c📜 MetaVGE-3DVis-Vue3 编译版本：${VGEEarth.VERSION}`, 'color: #84709b; font-size: 14px; font-weight: bold;');
+        window.GISResourcesUrl = 'http://8.146.208.114:9001';
+        window.AppBaseUrl = 'http://8.146.208.114:3060';
+        window.demoServer = 'http://8.146.208.114:3000/VGEEarth-SDK';
+    </script>
 </head>
-<script>
-    window.GISResourcesUrl = 'http://8.146.208.114:9001';
-    window.AppBaseUrl = 'http://8.146.208.114:3060';
-    window.demoServer = 'http://8.146.208.114:3000/VGEEarth-SDK';
-    // window.demoServer = 'http://127.0.0.1:3008';
-</script>
 
 <script src="/config/baseConfig.js" type="module"></script>
 <script src="/config/UIConfig.js"></script>

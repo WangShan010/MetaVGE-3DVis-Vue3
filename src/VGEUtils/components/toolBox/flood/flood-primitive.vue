@@ -47,7 +47,7 @@
         />
         <label>简化数据版:</label>
         <button class="btn btn-primary btn-sm" type="button" @click="togglePlay">{{
-            isPlaying ? '暂停' : '播放'
+            isPlaying ? "暂停" : "播放"
           }}
         </button>
         <button class="btn btn-primary btn-sm" type="button" @click="removeFlood" style="margin: 20px">重置</button>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { tabPane, winTabs } from '@/VGEUtils/components/winTabs/index.js';
+import {tabPane, winTabs} from "@/VGEUtils/components/winTabs/index.js";
 
 let maxFrame = 0;
 let frameStep = 0;
@@ -72,9 +72,9 @@ let inter = null;
 let pc = 0;
 let allFlood = [];
 
-let floods = []; //洪水geoJson文件在场景上的数量
+let floods = [] //洪水geoJson文件在场景上的数量
 export default {
-  name: 'flood-primitive',
+  name: "flood-primitive",
   components: {winTabs, tabPane},
   data: function () {
     return {
@@ -82,7 +82,7 @@ export default {
       speed: 100,
       status: 0,//0 未开始下载;1下载中;2下载完成;3预构建;4开始模拟;5模拟暂停;6模拟完成
       downloadedFilesCount: 0,
-      progress: '1/148',
+      progress: "1/148",
       floodDataSourceIndex: 0,
       floodLocation: [
         {
@@ -97,7 +97,7 @@ export default {
       ],
 
       /**洪水简化版参数**/
-      fileDirectory: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/floods/lod4404/',//vge-阿里云oss
+      fileDirectory: "https://vge-webgl.oss-cn-beijing.aliyuncs.com/floods/lod4404/",//vge-阿里云oss
       // fileDirectory: 'https://floodsimulation.oss-rg-china-mainland.aliyuncs.com/flood4404/',//g-阿里云oss
       fileCount: 217,
       progressValue: 0,
@@ -107,7 +107,7 @@ export default {
       isAnxianJh: true,
       isDragging: true,
       stopExecution: false,
-    };
+    }
   },
   mounted() {
     // for (let i = 0; i <= 217; i++) {
@@ -127,14 +127,14 @@ export default {
             let floodData = response.data;
             floodFrameCache.push(floodData);
             let finishedfile = that.downloadedFilesCount++;
-            that.progress = '正在加载: ' + (finishedfile) + '/' + max / step;
+            that.progress = "正在加载: " + (finishedfile) + "/" + max / step;
             if (floodFrame < max) {
               that.status = 1;
               that.requestGeojsonFloodData(url, floodFrame + step, max, step);
             } else {
-              that.progress = '全部数据已加载';
+              that.progress = "全部数据已加载"
               that.status = 2;
-              console.log('all data is ready');
+              console.log("all data is ready");
             }
           })
           .catch(function (error) {
@@ -149,12 +149,12 @@ export default {
       }
 
       if (currentFrame < (maxFrame / frameStep)) {
-        this.progress = '正在预构建:' + currentFrame + '/' + (maxFrame / frameStep);
+        this.progress = "正在预构建:" + currentFrame + "/" + (maxFrame / frameStep);
         floodFrame = floodFrameCache[currentFrame];
         currentFrame++;
       } else {
         this.status = 3;
-        this.progress = '构建结束';
+        this.progress = "构建结束";
         currentFrame = 0;
         clearInterval(inter);
         return;
@@ -165,7 +165,7 @@ export default {
         let instances = [];
         let entitys = ds.entities.values;
         entitys.forEach((e) => {
-          console.log(e);
+          console.log(e)
           let geometry = new Cesium.GeometryInstance({
             geometry: new Cesium.PolygonGeometry({
               polygonHierarchy: new Cesium.PolygonHierarchy(
@@ -193,10 +193,10 @@ export default {
             aboveGround: true, //在椭球面上
             material: new Cesium.Material({
               fabric: {
-                type: 'Water',
+                type: "Water",
                 uniforms: {
                   //baseWaterColor : new Cesium.Color(0.82, 0.79, 0.78, 0.8),
-                  normalMap: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/floods/waterNormals.jpg',
+                  normalMap: "https://vge-webgl.oss-cn-beijing.aliyuncs.com/floods/waterNormals.jpg",
                   frequency: 8000.0, // 控制波数的数字。
                   animationSpeed: 0.02, // 控制水的动画速度的数字。
                   amplitude: 3.0, // 控制水波振幅的数字。
@@ -216,15 +216,15 @@ export default {
       maxFrame = max;
       let step = this.floodLocation[this.floodDataSourceIndex].step;
       frameStep = step;
-      VGEEarth.getMainViewer().scene.camera.flyTo({'destination': visPoint});
+      VGEEarth.getMainViewer().scene.camera.flyTo({"destination": visPoint});
       if (this.floodDataSourceIndex == 0) {
-        let url = 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/floods/austin/';
+        let url = 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/floods/austin/'
         this.requestGeojsonFloodData(url, 0, max, step);
       } else if (this.floodDataSourceIndex == 1) {
-        let url = 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/floods/anxian/';
+        let url = 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/floods/anxian/'
         this.requestGeojsonFloodData(url, 0, max, step);
       } else {
-        alert('正在开发中...');
+        alert("正在开发中...");
         return;
       }
     },
@@ -241,7 +241,7 @@ export default {
           allFlood[i].show = false;
         }
         that.status = 4;
-        that.progress = '播放:' + currentPlayingFrame + '/' + allFlood.length;
+        that.progress = "播放:" + currentPlayingFrame + '/' + allFlood.length;
         allFlood[currentPlayingFrame].show = true;
         currentPlayingFrame++;
 
@@ -280,7 +280,7 @@ export default {
 
     /**安县洪水简化版,加载洪水数据**/
     loadAndRenderGeoJSON(fileIndex) {
-      let that = this;
+      let that = this
       // if (this.stopExecution) {
       //   return
       // } // 检查标志，停止执行
@@ -293,7 +293,7 @@ export default {
             const features = geoJsonData.features;
             features.forEach((feature) => {
               const coordinates = feature.g.c;
-              let color = that.calculateColor1(feature.g.d);
+              let color = that.calculateColor1(feature.g.d)
               let arr = [];
               coordinates[0].forEach((coord) => {
                 const cartesian = Cesium.Cartesian3.fromDegrees(
@@ -329,18 +329,18 @@ export default {
             });
 
             if (that.stopExecution) {
-              return;
+              return
             } // 检查标志，停止执行
 
             earth.viewer3D.scene.primitives.add(primitive);
 
             if (floods.length > 3) {
-              let a = floods.shift();
+              let a = floods.shift()
               earth.viewer3D.scene.primitives.remove(a);
             }
-            floods.push(primitive);
+            floods.push(primitive)
           });
-      return 'finish';
+      return "finish"
     },
     /**控制暂停/播放洪水过程-->play()/pause()**/
     togglePlay() {
@@ -353,7 +353,7 @@ export default {
     },
     /**播放洪水过程**/
     play() {
-      this.stopExecution = false;
+      this.stopExecution = false
       this.intervalId = setInterval(() => {
         if (!this.isMaxIndex) {
           this.progressValue = (this.currentIndex + 1) / (this.fileCount - 1) * 100;
@@ -373,10 +373,7 @@ export default {
       this.pause();
 
       //清除所有
-      floods.forEach((item) => {
-        earth.viewer3D.scene.primitives.remove(item);
-      });
-
+      earth.viewer3D.scene.primitives.removeAll(floods);
 
       // 更新进度条，并加载新数据
       this.loadAndRenderGeoJSON(this.currentIndex);
@@ -388,14 +385,14 @@ export default {
     /**控制安县简化版本窗口显隐**/
     handleOptionChange() {
       if (this.floodDataSourceIndex === 1) {
-        this.isAnxianJh = true;
+        this.isAnxianJh = true
         // earth.openDeBug();
         // window.earth.viewer3D.camera.flyTo({
         //   destination: Cesium.Cartesian3.fromDegrees(104.35556649960914, 31.605304431049152, 20600),
         //   // destination: Cesium.Cartesian3.fromDegrees(115.88359,22.034817, 20600),
         // });
       } else {
-        this.isAnxianJh = false;
+        this.isAnxianJh = false
       }
     },
     /**移除**/
@@ -405,37 +402,34 @@ export default {
       this.progressValue = 0;
       this.isPlaying = false;
       this.pause();
-      floods.forEach((item) => {
-        earth.viewer3D.scene.primitives.remove(item);
-      });
-      floods.length = 0;
+      earth.viewer3D.scene.primitives.removeAll();
       // this.stopExecution = false; //恢复添加洪水的函数执行
     },
     /**根据水深计算颜色
      * @param depth 水的深度
      * **/
     calculateColor1(depth) {
-      let max_depth = 30;
-      let min_depth = 0;
-      let min_color = [8, 48, 107];
-      let max_color = [33, 113, 181];
+      let max_depth = 30
+      let min_depth = 0
+      let min_color = [8, 48, 107]
+      let max_color = [33, 113, 181]
       let colors = {
         r: 0,
         g: 0,
         b: 0
-      };
+      }
       if (depth >= 30) {
-        colors.r = 8;
-        colors.g = 48;
-        colors.b = 107;
-        return colors;
+        colors.r = 8
+        colors.g = 48
+        colors.b = 107
+        return colors
       } else {
-        let depth_ratio = (depth - min_depth) / (max_depth - min_depth);
-        let color_ratio = 1 - depth_ratio;
-        colors.r = parseInt(min_color[0] * depth_ratio + max_color[0] * color_ratio);
-        colors.g = parseInt(min_color[1] * depth_ratio + max_color[1] * color_ratio);
-        colors.b = parseInt(min_color[2] * depth_ratio + max_color[2] * color_ratio);
-        return colors;
+        let depth_ratio = (depth - min_depth) / (max_depth - min_depth)
+        let color_ratio = 1 - depth_ratio
+        colors.r = parseInt(min_color[0] * depth_ratio + max_color[0] * color_ratio)
+        colors.g = parseInt(min_color[1] * depth_ratio + max_color[1] * color_ratio)
+        colors.b = parseInt(min_color[2] * depth_ratio + max_color[2] * color_ratio)
+        return colors
       }
     },
     /**鼠标按下时窗口不可被拖动**/
@@ -449,7 +443,7 @@ export default {
     /**关闭窗口**/
     close() {
       this.$store.commit('setVGEEarthComAction', {name: 'flood', on_off: 2});
-      this.removeFlood();
+      this.removeFlood()
     },
   },
   computed: {
@@ -479,12 +473,7 @@ export default {
       return this.currentIndex === this.fileCount - 1;
     },
   },
-  unmounted() {
-    clearInterval(inter);
-    this.stopExecution = true;
-    this.removeFlood();
-  }
-};
+}
 </script>
 
 <style scoped>

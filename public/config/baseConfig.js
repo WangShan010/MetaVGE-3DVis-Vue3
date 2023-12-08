@@ -1,33 +1,14 @@
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NjYwM2E1NS00OTRlLTRiMjEtYjhhZS05MzEzNDIwNGUzMjgiLCJpZCI6MjM5OTcsImlhdCI6MTY3OTI3ODE4OX0.X_5SfpOtpL-gSbGjAP2Z6ohp1jmI5k_UtjzA72iFPcQ';
+Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NjYwM2E1NS00OTRlLTRiMjEtYjhhZS05MzEzNDIwNGUzMjgiLCJpZCI6MjM5OTcsImlhdCI6MTY3OTI3ODE4OX0.X_5SfpOtpL-gSbGjAP2Z6ohp1jmI5k_UtjzA72iFPcQ";
 
 const baseConfig = {};
 
-const appName = '虚拟地理环境三维可视化平台';
-const appTitle = '虚拟地理环境三维可视化平台';
+const appName = '虚拟地理环境大数据可视化平台';
+const appTitle = '虚拟地理环境大数据可视化平台';
 
 // const homeView = {longitude: 117.316034, latitude: 42.411409, height: 55150};
 const homeView = {longitude: 108.387, latitude: 30.71, height: 4000000};
 
-const layerList = [
-    {
-        name: '高德影像',
-        catalog: '基础影像',
-        dataType: 'layer',
-        properties: {
-            scheme: 'layer-xyz-3857',
-            url: 'http://webst04.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}'
-        }
-    },
-    {
-        name: '高德电子地图',
-        catalog: '电子地图',
-        dataType: 'layer',
-        properties: {
-            scheme: 'layer-xyz-3857',
-            url: 'http://webst04.is.autonavi.com/appmaptile?style=7&x={x}&y={y}&z={z}'
-        }
-    }
-];
+const layerList = [];
 const terrainList = [];
 const modelList = [];
 
@@ -151,6 +132,9 @@ baseConfig.poi = poiList;
 
 // VGEEarth.ConfigTool.addMapBoxOnAliYun(true);
 // VGEEarth.ConfigTool.addTerrainOnAliYun(true);
+
+VGEEarth.ConfigTool.addAMapSatelliteLayerOnLine(false);
+VGEEarth.ConfigTool.addAMapLayerOnLine(false);
 VGEEarth.ConfigTool.addTerrainOnIon(true);
 VGEEarth.ConfigTool.addBingMapOnIon(true);
 VGEEarth.ConfigTool.loadConfig(baseConfig);

@@ -108,7 +108,7 @@ export default {
               position: positionProperty,
               orientation: orientationProperty,
               model: new Cesium.ModelGraphics({
-                uri: './app/demo/model/uva.gltf',
+                uri: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/MetaVGE-3DVis-Vue3/Model/%E5%A4%A7%E7%96%86%E6%97%A0%E4%BA%BA%E6%9C%BA/uva.gltf',
                 minimumPixelSize: 64,
                 maximumScale: 20000
               })

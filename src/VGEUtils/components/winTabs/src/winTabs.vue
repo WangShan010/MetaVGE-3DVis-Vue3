@@ -31,6 +31,7 @@
                       @click="changeSize"></span>
                 <span v-if="maxAble" class="iconBtn noDrag iconfont icon-esgcc--zuidahua" style="right: 40px"
                       @click="zoomSize"></span>
+<!--                <span class="iconBtn noDrag iconfont icon-esgcc-bangzhu" style="right: 0" @click="close"></span>-->
                 <span class="iconBtn noDrag iconfont icon-esgcc-guanbi" style="right: 0" @click="close"></span>
             </div>
 

@@ -1,11 +1,12 @@
 <template>
-    <win-tabs :initCSS="{width: 320,height: 200,left:500,top:330}" @close="close" v-loading="loading"  element-loading-text="后台服务计算中...">
+    <win-tabs :initCSS="{width: 350,height: 220,left:500,top:330}" @close="close" v-loading="loading"
+              element-loading-text="后台服务计算中...">
         <tab-pane label="水文分析">
             <div @mousedown.stop>
                 <div style="">
                     <div style="text-align: center">
                         <el-select v-model="analyze" placeholder="请选择" style="width: 150px; margin-right: 10px"
-                            @change="remove">
+                                   @change="remove">
                             <el-option
                                     v-for="item in analyzes"
                                     :key="item.value"
@@ -22,13 +23,17 @@
                             <span v-if="area>100 && coordinates===''">面积数值过大，可能会导致计算时间较长！</span>
                         </div>
                         <button class="btn btn-info btn-sm" :disabled="!analyze" @click="excavate">绘制区域</button>
-                        <button class="btn btn-warning btn-sm" @click="remove">重置</button>
+                        <button class="btn btn-warning btn-sm" @click="reset">重置</button>
                         <button class="btn btn-warning btn-sm" :disabled="!coordinates.length" @click="download">导出
                         </button>
                         <button class="btn btn-warning btn-sm" :disabled="!coordinates.length" @click="readingPixel">
                             取值
                         </button>
+                        <button class="btn btn-warning btn-sm" @click="helpShow=!helpShow">帮助</button>
                     </div>
+                </div>
+                <div id="helpInfo" v-show="helpShow" style="margin: 10px">
+                    {{ analyzes.find(entity => entity.value === analyze).intro }}
                 </div>
             </div>
         </tab-pane>
@@ -38,6 +43,7 @@
 <script>
 import {tabPane, winTabs} from '@/VGEUtils/components/winTabs/index.js';
 import flyTaiwan from '../../areaNavigation/areaNavigationContent.vue';
+
 
 let imageStores = {
     imageStore: [],
@@ -51,13 +57,14 @@ export default {
     components: {winTabs, tabPane},
     data() {
         return {
-            area:0,
+            area: 0,
             params: {
                 minslope: 0.5,
                 threhold: 5,
                 direction: 0
             },
-            loading:false,
+            loading: false,
+            helpShow: false,
             coordinates: '',
             w: 0,
             s: 0,
@@ -67,25 +74,42 @@ export default {
             analyze: 'fillSink',
             analyzes: [{
                 value: 'fillSink',
-                label: '填洼'
+                label: '填洼',
+                intro: '填洼功能，绘制矩形区域后自动生成修正的高程数据',
+                unity: '米'
             }, {
                 value: 'drainageExtract',
-                label: '河网提取'
+                label: '河网提取',
+                intro: '河网提取功能，绘制矩形区域后自动生成河流与流域矢量数据',
+                entity: [
+                    {text: '河流', color: 'rgb(255, 255, 0, 1)', isLine: true},
+                    {text: '流域', color: 'rgb(255, 255, 0, 0.6)', isLine: false}
+                ]
             }, {
                 value: 'strahlerOrder',
-                label: '河网等级'
+                label: '河网等级',
+                intro: '计算河网等级，绘制矩形区域后自动生成河网等级栅格',
+                unity: '河网等级'
             }, {
                 value: 'flowPath',
-                label: '流路长度'
+                label: '流路长度',
+                intro: '计算流路长度，绘制矩形区域后自动生成流路长度栅格',
+                unity: '米'
             }, {
                 value: 'maxFlowPath',
-                label: '最大流路长度'
+                label: '最大流路长度',
+                intro: '计算最大流路长度，绘制矩形区域后自动生成最大流路长度栅格',
+                unity: '米'
             }, {
                 value: 'verticalDistance',
-                label: '河网垂直距离'
+                label: '河网垂直距离',
+                intro: '计算河网垂直距离，绘制矩形区域后自动生成河网垂直距离栅格',
+                unity: '米'
             }, {
                 value: 'wetnessIndex',
-                label: '湿度指数'
+                label: '湿度指数',
+                intro: '计算湿度指数，绘制矩形区域后自动生成湿度指数栅格',
+                unity: '湿度指数'
             }]
         };
     },
@@ -97,11 +121,9 @@ export default {
             this.$store.commit('setVGEEarthComAction', {name: 'hydrologyAnalyze', on_off: 2});
             this.remove();
             this.delPolygon();
-
-
         },
         //添加矩形线
-        addPolygon(arr){
+        addPolygon(arr) {
             window.earth.viewer3D.entities.add({
                 id: 'tempPolygon_p',
                 polyline: {
@@ -117,7 +139,8 @@ export default {
             });
         },
         //删除矩形线
-        delPolygon(){
+        delPolygon() {
+            window.earth.viewer3D.entities.removeById('areaPolygon');
             window.earth.viewer3D.entities.removeById('tempPolygon_p');
         },
         excavate() {
@@ -168,7 +191,7 @@ export default {
         async addResult() {
             if (this.coordinates) {
                 this.remove();
-                this.loading=true
+                this.loading = true
                 this.result = (await axios.post(window.GISResourcesUrl + `/${this.analyze}`, {
                     coordinates: this.coordinates,
                     params: this.params
@@ -184,19 +207,24 @@ export default {
                         let [west, south, east, north] = image.getBoundingBox();
                         // 读取像素
                         let [red = [], green = red, blue = red] = await image.readRasters();
+
+                        let _this = this;
+
                         function mapValuesTo01Range(arr) {
-                            let min = 0;
-                            let max = 0;
+                            let min = Number.MAX_VALUE;
+                            let max = Number.MIN_VALUE;
                             for (let i = 0; i < arr.length; i++) {
-                                if(isNaN(arr[i])) continue
+                                if (isNaN(arr[i])) continue
                                 min = min < arr[i] ? min : arr[i];
                                 max = max > arr[i] ? max : arr[i];
                             }
+                            if (_this.analyze === value.split('.')[0] || _this.analyze === 'fillSink') _this.setLegend(min, max);
                             return arr.map(value => {
                                 let normalizedValue = (value - min) / (max - min);
                                 return parseInt(normalizedValue * 255);
                             });
                         }
+
                         red = mapValuesTo01Range(red);
                         green = mapValuesTo01Range(green);
                         blue = mapValuesTo01Range(blue);
@@ -227,13 +255,29 @@ export default {
                         const dataSource = await Cesium.GeoJsonDataSource.load(file, {clampToGround: true});
                         earth.viewer3D.dataSources.add(dataSource);
                         imageStores.geoJsonStore.push(dataSource);
+                        this.setLegend(Number.MIN_VALUE, Number.MAX_VALUE);
                     }
                 }
+
                 this.delPolygon();
-                this.loading=false;
+                this.loading = false;
+
             } else window.alert('请绘制区域!');
         },
+        setLegend(min, max) {
+            let entity = this.analyzes.find(entity => entity.value === this.analyze)
+            if (min === Number.MIN_VALUE && max === Number.MAX_VALUE) this.$store.commit('setLegendCurrent', {
+                title: entity.label, list: entity.entity
+            });
+            else this.$store.commit('setLegendCurrent', {
+                title: entity.label, list: {flag: true, min, max, unity: entity.unity}
+            });
+        },
         remove() {
+            this.helpShow = false;
+            this.reset();
+        },
+        reset() {
             this.area = 0;
             entities.forEach(entity => {
                 entity.destroyWindow();
@@ -244,14 +288,15 @@ export default {
             imageStores.geoJsonStore.forEach(item => {
                 earth.viewer3D.dataSources.remove(item);
             });
+
             imageStores.imageStore = [];
             imageStores.geoJsonStore = [];
             this.area = 0
 
-          //关闭图例
-          this.$store.commit('setLegendCurrent', {
-            title: null, list: [], img: null
-          });
+            //关闭图例
+            this.$store.commit('setLegendCurrent', {
+                title: null, list: [], img: null
+            });
         },
         download() {
             for (const value of this.result) {
@@ -293,24 +338,25 @@ export default {
 
 <style lang="less" scoped>
 .ha-content {
-    text-align: left;
+  text-align: left;
 
-    .mes {
-        color: #009b94;
-        margin-left: 7px;
-        margin-bottom: 8px;
-    }
+  .mes {
+    color: #009b94;
+    margin-left: 7px;
+    margin-bottom: 8px;
+  }
 
-    .mes_red {
-        color: #be9125;
-    }
+  .mes_red {
+    color: #be9125;
+  }
 }
+
 button {
-    margin-right: 5px;
-    margin-left: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 label {
-    color: #009b94;
+  color: #009b94;
 }
 </style>

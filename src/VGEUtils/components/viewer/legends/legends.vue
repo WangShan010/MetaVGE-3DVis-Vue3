@@ -10,11 +10,22 @@
             <div class="centreBox">
                 <span class="title" v-show="legends.title">{{ legends.title }}</span>
             </div>
-            <div class="bottomBox" v-if="legends.list.length>0"
+            <div class="bottomBox" v-if="!legends.list.flag"
                  v-for="item in legends.list"
                  :key="item.color">
-                <div class="colorBox" v-bind:style="{ 'background-color': item.color }"></div>
+                <div class="colorBox" v-bind:style="{ 'background-color': item.color }" v-if="!item.isLine"></div>
+                <div class="colorBox" v-bind:style="{ 'border-color': item.color, 'border-style': 'solid', 'border-width': '1px'}" v-else></div>
                 <span>{{ item.text }}</span>
+            </div>
+            <div v-if="legends.list.flag">
+                <span style="margin-left: 30px;">{{ legends.list.max.toFixed(2) }}</span>
+                <div class="bottomMap"
+                     v-for="item in colors"
+                     :key="item">
+                    <div class="colorBox" v-bind:style="{ 'background-color': item }"></div>
+                </div>
+                <span style="margin-left: 30px;">{{ legends.list.min.toFixed(2) }}</span>
+                <span style="margin-left: 30px;display: block;text-align: left;">单位：{{ legends.list.unity }}</span>
             </div>
             <div class="bottomBox" v-if="legends.img">
                 <img :src="legends.img" style="max-height: 250px">
@@ -24,6 +35,8 @@
 </template>
 
 <script>
+
+import colormap from "colormap";
 
 let addFunc = function (e) {
     if (e.properties.legend) {
@@ -44,8 +57,19 @@ let removeFunc = function (e) {
     }
 };
 
+
 export default {
     name: 'legends',
+    data() {
+        return {
+            colors: colormap({
+                colormap: 'greys',
+                nshades: 200,
+                format: 'hex',
+                alpha: 1
+            }).reverse()
+        }
+    },
     methods: {
         close() {
             this.$store.commit('setVGEEarthComAction', {name: 'legend', on_off: 3});
@@ -130,11 +154,23 @@ export default {
       .colorBox {
         width: 24px;
         height: 15px;
-        border: salmon solid 1px;
         margin: 2px 5px 2px 2px;
         display: inline-block;
       }
+    }
 
+    .bottomMap {
+      margin-left: 20px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: left;
+
+      .colorBox {
+        width: 24px;
+        height: 1px;
+        display: inline-block;
+      }
     }
   }
 }
