@@ -116,7 +116,7 @@ export default {
       SkyBox.groundSkyBoxList = groundSkyBoxList;
     },
     flyToGround() {
-      let s = VGEEarth.ConfigTool.getSourcesItemByPid('80f3778c-c8dc-481b-2122-b90e04fd3104');
+      let s = VGEEarth.ConfigTool.getResourcesByPid('80f3778c-c8dc-481b-2122-b90e04fd3104');
       earth.viewer3DWorkSpace.addData(s);
 
       earth.viewer3D.camera.flyTo({

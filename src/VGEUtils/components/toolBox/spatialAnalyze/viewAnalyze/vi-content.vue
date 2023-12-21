@@ -1,5 +1,5 @@
 <template>
-  <win-tabs :initCSS="{width: 320,height: 350,left:500,top:330}" @close="close" v-loading="loading" element-loading-text="后台服务计算中...">
+  <win-tabs :initCSS="{width: 320,height: 350,left:350,top:380}" @close="close" v-loading="loading" element-loading-text="后台服务计算中...">
     <tabPane label="视域分析">
       <div>
         <div style="margin-bottom: 5px">

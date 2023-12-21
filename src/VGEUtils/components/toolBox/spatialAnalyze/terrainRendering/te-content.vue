@@ -1,5 +1,5 @@
 <template>
-  <win-tabs :initCSS="{width: 340,height: 330,left:500,top:330}" @close="close" v-loading="loading"  element-loading-text="拼命加载中">
+  <win-tabs :initCSS="{width: 340,height: 330,left:350,top:380}" @close="close" v-loading="loading"  element-loading-text="拼命加载中">
     <tab-pane label="地貌渲染">
       <div>
         <label>颜色分级:</label>

@@ -31,11 +31,20 @@
                       @click="changeSize"></span>
                 <span v-if="maxAble" class="iconBtn noDrag iconfont icon-esgcc--zuidahua" style="right: 40px"
                       @click="zoomSize"></span>
-<!--                <span class="iconBtn noDrag iconfont icon-esgcc-bangzhu" style="right: 0" @click="close"></span>-->
-                <span class="iconBtn noDrag iconfont icon-esgcc-guanbi" style="right: 0" @click="close"></span>
+                <span title="帮助教程" class="iconBtn noDrag iconfont icon-esgcc-tishi" @click="openHelp"></span>
+                <span title="关闭" class="iconBtn noDrag iconfont icon-esgcc-guanbi" style="right: 0" @click="close"></span>
             </div>
 
-            <el-tabs style="height: 100%;border-radius: 3px">
+            <div class="help-block-win" v-if="firstGuide">
+                <span>
+                       📋您第一次使用该模块，可以点击此处观看使用视频教程：
+                </span>
+                <div>
+                    <el-button type="success">打开教程</el-button>
+                    <el-button type="primary" @click="firstGuide=false">跳过</el-button>
+                </div>
+            </div>
+            <el-tabs style="height: 100%;border-radius: 3px;padding: 0 10px;">
                 <slot></slot>
             </el-tabs>
         </div>
@@ -73,7 +82,7 @@ export default {
             inBackgroundColor: '#242524'
         };
     },
-    props: ['initCSS', 'maxAble', 'changeSizeAble'],
+    props: ['initCSS', 'maxAble', 'changeSizeAble', 'firstGuide'],
     components: {
         Vue3DraggableResizable,
         ElTabs
@@ -108,6 +117,9 @@ export default {
                 this.w = document.documentElement.clientWidth;
             }
 
+        },
+        openHelp() {
+            this.$emit('openHelp');
         },
         close() {
             this.$emit('close');
@@ -154,9 +166,27 @@ export default {
     height: 100%;
     width: 100%;
     position: relative;
-    padding: 0 10px;
     border: 1px solid #526f82;
     border-radius: 5px;
+}
+
+.help-block-win {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 5;
+    background-color: rgba(33, 45, 33, 0.9);
+    color: #fad9a4;
+    padding: 50px 20px 20px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+
+    div {
+        padding-top: 20px;
+        text-align: center;
+    }
 }
 
 .classNameActive {

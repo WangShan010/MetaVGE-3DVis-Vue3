@@ -2,8 +2,8 @@ Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 const baseConfig = {};
 
-const appName = '虚拟地理环境大数据可视化平台';
-const appTitle = '虚拟地理环境大数据可视化平台';
+const appName = '虚拟地理环境大数据可视化系统';
+const appTitle = '虚拟地理环境大数据可视化系统';
 
 // const homeView = {longitude: 117.316034, latitude: 42.411409, height: 55150};
 const homeView = {longitude: 108.387, latitude: 30.71, height: 4000000};
@@ -26,7 +26,7 @@ const cesium3DTileSetList = [
         decryptionKey: '795bc22d-c487-6fd6-ec77-56849171d53d',
         properties: {
             url: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/encrypt/3DTiles-TianYi/tileset.json',
-            maximumScreenSpaceError: 8,
+            maximumScreenSpaceError: 2,
             offset: {
                 height: 35
             }

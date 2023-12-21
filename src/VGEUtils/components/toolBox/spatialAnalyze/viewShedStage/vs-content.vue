@@ -4,7 +4,7 @@
 ****************************************************************************/
 
 <template>
-  <win-tabs :initCSS="{width: 320,height: 280,left:500,top:330}" @close="close">
+  <win-tabs :initCSS="{width: 320,height: 280,left:350,top:380}" @close="close">
     <tab-pane label="可视域分析">
       <div>
         <div style="margin-bottom: 5px">

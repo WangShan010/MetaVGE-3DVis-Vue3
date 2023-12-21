@@ -1,5 +1,5 @@
 <template>
-  <win-tabs :initCSS="{width: 300,height: 290,left:500,top:330}" @close="close" :draggable="isDragging">
+  <win-tabs :initCSS="{width: 300,height: 290,left:350,top:380}" @close="close" :draggable="isDragging">
     <tab-pane label="火焰粒子" class="win">
       <div class="app-wrapp">
         <div class="symbol-item">

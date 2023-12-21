@@ -1,5 +1,5 @@
 <template>
-  <win-tabs :initCSS="{width: 300,height: 280,left:500,top:330}" @close="close" class="move_box">
+  <win-tabs :initCSS="{width: 300,height: 280,left:350,top:380}" @close="close" class="move_box">
     <tab-pane label="路径漫游">
 
       <div style="margin-bottom: 5px">

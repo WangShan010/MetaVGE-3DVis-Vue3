@@ -28,7 +28,7 @@ let UIConfig = {
         {name: '卷帘对比', type: 'ToolBoxItem', open: false, comName: 'ImageLayerSplitMana', config: {inToolBox: true, iconClass: 'vge-juanlian'}},
         {name: '时序图层', type: 'ToolBoxItem', open: false, comName: 'ImageLayerTimeLine', config: {inToolBox: true, iconClass: 'vge-timeline'}},
         {name: '路线规划', type: 'ToolBoxItem', open: false, comName: 'pathPlanning', config: {inToolBox: true, iconClass: 'vge-zhuanyiluxian'}},
-        {name: '路径漫游', type: 'ToolBoxItem', open: false, comName: 'pathRoaming', config: {inToolBox: true, iconClass: 'vge-zhuanyiluxian'}},
+        {name: '路径漫游', type: 'ToolBoxItem', open: false, comName: 'pathRoaming', config: {inToolBox: false, iconClass: 'vge-zhuanyiluxian'}},
         {name: '天空盒', type: 'ToolBoxItem', open: false, comName: 'skyBoxTool', config: {inToolBox: true, iconClass: 'vge-jiejing'}},
         {name: 'VR立体', type: 'ToolBoxItem', open: false, comName: 'vr3d', config: {inToolBox: true, iconClass: 'vge-zhuanyiluxian'}},
         {name: '实时天气', type: 'ToolBoxItem', open: false, comName: 'weather', config: {inToolBox: false, iconClass: 'vge-duoyun'}},

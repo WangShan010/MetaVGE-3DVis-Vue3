@@ -3,8 +3,8 @@
     <tab-pane label="土方量计算">
       <div @mousedown.stop>
         <div>
-          数据集：
-          <el-select v-model.number="tifData" placeholder="请选择" size="small">
+          <span style="display:inline-block;width: 110px">原数据集：</span>
+          <el-select v-model="selBackgroundDataId" placeholder="请选择" size="small" clearable @change="selTifDataGroup">
             <el-option
                 v-for="item in tifGroup"
                 :key="item.id"
@@ -12,6 +12,31 @@
                 :value="item.id">
             </el-option>
           </el-select>
+          <template v-if="selBackgroundDataId">
+            <el-popconfirm title="确认从服务器上永久删除该 Tif 文件?" @confirm="delTif(selBackgroundDataId)">
+              <template #reference>
+                <el-button size="small" type="danger" style="margin-left:10px">删除</el-button>
+              </template>
+            </el-popconfirm>
+            <el-button size="small" type="success" @click="downloadTif(selBackgroundDataId)">下载</el-button>
+          </template>
+        </div>
+        <div style="padding: 10px 0">
+          <span style="display:inline-block;width: 110px">滑坡后数据集：</span>
+          <el-select v-model="selLandslideDataId" placeholder="请选择" size="small" clearable @change="selTifDataGroup">
+            <el-option
+                v-for="item in tifGroup"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id">
+            </el-option>
+          </el-select>
+          <template v-if="selLandslideDataId">
+            <el-button size="small" type="danger" style="margin-left:10px" @click="delTif(selLandslideDataId)">删除</el-button>
+            <el-button size="small" type="success" @click="downloadTif(selLandslideDataId)">下载</el-button>
+          </template>
+        </div>
+        <div>
         </div>
         <div v-if="tifInfo" style="margin: 10px 0">
           数据集基本信息：
@@ -32,148 +57,176 @@
           </div>
         </div>
         <div class="ctrBtns">
-          <button type="button" class="btn btn-sm btn-success" :disabled="!tifData" @click="selPolygon">框选范围
-          </button>
-          <button type="button" class="btn btn-sm btn-warning" @click="clearRes">重置</button>
+
+          <el-button size="small" type="primary" :disabled="!(selBackgroundDataId&&selLandslideDataId)" @click="selPolygon">框选范围</el-button>
+          <el-button size="small" type="warning" @click="clearRes">重置</el-button>
         </div>
       </div>
+    </tab-pane>
+    <tab-pane label="上传文件">
+      <!--      <el-button size="small" type="success">新上传 Tif 数据</el-button>-->
+      <el-upload
+          ref="upload"
+          action="http://39.107.89.250:8485/uploadTif"
+          :on-success="uploadSuccess"
+          :limit="1"
+      >
+        <template #trigger>
+          <el-button type="primary">新上传 Tif 数据</el-button>
+        </template>
+        <template #tip>
+          <div class="el-upload__tip text-red">
+            单次限制上传一个文件，选取新文件后会覆盖原文件
+          </div>
+        </template>
+      </el-upload>
     </tab-pane>
   </win-tabs>
 </template>
 
 <script>
+import {tabPane, winTabs} from '@/VGEUtils/components/winTabs/index.js';
 
-import {tabPane, winTabs} from "@/VGEUtils/components/winTabs/index.js";
-
-let fakeTifInfo = {
-  "fields": [
-    {"name": "east", "alias": "影像最东边经度"},
-    {"name": "west", "alias": "影像最西边经度"},
-    {"name": "north", "alias": "影像最北边纬度"},
-    {"name": "south", "alias": "影像最南边纬度"},
-    {"name": "tif1Address", "alias": "影像1地址"},
-    {"name": "tif2Address", "alias": "影像2地址"}
-  ],
-  "data": {
-    "east": 117,
-    "west": 116,
-    "north": 40,
-    "south": 39,
-    "tif1Address": "tif/tif1.tif",
-    "tif2Address": "tif/tif2.tif"
-  },
-  "dataText": "所查询的影像组经纬度范围：116 117 39 40 文件路径：tif/tif1.tif,tif/tif2.tif",
-  "msg": "数据返回成功"
-};
-
-let earthworkVolumeFakeData = {
-  "fields": [
-    {
-      "name": "reNum",
-      "alias": "影像高程变低的像元数"
-    },
-    {
-      "name": "reSoil",
-      "alias": "减少的土方量"
-    },
-    {
-      "name": "upNum",
-      "alias": "影像高程变高的像元数"
-    },
-    {
-      "name": "upSoil",
-      "alias": "增加的土方量"
-    },
-    {
-      "name": "calRes",
-      "alias": "土方量变化"
-    }
-  ],
-  "data": {
-    "reNum": 0,
-    "reSoil": 0,
-    "upNum": 4374,
-    "upSoil": 60695681.6262207,
-    "calRes": 60695681.6262207
-  },
-  "dataText": "土方量计算结果为：共有0个像元变低。该部分像元共减少了0.000000立方米的土。共有4374个像元变高。该部分像元共增加了60695681.626221立方米的土。该部分像元土方量变化值为60695681.626221立方米。当前Tif影像边界为：116 117 39 40",
-  "msg": "数据返回成功"
-};
-
-let redRectangle = null;
-
+let redRectangle = [null, null];
+let polygonEntity = null;
 export default {
-  name: "ev-content",
+  name: 'ev-content',
   components: {winTabs, tabPane},
   data() {
     return {
-      tifGroup: [
-        {id: 1, name: "测试数据集"}
-      ],
-      tifData: null,
+      tifGroup: [],
       tifInfo: null,
+
+      backgroundData: null,
+      landslideData: null,
+      selBackgroundDataId: null,
+      selLandslideDataId: null,
+
       earthworkVolumeData: null,
+      fields: []
     };
   },
   methods: {
+    // 载入 Tif 数据集
     async loadTifDataGroup() {
-      this.tifInfo = fakeTifInfo;
-      this.addTifRectangle();
+      const {data} = await axios.get('http://39.107.89.250:8485/get_tif_info');
+      this.fields = data.tif_fields;
+      this.tifGroup = [];
+
+      for (const dataKey in data) {
+        if (dataKey === 'tif_fields') {
+          this.fields = data[dataKey];
+        } else {
+          data[dataKey].id = dataKey;
+          this.tifGroup.push(data[dataKey]);
+        }
+      }
     },
+    selTifDataGroup() {
+      this.backgroundData = this.tifGroup.find(item => item.id === this.selBackgroundDataId);
+      this.landslideData = this.tifGroup.find(item => item.id === this.selLandslideDataId);
+
+      this.addTifRectangle(this.backgroundData, 0);
+      this.addTifRectangle(this.landslideData, 1);
+    },
+
     async selPolygon() {
       let that = this;
       earth.drawShape.drawPolygon({
-        coordinateType: "cartographicPoiArr",
+        coordinateType: 'cartographicPoiArr',
         endCallback: (positions) => {
           that.getEarthworkVolume(positions);
         }
       });
     },
     async getEarthworkVolume(positions) {
-      let positionText = JSON.stringify(positions);
+      let newPosition = positions.map(item => [item[0], item[1]]);
 
-      this.earthworkVolumeData = earthworkVolumeFakeData;
+       polygonEntity = earth.viewer3D.entities.add({
+        polygon: {
+          hierarchy: Cesium.Cartesian3.fromDegreesArray(newPosition.flat()),
+          material: Cesium.Color.GREEN.withAlpha(0.2),
+          outline: true,
+          outlineColor: Cesium.Color.RED
+        }
+      });
+
+      let positionText = JSON.stringify(newPosition);
+
+      let {data} = await axios.get(`http://39.107.89.250:8485/cal/${this.selBackgroundDataId}/${this.selLandslideDataId}/${positionText}`);
+
+      this.earthworkVolumeData = data;
     },
-    addTifRectangle() {
-      earth.viewer3D.entities.remove(redRectangle);
-      redRectangle = earth.viewer3D.entities.add({
-        name: "Red translucent rectangle",
+    addTifRectangle(tifInfo, index = 0) {
+      earth.viewer3D.entities.remove(redRectangle[index]);
+      if (!tifInfo) return;
+      redRectangle[index] = earth.viewer3D.entities.add({
+        name: 'Red translucent rectangle',
         rectangle: {
           coordinates: Cesium.Rectangle.fromDegrees(
-              this.tifInfo.data.west,
-              this.tifInfo.data.south,
-              this.tifInfo.data.east,
-              this.tifInfo.data.north
+              tifInfo.geographic_extent.left,
+              tifInfo.geographic_extent.bottom,
+              tifInfo.geographic_extent.right,
+              tifInfo.geographic_extent.top
           ),
           material: Cesium.Color.RED.withAlpha(0.2),
           outline: true,
-          outlineColor: Cesium.Color.YELLOW,
-        },
+          outlineColor: Cesium.Color.YELLOW
+        }
       });
 
-      earth.viewer3D.zoomTo(redRectangle);
+      earth.viewer3D.zoomTo(redRectangle[index]);
+    },
+
+    downloadTif(tifId) {
+      if (!tifId) return;
+
+      let a = document.createElement('a');
+      a.style = 'display: none'; // 创建一个隐藏的a标签
+      a.download = tifId;
+      a.href = `http://39.107.89.250:8485/downloadTif/${tifId}`;
+      document.body.appendChild(a);
+      a.click(); // 触发a标签的click事件
+      document.body.removeChild(a);
+    },
+    delTif(tifId) {
+      axios.post('http://39.107.89.250:8485/deleteTif/' + tifId).then(() => {
+        this.clearRes();
+        this.loadTifDataGroup();
+        this.$message({
+          message: '删除 Tif 文件成功',
+          type: 'warning'
+        });
+      });
+    },
+
+    uploadSuccess() {
+      this.$message({
+        message: '上传成功',
+        type: 'success'
+      });
+      this.loadTifDataGroup();
     },
 
     clearRes() {
-      this.tifData = null;
-      this.tifInfo = null;
+      this.selBackgroundDataId = null;
+      this.selLandslideDataId = null;
+      this.backgroundData = null;
+      this.landslideData = null;
       this.earthworkVolumeData = null;
 
-      earth.viewer3D.entities.remove(redRectangle);
+      if (polygonEntity) {
+        earth.viewer3D.entities.remove(polygonEntity);
+      }
+      earth.viewer3D.entities.remove(redRectangle[0]);
+      earth.viewer3D.entities.remove(redRectangle[1]);
     },
     close() {
-      this.$store.commit("setVGEEarthComAction", {name: "earthworkVolume", on_off: 2});
-    }
-  },
-  watch: {
-    tifData(newV, oldV) {
-      if (newV) {
-        this.loadTifDataGroup();
-        this.addTifRectangle();
-      }
+      this.$store.commit('setVGEEarthComAction', {name: 'earthworkVolume', on_off: 2});
     }
   },
   mounted() {
+    this.loadTifDataGroup();
   },
   unmounted() {
     this.clearRes();

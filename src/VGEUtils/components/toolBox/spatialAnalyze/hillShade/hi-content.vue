@@ -1,5 +1,5 @@
 <template>
-  <win-tabs :initCSS="{width: 320,height: 280,left:500,top:330}" @close="close">
+  <win-tabs :initCSS="{width: 320,height: 280,left:350,top:380}" @close="close">
     <tab-pane label="山体阴影">
       <div class="hi-content">
         <button class="btn btn-info btn-sm" @click="excavate">绘制阴影</button>

@@ -1,5 +1,5 @@
 <template>
-  <win-tabs :initCSS="{width: 300,height: 250,left:500,top:330}" @close="close">
+  <win-tabs :initCSS="{width: 300,height: 250,left:350,top:380}" @close="close">
     <tab-pane label="洪水模拟">
 
       <el-row>

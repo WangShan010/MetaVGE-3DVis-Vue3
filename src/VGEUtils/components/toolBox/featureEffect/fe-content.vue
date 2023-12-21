@@ -4,7 +4,7 @@
 ****************************************************************************/
 
 <template>
-  <win-tabs :initCSS="{width: 500,height: 280,left:500,top:330}" @close="close" class="move_box">
+  <win-tabs :initCSS="{width: 500,height: 280,left:350,top:380}" @close="close" class="move_box">
     <tab-pane label="点特效">
       <pointEffect></pointEffect>
     </tab-pane>

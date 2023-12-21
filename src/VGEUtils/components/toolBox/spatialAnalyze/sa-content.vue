@@ -4,7 +4,7 @@
 ****************************************************************************/
 
 <template>
-  <win-tabs :initCSS="{width: 300,height: 220,left:500,top:140}" @close="close">
+  <win-tabs :initCSS="{width: 300,height: 220,left:350,top:140}" @close="close">
     <tab-pane label="空间分析">
       <div style="text-align: center">
         <div class="toolRow">

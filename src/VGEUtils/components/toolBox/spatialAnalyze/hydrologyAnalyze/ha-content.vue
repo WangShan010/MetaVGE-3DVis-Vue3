@@ -1,5 +1,5 @@
 <template>
-    <win-tabs :initCSS="{width: 350,height: 220,left:500,top:330}" @close="close" v-loading="loading"
+    <win-tabs :initCSS="{width: 350,height: 220,left:350,top:380}" @close="close" v-loading="loading"
               element-loading-text="后台服务计算中...">
         <tab-pane label="水文分析">
             <div @mousedown.stop>

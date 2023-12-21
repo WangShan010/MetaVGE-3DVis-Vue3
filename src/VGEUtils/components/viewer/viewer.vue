@@ -49,4 +49,11 @@ export default {
 .distance-legend {
   bottom: 50px;
 }
+
+.cesium-performanceDisplay-defaultContainer{
+    top: auto !important;
+    bottom: 10px !important;
+    left: 20px !important;
+    right: auto !important;
+}
 </style>

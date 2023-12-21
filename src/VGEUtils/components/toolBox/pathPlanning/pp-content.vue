@@ -5,7 +5,7 @@
 ****************************************************************************/
 
 <template>
-  <win-tabs :initCSS="{width: 300,height: 280,left:500,top:330}" @close="close">
+  <win-tabs :initCSS="{width: 300,height: 280,left:350,top:380}" @close="close">
     <tab-pane label="路径规划">
       <div>
         <div style="margin-bottom: 5px">

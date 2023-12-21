@@ -1,5 +1,5 @@
 <template>
-  <win-tabs :initCSS="{width: 320,height: 180,left:500,top:330}" @close="close" :draggable="isDragging">
+  <win-tabs :initCSS="{width: 320,height: 180,left:350,top:380}" @close="close" :draggable="isDragging">
     <tab-pane label="限高分析">
       <div @mousedown.stop>
         <div style="margin-bottom: 5px">
