@@ -22,7 +22,7 @@ const router = createRouter({
         {
             path: '/blank',
             name: 'blank',
-            component: () => import('../components/blank/blank.vue')
+            component: () => import('../components/Blank/blank.vue')
         },
         {
             // 404 页面
