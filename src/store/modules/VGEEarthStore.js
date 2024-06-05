@@ -47,6 +47,8 @@ const VGEEarthStore = {
             if (userInfo) {
                 userInfo = JSON.parse(userInfo) || {};
                 state.comActions = UIConfig.comActions.filter(item => item.role === userInfo.useName || item.role === 'all');
+            }else {
+                state.comActions = UIConfig.comActions.filter(item => item.role === 'all');
             }
         },
         setUserName(state, name) {
