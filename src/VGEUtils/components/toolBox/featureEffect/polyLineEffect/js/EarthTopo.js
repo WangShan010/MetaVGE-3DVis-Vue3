@@ -328,4 +328,4 @@ function removeEarthTope() {
     }
 }
 
-export {addEarthTopo, removeEarthTope};
+export { addEarthTopo, removeEarthTope };

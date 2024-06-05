@@ -1,8 +1,15 @@
 const VGEEarthStore = {
     state: {
-        // 当时组件的状态，是用于 Demo 演示，还是用在真正的生产环境下。
+        useName: '',
+        // 判断当时组件的状态，是用于 Demo 演示，还是用在真正的生产环境下。
         demoModel: true,
+        // 判断组件的样式
         themeColor: 'green',
+        // 头部菜单栏
+        titleHeader: {
+            left: [],
+            right: []
+        },
         // 当前所显示的图例
         legendCurrent: {
             title: '',
@@ -11,23 +18,50 @@ const VGEEarthStore = {
         },
         // 全部的图例数据
         legendCollection: [],
+        // 所有已注册的 UI 组件
         comActions: []
     },
     getters: {
         // 获取组件开关状态
         comStatus: (state) => (comName) => {
             let com = state.comActions.find(item => item.comName === comName);
-            return !!(com && com.open);
+            return com && com.open;
+        },
+        // 获取当前菜单状态
+        titleHeaderCurrent: (state) => () => {
+            const titles = [
+                ...state.titleHeader.right,
+                ...state.titleHeader.left
+            ];
+            return titles.find(item => {
+                return item?.open;
+            });
         }
     },
     mutations: {
         loadUIConfig(state, UIConfig) {
             state.demoModel = UIConfig.demoModel;
-            state.comActions = UIConfig.comActions;
             state.themeColor = UIConfig.themeColor;
+            state.titleHeader = UIConfig.titleHeader;
+            let userInfo = localStorage.getItem('userInfo');
+            if (userInfo) {
+                userInfo = JSON.parse(userInfo) || {};
+                state.comActions = UIConfig.comActions.filter(item => item.role === userInfo.useName || item.role === 'all');
+            }
+        },
+        setUserName(state, name) {
+            state.useName = name;
         },
         setThemeColor(state, color) {
             state.themeColor = color;
+        },
+        setTitleHeaderCurrent(state, titleId) {
+            state.titleHeader.left.find(item => {
+                item.open = item.id === titleId;
+            });
+            state.titleHeader.right.find(item => {
+                item.open = item.id === titleId;
+            });
         },
 
         setLegendCurrent: (state, legend) => {
@@ -60,7 +94,7 @@ const VGEEarthStore = {
          * @param name    组件名称
          * @param on_off  1：显示，2：隐藏，3：切换
          */
-        setVGEEarthComAction({comActions}, {name, on_off}) {
+        setVGEEarthComAction({ comActions }, { name, on_off }) {
             let effective = false;
             if (typeof name === 'string' && typeof on_off === 'number') {
                 for (let i = 0; i < comActions.length; i++) {
@@ -80,7 +114,7 @@ const VGEEarthStore = {
          * @param comName
          * @param show
          */
-        setItemInTool({comActions}, {comName, show}) {
+        setItemInTool({ comActions }, { comName, show }) {
             for (let i = 0; i < comActions.length; i++) {
                 if (comActions[i].comName === comName) {
                     comActions[i].show = show;
@@ -88,7 +122,7 @@ const VGEEarthStore = {
                     break;
                 }
             }
-        },
+        }
     }
 };
 

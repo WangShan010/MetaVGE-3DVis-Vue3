@@ -5,19 +5,19 @@
 ****************************************************************************/
 
 <template>
-  <CContent v-if="show"></CContent>
+    <CContent v-if="show"></CContent>
 </template>
 
 <script>
 import CContent from './c-content.vue';
 
 export default {
-  name: 'coordinates',
-  components: {CContent},
-  computed: {
-    show() {
-      return this.$store.getters.comStatus('coordinates');
+    name: 'coordinates',
+    components: { CContent },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('coordinates');
+        }
     }
-  }
 };
 </script>

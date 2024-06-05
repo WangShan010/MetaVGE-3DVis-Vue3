@@ -1,59 +1,74 @@
 <template>
-  <div style="overflow:hidden;height: 100%" v-loading="loading">
-    <div id="MapContainer"></div>
-  </div>
+    <div v-loading="loading" style="overflow:hidden;height: 100%">
+        <div id="MapContainer"></div>
+    </div>
 </template>
 
 <script>
 
 export default {
-  name: 'viewer',
-  data() {
-    return {
-      loading: false
-    };
-  },
-  methods: {
-    initEarth() {
-      earth.createNavigation();
-      earth.openDeBug();
-      earth.viewer3D.scene.globe.depthTestAgainstTerrain = true;
+    name: 'viewer',
+    data() {
+        return {
+            loading: false
+        };
+    },
+    methods: {
+        initEarth() {
+            earth.createNavigation();
+            // earth.openDeBug();
+            earth.viewer3D.scene.globe.depthTestAgainstTerrain = true;
 
-      let t = setInterval(() => {
-        if (earth.loadComplete) {
-          this.loading = false;
-          window.clearInterval(t);
+            earth.thenLoadComplete().then(() => {
+                this.loading = false;
+            });
         }
-      }, 100);
+    },
+    mounted: function () {
+        // 创建viewer对象
+        const earth = new VGEEarth.Earth('MapContainer', {
+            infoBox: true,
+            selectionIndicator: false,
+            vrButton: true,
+            geocoder: true // 是否显示地名查找控件
+        });
+        this.initEarth();
     }
-  },
-  mounted: function () {
-    // 创建viewer对象
-    const earth = new VGEEarth.Earth('MapContainer', {
-      infoBox: false,
-      selectionIndicator: false,
-      vrButton: true
-    });
-    this.initEarth();
-  }
 };
 </script>
 
 
 <style>
 .el-loading-mask {
-  background-color: rgba(255, 255, 255, 0.15) !important;
-  z-index: 10;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    z-index: 10;
 }
 
 .distance-legend {
-  bottom: 50px;
+    bottom: 50px;
 }
 
-.cesium-performanceDisplay-defaultContainer{
+.cesium-performanceDisplay-defaultContainer {
     top: auto !important;
-    bottom: 10px !important;
+    bottom: 50px !important;
     left: 20px !important;
     right: auto !important;
+}
+
+.cesium-viewer-toolbar {
+    top: auto !important;
+    bottom: 50px;
+    right: 180px !important;
+}
+
+
+/** 导航罗盘 **/
+.compass {
+    top: 140px !important;
+}
+
+/** 放大缩小按钮 **/
+.navigation-controls {
+    top: 240px !important;
 }
 </style>

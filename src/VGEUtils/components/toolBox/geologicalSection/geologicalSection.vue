@@ -11,12 +11,12 @@
 import GsContent from './gs-content.vue';
 
 export default {
-  name: 'geologicalSection',
-  components: {GsContent},
-  computed: {
-    show() {
-      return this.$store.getters.comStatus("geologicalSection")
+    name: 'geologicalSection',
+    components: { GsContent },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('geologicalSection');
+        }
     }
-  }
 };
 </script>

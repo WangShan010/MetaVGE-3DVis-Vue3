@@ -34,14 +34,14 @@ let domData = {
     pos9: [108.9605, 34.219],
 
     //动态
-    pos10: [108.9598, 34.2185],
-}
+    pos10: [108.9598, 34.2185]
+};
 
 //弹跳点
 let bMarkers = [];
-let point1, point2, point3, point4, point5, point7, point8,point9, point10, hls = {}
+let point1, point2, point3, point4, point5, point7, point8, point9, point10, hls = {};
 let pointData = {
     hls, bMarkers, point1, point2, point3, point4, point5, point7, point8, point9, point10
-}
-export { domData, pointData }
+};
+export { domData, pointData };
 

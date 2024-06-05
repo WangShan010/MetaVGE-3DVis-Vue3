@@ -89,7 +89,7 @@ export default {
         loadAllLayer() {
             let group = this.layersData.find(item => item.group === this.selGroup);
             let position = group.position;
-            VGEEarth.SceneUtils.viewerFlyToLonLat (position.lon, position.lat, position.height);
+            VGEEarth.SceneUtils.viewerFlyToLonLat(position.lon, position.lat, position.height);
             this.layers = group.layers || [];
 
             for (let i = 0; i < this.layers.length; i++) {
@@ -176,7 +176,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 #ImageLayerSplitMana {
     position: absolute;
     background-color: rgba(33, 45, 33, 0.8);

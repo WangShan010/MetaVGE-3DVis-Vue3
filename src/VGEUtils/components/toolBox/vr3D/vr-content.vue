@@ -1,5 +1,5 @@
 <template>
-    <win-tabs :initCSS="{width: 350,height: 350,left:400,top:300}" @close="close">
+    <win-tabs :initCSS="{width: 350,height: 250,left:400,top:300}" @close="close">
         <tab-pane label="VR立体屏幕" style="height: 100%">
             <div style="height: 100%" @mousedown.stop>
 
@@ -8,16 +8,17 @@
                         <el-col :span="4">眼距:</el-col>
                         <el-col :span="12">
                             <div class="grid-content ep-bg-purple-light"/>
-                            <el-slider :min="eyeSeparationRange*-1" :max="eyeSeparationRange*1"
+                            <el-slider v-model="eyeSeparation" :max="eyeSeparationRange*1"
+                                       :min="eyeSeparationRange*-1"
                                        class="m-12"
-                                       v-model="eyeSeparation"
-                                       @input="setEyeSeparation(eyeSeparation)"/>
+                                       @input="setEyeSeparation(eyeSeparation)"
+                            />
                         </el-col>
                         <el-col :span="2">&nbsp;</el-col>
                         <el-col :span="6">
                             <div class="grid-content ep-bg-purple"/>
                             <el-select v-model.number="eyeSeparationRange" class="m-2"
-                                       style="width: 70px;" placeholder="Select" size="small">
+                                       placeholder="Select" size="small" style="width: 70px;">
                                 <el-option v-for="item in eyeSeparationRangeArr" :label="String(item)" :value="item"/>
                             </el-select>
                         </el-col>
@@ -26,18 +27,18 @@
 
                 <div style="margin:  30px 0">
                     <span>默认场景：</span>
-                    <el-select v-model="selScene" class="m-2" placeholder="Select" size="small" clearable>
+                    <el-select v-model="selScene" clearable placeholder="Select" size="small" style="width: 200px">
                         <el-option
-                                v-for="item in sceneList"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value"
+                            v-for="item in sceneList"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value"
                         />
                     </el-select>
                 </div>
 
-                <div style="padding: 10px;text-align: center">
-                    <button type="button" class="btn btn-default" @click="turnOn">切换VR模式</button>
+                <div style="text-align: center">
+                    <button class="btn btn-default" type="button" @click="turnOn">切换VR模式</button>
                 </div>
 
             </div>
@@ -47,11 +48,12 @@
 
 
 <script>
-import {tabPane, winTabs} from "@/VGEUtils/components/winTabs/index.js";
+import { tabPane, winTabs } from '@/VGEUtils/components/winTabs/index.js';
 
+let handleKeyDown;
 export default {
-    name: "vr-content",
-    components: {winTabs, tabPane},
+    name: 'vr-content',
+    components: { winTabs, tabPane },
     data: function () {
         return {
             open: false,
@@ -66,19 +68,19 @@ export default {
             eyeSeparation: 0,
             focalLength: 0,
 
-            selScene: "Option1",
+            selScene: 'Option1',
             sceneList: [
                 {
-                    value: "Option1",
-                    label: "居民楼-小尺度",
+                    value: 'Option1',
+                    label: '居民楼-小尺度'
                 },
                 {
-                    value: "Option2",
-                    label: "居民楼-大尺度",
+                    value: 'Option2',
+                    label: '居民楼-大尺度'
                 },
                 {
-                    value: "Option3",
-                    label: "山脉-大尺度",
+                    value: 'Option3',
+                    label: '山脉-大尺度'
                 }
             ]
         };
@@ -111,14 +113,32 @@ export default {
             earth.viewer3D.scene.useWebVR = true;
             earth.viewer3D.scene.eyeSeparation = eyeSeparation * 1;
         },
-
         close() {
-            this.$store.commit("setVGEEarthComAction", {name: "vr3d", on_off: 2});
+            this.$store.commit('setVGEEarthComAction', { name: 'vr3d', on_off: 2 });
         }
+    },
+    mounted() {
+        handleKeyDown = (keyboardEvent) => {
+            if (keyboardEvent.code === 'ArrowRight') {
+                this.eyeSeparation++;
+            } else if (keyboardEvent.code === 'ArrowLeft') {
+                this.eyeSeparation--;
+            } else if (keyboardEvent.code === 'NumpadAdd') {
+                this.eyeSeparation++;
+            } else if (keyboardEvent.code === 'NumpadSubtract') {
+                this.eyeSeparation--;
+            }
+
+            this.setEyeSeparation(this.eyeSeparation);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+    },
+    unmounted() {
+        window.removeEventListener('keydown', handleKeyDown);
     }
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
 </style>

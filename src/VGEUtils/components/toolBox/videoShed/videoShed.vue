@@ -4,15 +4,15 @@
 
 </template>
 <script>
-import VideoShedContent from "./videoShedContent.vue";
+import VideoShedContent from './videoShedContent.vue';
 
 export default {
-  name: "videoShed",
-  components: {VideoShedContent},
-  computed: {
-    show() {
-      return this.$store.getters.comStatus("videoShed")
+    name: 'videoShed',
+    components: { VideoShedContent },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('videoShed');
+        }
     }
-  }
 };
 </script>

@@ -3,14 +3,14 @@
         <div style="padding-top: 15px">
             分组：
             <el-cascader v-model="selGroup" :options="groupList"
-                         :props="{ value: 'groupName', label: 'groupName', children: 'childrens' }" @change="changeGroup"
-                         clearable
-                         size="small" style="width: 200px">
+                         :props="{ value: 'groupName', label: 'groupName', children: 'childrens' }" clearable
+                         size="small"
+                         style="width: 180px" @change="changeGroup">
             </el-cascader>
         </div>
         <div style="padding-top: 15px">
             符号：
-            <el-select v-model="selPlotCode" size="small" @change="changePlot">
+            <el-select v-model="selPlotCode" size="small" @change="changePlot" style="width: 120px">
                 <el-option v-for="item in plotList" :key="item.code" :label="item.name" :value="item.code" clearable>
                 </el-option>
             </el-select>
@@ -20,12 +20,12 @@
             <div v-for="item in selPlot.paramList">
                 <div style="padding-top: 10px">
                     {{ item.name }}：
-                    <el-select v-if="item.select instanceof Array" v-model="item.value" size="small">
+                    <el-select v-if="item.select instanceof Array" v-model="item.value" size="small" style="width: 120px;">
                         <el-option v-for="item2 in item.select" :key="item2.key" :label="item2.label" :value="item2.value"
                                    clearable>
                         </el-option>
                     </el-select>
-                    <el-input size="small" v-else v-model="item.value" style="width: 200px" :placeholder="item.placeholder || ''" @input="setOption(item)">
+                    <el-input v-else v-model="item.value" :placeholder="item.placeholder || ''" size="small" style="width: 120px" @input="setOption(item)">
                     </el-input>
                 </div>
             </div>
@@ -60,7 +60,7 @@ export default {
     methods: {
         getPlotByCode(code) {
             let plot = null;
-            this.groupList.forEach(({plotList}) => {
+            this.groupList.forEach(({ plotList }) => {
                 plot = plot || plotList.find(plotItem => plotItem.code === code);
             });
             return plot;
@@ -112,7 +112,7 @@ export default {
         // let {data} = await axios.get('http://localhost:3000/Resources/PlotManager/plotList/list.json');
         // this.groupList = data.nodes;
 
-        let {data: customPlotList} = await axios.get(new URL('/VGEEarth/Config/plotTool/custom/plotList.json', import.meta.url).href);
+        let { data: customPlotList } = await axios.get(new URL('/VGEEarth/Config/plotTool/custom/plotList.json', import.meta.url).href);
         this.groupList = customPlotList;
         this.$emit('setDrawObj', null);
         this.changeGroup(['信息弹框']);

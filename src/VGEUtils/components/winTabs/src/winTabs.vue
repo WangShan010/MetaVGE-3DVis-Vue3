@@ -1,41 +1,41 @@
 <template>
     <Vue3DraggableResizable
+        v-show="ready"
         ref="tab"
-        :minH="123"
-        :minW="300"
-        :initH="250"
-        :initW="300"
+        v-model:active="active"
+        v-model:h="h"
+        v-model:parent="parent"
+        v-model:w="w"
         v-model:x="x"
         v-model:y="y"
-        v-model:w="w"
-        v-model:h="h"
-        v-model:active="active"
-        v-model:parent="parent"
         :draggable="true"
+        :initH="250"
+        :initW="300"
+        :minH="123"
+        :minW="300"
         :resizable="resizable"
+        class="winTabs"
+        classNameActive="classNameActive"
         @activated="print('activated')"
         @deactivated="print('deactivated')"
-        @drag-start="print('drag-start')"
-        @resize-start="print('resize-start')"
         @dragging="print('dragging')"
         @resizing="print('resizing')"
+        @drag-start="print('drag-start')"
+        @resize-start="print('resize-start')"
         @drag-end="print('drag-end')"
         @resize-end="print('resize-end')"
-        classNameActive="classNameActive"
-        class="winTabs"
-        v-show="ready"
     >
-        <div class="content" ref="content">
+        <div ref="content" class="content">
             <div class="iconBtnGroup">
                 <span v-if="changeSizeAble" class="iconBtn noDrag iconfont icon-esgcc-fuzhi" style="right: 20px"
                       @click="changeSize"></span>
                 <span v-if="maxAble" class="iconBtn noDrag iconfont icon-esgcc--zuidahua" style="right: 40px"
                       @click="zoomSize"></span>
-                <span title="帮助教程" class="iconBtn noDrag iconfont icon-esgcc-tishi" @click="openHelp"></span>
-                <span title="关闭" class="iconBtn noDrag iconfont icon-esgcc-guanbi" style="right: 0" @click="close"></span>
+                <span class="iconBtn noDrag iconfont icon-esgcc-tishi" title="帮助教程" @click="openHelp"></span>
+                <span class="iconBtn noDrag iconfont icon-esgcc-guanbi" style="right: 0" title="关闭" @click="close"></span>
             </div>
 
-            <div class="help-block-win" v-if="firstGuide">
+            <div v-if="firstGuide" class="help-block-win">
                 <span>
                        📋您第一次使用该模块，可以点击此处观看使用视频教程：
                 </span>

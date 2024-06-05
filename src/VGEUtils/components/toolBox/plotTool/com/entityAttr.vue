@@ -7,10 +7,10 @@
             <el-button :size="'small'" :type="'success'" @click="flyToEntity">
                 飞向实体
             </el-button>
-            <el-button :size="'small'" :type="'primary'" v-if="false">
+            <el-button v-if="false" :size="'small'" :type="'primary'">
                 编辑属性
             </el-button>
-            <el-button :size="'small'" :type="'warning'" v-if="false">
+            <el-button v-if="false" :size="'small'" :type="'warning'">
                 删除实体
             </el-button>
         </div>
@@ -24,29 +24,29 @@
                 <tbody>
                 <tr v-for="row in TableData">
                     <td
-                            style="max-width: 75px"
-                            onclick="this.children[1].style.display='inline';this.children[1].focus(); "
+                        onclick="this.children[1].style.display='inline';this.children[1].focus(); "
+                        style="max-width: 75px"
                     >
                         <div>{{ row.key }}</div>
                         <input
-                                type="text"
-                                v-model="row.key"
-                                class="form-control"
-                                style="margin-top: 5px;display: none"
-                                onfocusout="this.style.display='none'"
+                            v-model="row.key"
+                            class="form-control"
+                            onfocusout="this.style.display='none'"
+                            style="margin-top: 5px;display: none"
+                            type="text"
                         />
                     </td>
                     <td
-                            style="text-align: center;max-width: 200px"
-                            onclick="this.children[1].style.display='inline';this.children[1].focus(); "
+                        onclick="this.children[1].style.display='inline';this.children[1].focus(); "
+                        style="text-align: center;max-width: 200px"
                     >
                         <div>{{ row.value }}</div>
                         <input
-                                type="text"
-                                v-model="row.value"
-                                class="form-control"
-                                style="margin-top: 5px;display: none"
-                                onfocusout="this.style.display='none'"
+                            v-model="row.value"
+                            class="form-control"
+                            onfocusout="this.style.display='none'"
+                            style="margin-top: 5px;display: none"
+                            type="text"
                         />
                     </td>
                     <td style="width: 25px">
@@ -212,10 +212,10 @@ export default {
 
 <style lang="less" scoped>
 .entity_arr {
-  padding: 15px;
-  height: 200px;
-  overflow: auto;
-  border: #949393 1px dashed
+    padding: 15px;
+    height: 200px;
+    overflow: auto;
+    border: #949393 1px dashed
 }
 
 </style>

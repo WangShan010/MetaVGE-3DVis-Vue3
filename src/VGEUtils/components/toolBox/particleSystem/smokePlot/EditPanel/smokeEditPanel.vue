@@ -7,90 +7,90 @@
             <el-form ref="form" label-width="100px" size="small">
                 <el-form-item label="粒子数量">
                     <el-slider
-                        @change="updateStyle"
-                        :min="0"
-                        :max="1000"
                         v-model="emissionRate"
+                        :max="1000"
+                        :min="0"
+                        @change="updateStyle"
                     ></el-slider>
                 </el-form-item>
 
                 <el-form-item label="粒子大小">
                     <el-slider
-                        @change="updateStyle"
-                        :min="0"
-                        :max="60.0"
-                        :step="1"
                         v-model="particleSize"
+                        :max="60.0"
+                        :min="0"
+                        :step="1"
+                        @change="updateStyle"
                     ></el-slider>
                 </el-form-item>
 
                 <el-form-item label="最小生命周期">
                     <el-slider
-                        @change="updateStyle"
-                        :min="0.1"
-                        :max="5.0"
-                        :step="0.2"
                         v-model="minimumParticleLife"
+                        :max="5.0"
+                        :min="0.1"
+                        :step="0.2"
+                        @change="updateStyle"
                     ></el-slider>
                 </el-form-item>
 
                 <el-form-item label="最大生命周期">
                     <el-slider
-                        @change="updateStyle"
-                        :min="0.1"
-                        :max="5.0"
-                        :step="0.2"
                         v-model="maximumParticleLife"
+                        :max="5.0"
+                        :min="0.1"
+                        :step="0.2"
+                        @change="updateStyle"
                     ></el-slider>
                 </el-form-item>
 
                 <el-form-item label="最小速度">
                     <el-slider
-                        @change="updateStyle"
-                        :min="0.0"
-                        :max="30.0"
-                        :step="1"
                         v-model="minimumSpeed"
+                        :max="30.0"
+                        :min="0.0"
+                        :step="1"
+                        @change="updateStyle"
                     ></el-slider>
                 </el-form-item>
 
                 <el-form-item label="最大速度">
                     <el-slider
-                        @change="updateStyle"
-                        :min="0.0"
-                        :max="30.0"
-                        :step="1"
                         v-model="maximumSpeed"
+                        :max="30.0"
+                        :min="0.0"
+                        :step="1"
+                        @change="updateStyle"
                     ></el-slider>
                 </el-form-item>
 
                 <el-form-item label="初始比例">
                     <el-slider
-                        @change="updateStyle"
-                        :min="0.0"
-                        :max="10.0"
-                        :step="1"
                         v-model="startScale"
+                        :max="10.0"
+                        :min="0.0"
+                        :step="1"
+                        @change="updateStyle"
                     ></el-slider>
                 </el-form-item>
 
                 <el-form-item label="终止比例">
                     <el-slider
-                        @change="updateStyle"
-                        :min="0.0"
-                        :max="10.0"
-                        :step="1"
                         v-model="endScale"
+                        :max="10.0"
+                        :min="0.0"
+                        :step="1"
+                        @change="updateStyle"
                     ></el-slider>
                 </el-form-item>
 
                 <el-form-item label="重力">
                     <el-slider
-                        @change="updateStyle"
-                        :min="-20"
-                        :max="20"
-                        :step="0.01"
                         v-model="gravity"
+                        :max="20"
+                        :min="-20"
+                        :step="0.01"
+                        @change="updateStyle"
                     ></el-slider>
                 </el-form-item>
 
@@ -120,7 +120,7 @@ import particleStore from './particleStore.js';
 
 export default {
     name: 'smokeEditPanel',
-    components: {winTabs, tabPane},
+    components: { winTabs, tabPane },
     data() {
         return {
             endScale: 0,
@@ -173,7 +173,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .attr-panel-body :deep( .el-form-item--mini.el-form-item),
 .attr-panel-body :deep( .el-form-item--small.el-form-item) {
     margin-bottom: 0;

@@ -34,17 +34,14 @@ export default {
                 }
             );
             setInterval(() => {
-                that.FPS = VGEEarth.runTime.FPS;
+                that.FPS = earth.getFPS();
             }, 20);
         }
     },
     mounted() {
-        let t = setInterval(() => {
-            if (earth.loadComplete) {
-                this.init();
-                window.clearInterval(t);
-            }
-        }, 100);
+        earth.thenLoadComplete().then(() => {
+            this.init();
+        });
     }
 };
 </script>

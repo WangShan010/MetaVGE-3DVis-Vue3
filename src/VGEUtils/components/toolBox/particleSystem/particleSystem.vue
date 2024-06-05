@@ -8,16 +8,16 @@
 import PaContent from './pa-content.vue';
 
 export default {
-  name: 'ParticleSystem',
-  components: {PaContent},
-  computed: {
-    show() {
-      return this.$store.getters.comStatus('particleSystem');
+    name: 'ParticleSystem',
+    components: { PaContent },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('particleSystem');
+        }
     }
-  }
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
 </style>

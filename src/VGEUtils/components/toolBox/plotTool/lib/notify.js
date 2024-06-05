@@ -1,4 +1,4 @@
-function notify({message, status}) {
+function notify({ message, status }) {
     window.App.$message({
         message: message,
         type: status

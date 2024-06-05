@@ -4,23 +4,24 @@
 ****************************************************************************/
 <template>
 
-    <vm-content v-if="show" ></vm-content>
+    <vm-content v-if="show"></vm-content>
 
 </template>
 
 <script>
-import VmContent from "./vm-content.vue";
+import VmContent from './vm-content.vue';
+
 export default {
-  name: "visualMarker",
-  components: {VmContent},
-  computed: {
-    show() {
-      return this.$store.getters.comStatus("visualMarker")
+    name: 'visualMarker',
+    components: { VmContent },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('visualMarker');
+        }
     }
-  }
-}
+};
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
 </style>

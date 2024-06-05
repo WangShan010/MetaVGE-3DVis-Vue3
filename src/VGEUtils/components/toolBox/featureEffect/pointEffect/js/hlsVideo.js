@@ -1,11 +1,11 @@
 export default function (position, data) {
-    hlsVideo(position, data)
+    hlsVideo(position, data);
 }
 
 //hls视频窗口点
 function hlsVideo(position, data) {
     window.earth.viewer3D.camera.flyTo({
-        destination: Cesium.Cartesian3.fromDegrees(108.9588, 34.2189, 1000),
+        destination: Cesium.Cartesian3.fromDegrees(108.9588, 34.2189, 1000)
     });
     let monitor = {
         id: '51616161',
@@ -15,7 +15,7 @@ function hlsVideo(position, data) {
             longitude: position[0],
             latitude: position[1]
         }
-    }
+    };
     data.hls = new VGEEarth.SuperiorEntity.HlsVideoWindow(earth.viewer3D, monitor);
     data.hls.init();
 

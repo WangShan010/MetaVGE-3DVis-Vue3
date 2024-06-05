@@ -5,7 +5,7 @@ function SingleTileImagery(url, param = {}) {
     } else {
         layerRectangle = Cesium.Rectangle.MAX_VALUE;
     }
-    return new Cesium.SingleTileImageryProvider({url: url, rectangle: layerRectangle});
+    return new Cesium.SingleTileImageryProvider({ url: url, rectangle: layerRectangle });
 }
 
 export default SingleTileImagery;

@@ -1,5 +1,5 @@
 export default function (position, dom, data) {
-    simpleLabel(position, dom, data)
+    simpleLabel(position, dom, data);
 }
 
 //简单标注点
@@ -14,10 +14,10 @@ function simpleLabel(position, dom, data) {
         {
             longitude: position[0],
             latitude: position[1]
-        },
-    )
+        }
+    );
     data.point2.initWindow();
     window.earth.viewer3D.camera.flyTo({
-        destination: Cesium.Cartesian3.fromDegrees(108.96, 34.22, 1000),
+        destination: Cesium.Cartesian3.fromDegrees(108.96, 34.22, 1000)
     });
 }

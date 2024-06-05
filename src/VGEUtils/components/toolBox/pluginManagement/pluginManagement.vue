@@ -2,19 +2,20 @@
     <PmContent v-if="show"></PmContent>
 </template>
 <script>
-import PmContent from "./pm-content.vue"
+import PmContent from './pm-content.vue';
+
 export default {
-  name: "PluginManagement",
-  components: {
-    PmContent
-  },
-  computed: {
-    show() {
-      return this.$store.getters.comStatus("PluginManagement")
+    name: 'PluginManagement',
+    components: {
+        PmContent
+    },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('PluginManagement');
+        }
     }
-  }
 };
 </script>
-<style scoped>
+<style lang="less" scoped>
 
 </style>

@@ -1,21 +1,21 @@
 <template>
-  <ws-content v-if="show"></ws-content>
+    <ws-content v-if="show"></ws-content>
 </template>
 
 <script>
 import WsContent from './ws-content.vue';
 
 export default {
-  name: 'waterSpecial',
-  components: {WsContent},
-  computed: {
-    show() {
-      return this.$store.getters.comStatus('waterSpecial');
+    name: 'waterSpecial',
+    components: { WsContent },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('waterSpecial');
+        }
     }
-  }
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
 </style>

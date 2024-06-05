@@ -1,32 +1,32 @@
 <template>
-    <win-tabs :initCSS="{width: 320,height: 310,left:450,top:330}"
+    <win-tabs :firstGuide="firstGuide"
+              :initCSS="{width: 320,height: 310,left:450,top:330}"
               @close="close"
-              @openHelp="openHelp"
-              :firstGuide="firstGuide">
+              @openHelp="openHelp">
         <tab-pane label="坐标定位">
             <div class="centerXY" @mousedown.stop>
                 <!--radio选择框-->
                 <div>
                     <div class="radio radio-info radio-inline">
-                        <input type="radio" id="rdoType1" name="rdoType" v-model="pccradio" value="1">
+                        <input id="rdoType1" v-model="pccradio" name="rdoType" type="radio" value="1">
                         <label for="rdoType1">十进制</label>
                     </div>
                     <div class="radio radio-info radio-inline">
-                        <input type="radio" id="rdoType2" name="rdoType" v-model="pccradio" value="2">
+                        <input id="rdoType2" v-model="pccradio" name="rdoType" type="radio" value="2">
                         <label for="rdoType2">度分秒</label>
                     </div>
                     <div class="radio radio-info radio-inline">
-                        <input type="radio" id="rdoType3" name="rdoType" v-model="pccradio" value="3">
+                        <input id="rdoType3" v-model="pccradio" name="rdoType" type="radio" value="3">
                         <label for="rdoType3">平面坐标</label>
                     </div>
                 </div>
                 <!--表单内容区-->
-                <form name="navText" class="form-horizontal" autocomplete="off"
-                      v-if="pccradio === '1'">
+                <form v-if="pccradio === '1'" autocomplete="off" class="form-horizontal"
+                      name="navText">
                     <div class="viewTen">
                         <div>
                             <label>坐标系：</label>
-                            <select v-model="coordinateSystem" style="width:160px;margin-top:10px" clearable>
+                            <select v-model="coordinateSystem" clearable style="width:160px;margin-top:10px">
                                 <option
                                     v-for="item in coordinateSystemFormList"
                                     :key="item.index"
@@ -38,63 +38,63 @@
                         <div v-if="coordinateSystem === 0">
                             <div title="请输入-180至180之间的数字">
                                 <label>经度：</label>
-                                <input type="text" id="txtLngTen" ref="watchCoordinate"
+                                <input id="txtLngTen" ref="watchCoordinate" v-model="degrees.longitude"
                                        onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                       v-model="degrees.longitude" style="width:160px;margin-top:10px;"
+                                       style="width:160px;margin-top:10px;" type="text"
                                 >
                             </div>
                             <div title="请输入-90至90之间的数字">
                                 <label>纬度：</label>
-                                <input type="text" id="txtLatTen" ref="watchCoordinate2"
+                                <input id="txtLatTen" ref="watchCoordinate2" v-model="degrees.latitude"
                                        onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                       v-model="degrees.latitude" style="width:160px;margin-top:10px;"
+                                       style="width:160px;margin-top:10px;" type="text"
                                 >
                             </div>
                         </div>
                         <div v-if="coordinateSystem === 1">
                             <div title="请输入-180至180之间的数字">
                                 <label>经度：</label>
-                                <input type="text" id="txtLngTen1" ref="watchCoordinate"
+                                <input id="txtLngTen1" ref="watchCoordinate" v-model="gcj02.lon"
                                        onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                       v-model="gcj02.lon" style="width:160px;margin-top:10px;"
+                                       style="width:160px;margin-top:10px;" type="text"
                                 >
                             </div>
                             <div title="请输入-90至90之间的数字">
                                 <label>纬度：</label>
-                                <input type="text" id="txtLatTen1" ref="watchCoordinate2"
+                                <input id="txtLatTen1" ref="watchCoordinate2" v-model="gcj02.lat"
                                        onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                       v-model="gcj02.lat" style="width:160px;margin-top:10px;"
+                                       style="width:160px;margin-top:10px;" type="text"
                                 >
                             </div>
                         </div>
                         <div v-if="coordinateSystem === 2">
                             <div title="请输入-180至180之间的数字">
                                 <label>经度：</label>
-                                <input type="text" id="txtLngTen2" ref="watchCoordinate"
+                                <input id="txtLngTen2" ref="watchCoordinate" v-model="bd09.lon"
                                        onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                       v-model="bd09.lon" style="width:160px;margin-top:10px;"
+                                       style="width:160px;margin-top:10px;" type="text"
                                 >
                             </div>
                             <div title="请输入-90至90之间的数字">
                                 <label>纬度：</label>
-                                <input type="text" id="txtLatTen2" ref="watchCoordinate2"
+                                <input id="txtLatTen2" ref="watchCoordinate2" v-model="bd09.lat"
                                        onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                       v-model="bd09.lat" style="width:160px;margin-top:10px;"
+                                       style="width:160px;margin-top:10px;" type="text"
                                 >
                             </div>
                         </div>
                         <div>
                             <label>高程：</label>
-                            <input type="text" id="txtLatAlt"
-                                   v-model="degrees.height" style="width:160px;margin-top:10px;">
+                            <input id="txtLatAlt" v-model="degrees.height"
+                                   style="width:160px;margin-top:10px;" type="text">
                         </div>
                     </div>
                 </form>
-                <form name="navText" id="coordinateForm" class="form-horizontal" autocomplete="off" v-if="pccradio == 2">
+                <form v-if="pccradio == 2" id="coordinateForm" autocomplete="off" class="form-horizontal" name="navText">
                     <div class="viewDms">
                         <div>
                             <label>坐标系：</label>
-                            <select v-model="coordinateSystem" style="width:160px;margin-top:10px" clearable>
+                            <select v-model="coordinateSystem" clearable style="width:160px;margin-top:10px">
                                 <option
                                     v-for="item in coordinateSystemFormList"
                                     :key="item.index"
@@ -105,47 +105,47 @@
                         </div>
                         <div>
                             <label>经度：</label>
-                            <input type="text" style="width:60px;margin-top:10px" id="txtLngDegree"
-                                   onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                   v-model="alert.b1">
+                            <input id="txtLngDegree" v-model="alert.b1" onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
+                                   style="width:60px;margin-top:10px"
+                                   type="text">
                             <label>&nbsp;°</label>
-                            <input type="text" style="width:50px;margin-top:10px" id="txtLngMinute"
-                                   onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                   v-model="alert.b2">
+                            <input id="txtLngMinute" v-model="alert.b2" onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
+                                   style="width:50px;margin-top:10px"
+                                   type="text">
                             <label>&nbsp;′</label>
-                            <input type="text" style="width:50px;margin-top:10px" id="txtLngSecond"
-                                   onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                   v-model="alert.b3">
+                            <input id="txtLngSecond" v-model="alert.b3" onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
+                                   style="width:50px;margin-top:10px"
+                                   type="text">
                             <label>&nbsp;″</label>
                         </div>
                         <div>
                             <label>纬度：</label>
-                            <input type="text" style="width:60px;margin-top:10px;"
+                            <input id="txtLatDegree" v-model="alert.v1"
                                    onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                   id="txtLatDegree" v-model="alert.v1">
+                                   style="width:60px;margin-top:10px;" type="text">
                             <label>&nbsp;°</label>
-                            <input type="text" style="width:50px;margin-top:10px;"
+                            <input id="txtLatMinute" v-model="alert.v2"
                                    onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                   id="txtLatMinute" v-model="alert.v2">
+                                   style="width:50px;margin-top:10px;" type="text">
                             <label>&nbsp;′</label>
-                            <input type="text" style="width:50px;margin-top:10px;"
+                            <input id="txtLatSecond" v-model="alert.v3"
                                    onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                   id="txtLatSecond" v-model="alert.v3">
+                                   style="width:50px;margin-top:10px;" type="text">
                             <label>&nbsp;″</label>
                         </div>
                         <div>
                             <label>高程：</label>
-                            <input type="text" name="txtDmsAlt" v-model="degrees.height"
-                                   style="width:100px;margin-top:10px" id="txtDmsAlt" step="0.1">
+                            <input id="txtDmsAlt" v-model="degrees.height" name="txtDmsAlt"
+                                   step="0.1" style="width:100px;margin-top:10px" type="text">
                         </div>
                     </div>
                 </form>
-                <form name="navText" id="xyForm" class="form-horizontal" autocomplete="off" v-if="pccradio == 3">
+                <form v-if="pccradio == 3" id="xyForm" autocomplete="off" class="form-horizontal" name="navText">
                     <div class="viewGk">
                         <div>
                             <label>坐标系：</label>
                             <select id="System1" v-model="system"
-                                    style="width:160px;margin-top:10px" clearable>
+                                    clearable style="width:160px;margin-top:10px">
                                 <option
                                     v-for="item in coordinateFormList"
                                     :key="item.index"
@@ -157,47 +157,47 @@
                         <div v-if="system === 0">
                             <div>
                                 <label>纵坐标：</label>
-                                <input type="text" id="txtGk3X" v-model="cartesian3.y"
-                                       onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                       style="width:160px;margin-top:10px">
+                                <input id="txtGk3X" v-model="cartesian3.y" onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
+                                       style="width:160px;margin-top:10px"
+                                       type="text">
                             </div>
                             <div>
                                 <label>横坐标：</label>
-                                <input type="text" id="txtGk3Y" v-model="cartesian3.x"
-                                       onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                       style="width:160px;margin-top:10px">
+                                <input id="txtGk3Y" v-model="cartesian3.x" onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
+                                       style="width:160px;margin-top:10px"
+                                       type="text">
                             </div>
                         </div>
                         <div v-if="system === 1">
                             <div>
                                 <label>纵坐标：</label>
-                                <input type="text" id="txtGk3X1" v-model="EPSG3857.y"
-                                       style="width:160px;margin-top:10px">
+                                <input id="txtGk3X1" v-model="EPSG3857.y" style="width:160px;margin-top:10px"
+                                       type="text">
                             </div>
                             <div>
                                 <label>横坐标：</label>
-                                <input type="text" id="txtGk3Y1" v-model="EPSG3857.x"
-                                       style="width:160px;margin-top:10px">
+                                <input id="txtGk3Y1" v-model="EPSG3857.x" style="width:160px;margin-top:10px"
+                                       type="text">
                             </div>
                         </div>
                         <div v-if="system === 2">
                             <div>
                                 <label>纵坐标：</label>
-                                <input type="text" id="txtGk3X2" v-model="mercator.y"
-                                       onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                       style="width:160px;margin-top:10px">
+                                <input id="txtGk3X2" v-model="mercator.y" onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
+                                       style="width:160px;margin-top:10px"
+                                       type="text">
                             </div>
                             <div>
                                 <label>横坐标：</label>
-                                <input type="text" id="txtGk3Y2" v-model="mercator.x"
-                                       onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
-                                       style="width:160px;margin-top:10px">
+                                <input id="txtGk3Y2" v-model="mercator.x" onkeyup="this.value=this.value.replace(/[^\-?\d.]/g,'')"
+                                       style="width:160px;margin-top:10px"
+                                       type="text">
                             </div>
                         </div>
                         <div>
                             <label>高程值：</label>
-                            <input type="text" id="txtGk3Alt" v-model="degrees.height"
-                                   style="width:160px;margin-top:10px" step="0.1">
+                            <input id="txtGk3Alt" v-model="degrees.height" step="0.1"
+                                   style="width:160px;margin-top:10px" type="text">
                         </div>
                     </div>
                 </form>
@@ -205,41 +205,39 @@
                 <div class="co-btn">
                     <el-button size="small" type="success" @click="pickPoint">图上拾取</el-button>
                     <el-button size="small" type="primary" @click="coordinate">坐标定位</el-button>
-                    <el-button size="small" type="warning">复制到粘贴板</el-button>
+                    <el-button size="small" type="warning" @click="toCopy">复制到粘贴板</el-button>
                 </div>
             </div>
         </tab-pane>
         <tab-pane label="坐标标注">
-            <coord-plot>
-
-            </coord-plot>
+            <coord-plot></coord-plot>
         </tab-pane>
     </win-tabs>
 </template>
 <script>
 import { tabPane, winTabs } from '@/VGEUtils/components/winTabs/index.js';
-
+import toClipboard from './lib/toClipboard.js';
 import coordinateOffset from './img/CoordinateOffset.js';
 import CoordPlot from './coordPlot.vue';
 
 export default {
     name: 'c-content',
-    components: {CoordPlot, winTabs, tabPane},
+    components: { CoordPlot, winTabs, tabPane },
     data() {
         return {
             firstGuide: true,
             coordinateSystem: 0,//弧度下拉窗显隐
             system: 0,//平面坐标下拉窗显隐
             coordinateSystemFormList: [
-                {index: 0, name: 'WGS-84'},
-                {index: 1, name: 'GCJ-02'},
-                {index: 2, name: 'BD09'}
+                { index: 0, name: 'WGS-84' },
+                { index: 1, name: 'GCJ-02' },
+                { index: 2, name: 'BD09' }
                 // {index: 3, name: '北京54'},
             ],
             coordinateFormList: [
-                {index: 0, name: 'WGS-84'},
-                {index: 1, name: 'EPSG:3857'},
-                {index: 2, name: 'Web mercator'}
+                { index: 0, name: 'WGS-84' },
+                { index: 1, name: 'EPSG:3857' },
+                { index: 2, name: 'Web mercator' }
                 // {index: 3, name: '北京54'},
             ],
             pccradio: '1',
@@ -354,7 +352,8 @@ export default {
          * 添加点entity
          */
         addMarkEntity(lon, lat, height) {
-            window.earth.viewer3D.entities.removeAll();//第二次定位的时候移除上次的点
+            window.earth.viewer3D.entities.removeById('coordinatePonint');
+
             let point = window.earth.viewer3D.entities.add({//创建定位点
                 id: 'coordinatePonint',
                 name: 'coordinates',
@@ -394,7 +393,7 @@ export default {
                     that.cartesian3.y = cartesian3.y;
                     that.cartesian3.z = cartesian3.z;
                     //EPSG:3857
-                    let a = proj4('EPSG:4326', 'EPSG:3857', {x: cartographic.latitude, y: cartographic.longitude});
+                    let a = proj4('EPSG:4326', 'EPSG:3857', { x: cartographic.latitude, y: cartographic.longitude });
                     that.EPSG3857.x = a.x;
                     that.EPSG3857.y = a.y;
 
@@ -475,8 +474,8 @@ export default {
          */
         close() {
             this.remove();
-            this.$store.commit('setVGEEarthComAction', {name: 'coordinates', on_off: 2});
-            window.earth.viewer3D.entities.removeAll();
+            this.$store.commit('setVGEEarthComAction', { name: 'coordinates', on_off: 2 });
+            window.earth.viewer3D.entities.removeById('coordinatePonint');
         },
         openHelp() {
             console.log('帮助教程');
@@ -576,7 +575,7 @@ export default {
          * 视角飞行 高度3000
          */
         coordinatePoint(lon, lat) {
-            window.earth.viewer3D.entities.removeAll();
+            window.earth.viewer3D.entities.removeById('coordinatePonint');
             this.addMarkEntity(lon, lat, this.degrees.height);
             window.earth.viewer3D.camera.flyTo({//定位过去
                 destination: Cesium.Cartesian3.fromDegrees(lon, lat, 3000)
@@ -606,6 +605,20 @@ export default {
                     this.coordinatePoint(this.mctTo84.lon, this.mctTo84.lat);
                 }
             }
+        },
+        toCopy() {
+            toClipboard(
+                JSON.stringify({
+                    lon: this.alert10.lon,
+                    lat: this.alert10.lat,
+                    height: this.degrees.height
+                }, null, 4)
+                , () => {
+                    this.$message({
+                        message: '设备标识码 - 复制到粘贴板成功',
+                        type: 'success'
+                    });
+                });
         }
     },
     computed: {

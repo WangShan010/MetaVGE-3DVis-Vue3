@@ -7,39 +7,39 @@
 
 
 <template>
-  <win-tabs :initCSS="{width: 300,height: 530,left:500,top:140}" v-if="show" @close="close">
-    <tab-pane label="地区导航">
-      <areaNavigationContent></areaNavigationContent>
-    </tab-pane>
-  </win-tabs>
+    <win-tabs v-if="show" :initCSS="{width: 300,height: 530,left:500,top:140}" @close="close">
+        <tab-pane label="地区导航">
+            <areaNavigationContent></areaNavigationContent>
+        </tab-pane>
+    </win-tabs>
 </template>
 <script>
 import areaNavigationContent from './areaNavigationContent.vue';
 import { tabPane, winTabs } from '@/VGEUtils/components/winTabs/index.js';
 
 export default {
-  name: 'areaNavigation',
-  components: {
-    areaNavigationContent,
-    winTabs,
-    tabPane
-  },
-  methods: {
-    /**
-     * 关闭事件 移除所有entity
-     */
-    close() {
-      this.$store.commit('setVGEEarthComAction', {name: 'areaNavigation', on_off: 2});
-      window.earth.viewer3D.entities.removeById('areaPolygon');
+    name: 'areaNavigation',
+    components: {
+        areaNavigationContent,
+        winTabs,
+        tabPane
     },
-  },
-  computed: {
-    show() {
-      return this.$store.getters.comStatus('areaNavigation');
+    methods: {
+        /**
+         * 关闭事件 移除所有entity
+         */
+        close() {
+            this.$store.commit('setVGEEarthComAction', { name: 'areaNavigation', on_off: 2 });
+            window.earth.viewer3D.entities.removeById('areaPolygon');
+        }
     },
-  },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('areaNavigation');
+        }
+    }
 };
 </script>
-<style scoped>
+<style lang="less" scoped>
 </style>
 

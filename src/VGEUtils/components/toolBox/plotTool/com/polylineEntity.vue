@@ -3,18 +3,18 @@
         <div style="padding-top: 15px">
             材质：
             <el-select v-model="lineMaterialIndex"
-                       @change="changeSymbol"
+                       clearable
                        placeholder="请选择"
                        size="small"
-                       clearable
-                       style="width: 215px">
+                       style="width: 215px"
+                       @change="changeSymbol">
                 <el-option v-for="(item,index) in lineMaterials"
+                           :key="index"
                            :label="item.label"
-                           :value="index"
-                           :key="index">
+                           :value="index">
                     <span style="float: left">{{ item.label }}</span>
-                    <span style="float: right;" v-if="item.url">
-            <img width="100" height="10" :src="item.url"/>
+                    <span v-if="item.url" style="float: right;">
+            <img :src="item.url" height="10" width="100"/>
           </span>
                 </el-option>
             </el-select>
@@ -56,7 +56,7 @@ export default {
         }
     },
     async mounted() {
-        let {data: plotList} = await axios.get(new URL('/VGEEarth/Config/plotTool/lineEntity/plotList.json', import.meta.url).href);
+        let { data: plotList } = await axios.get(new URL('/VGEEarth/Config/plotTool/lineEntity/plotList.json', import.meta.url).href);
         this.lineMaterials = plotList;
         console.log(plotList);
         await this.changeSymbol();
@@ -64,6 +64,6 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
 </style>

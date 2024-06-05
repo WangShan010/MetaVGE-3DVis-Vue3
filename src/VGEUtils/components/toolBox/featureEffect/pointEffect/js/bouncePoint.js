@@ -1,13 +1,13 @@
 export default function (data, viewer) {
-    addBounceMarkers(data, viewer)
+    addBounceMarkers(data, viewer);
 }
 //弹跳点
 //初始化BounceMarker
 function addBounceMarkers(data, viewer) {
     window.earth.viewer3D.camera.flyTo({
-        destination: Cesium.Cartesian3.fromDegrees(108.95942020820043,34.21924059801738, 1000),
+        destination: Cesium.Cartesian3.fromDegrees(108.95942020820043, 34.21924059801738, 1000)
     });
-    data.bMarkers = []
+    data.bMarkers = [];
     let position = Cesium.Cartesian3.fromDegrees(108.95850065559718, 34.21944714452281, -1);
     let bMarker = new VGEEarth.NormalEntity.bouncePoint(viewer, position);
     data.bMarkers.push(bMarker);
@@ -32,7 +32,7 @@ function addBounceMarkers(data, viewer) {
     bMarker = new VGEEarth.NormalEntity.bouncePoint(viewer, position, {
         //image: "static/images/marker/mark3.png",
         bounceHeight: 100, //高度
-        increment: 0.05, //增量
+        increment: 0.05 //增量
     });
     data.bMarkers.push(bMarker);
 }

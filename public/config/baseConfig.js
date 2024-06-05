@@ -1,120 +1,235 @@
-Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NjYwM2E1NS00OTRlLTRiMjEtYjhhZS05MzEzNDIwNGUzMjgiLCJpZCI6MjM5OTcsImlhdCI6MTY3OTI3ODE4OX0.X_5SfpOtpL-gSbGjAP2Z6ohp1jmI5k_UtjzA72iFPcQ";
+Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NjYwM2E1NS00OTRlLTRiMjEtYjhhZS05MzEzNDIwNGUzMjgiLCJpZCI6MjM5OTcsImlhdCI6MTY3OTI3ODE4OX0.X_5SfpOtpL-gSbGjAP2Z6ohp1jmI5k_UtjzA72iFPcQ';
+
+console.log(`%c📜 MetaVGE-3DVis-Vue3 编译版本：2024年03月13日`, 'color: #84709b; font-size: 14px; font-weight: bold;');
+window.GISResourcesUrl = 'http://8.146.208.114:9001';
+window.AppBaseUrl = 'http://8.146.208.114:3060';
+
+window.QISWSUrl = '8.146.208.114:8766/';                            // QIS 空间分析服务的 WebSocket 地址
+window.GeoServerLiveUrl = 'http://8.146.208.114:8086/geoserver/st/wms?service=WMS';             // GeoServer 实时生成图层地址
+window.GeoServerLocalUrl = 'https://bj.webgpu.top:3004/geoserver/VGE/wms?service=WMS';          // GeoServer 本地提前配置的图层地址
+
+window.demoServer = 'https://bj.webgpu.top:3006/VGEEarth-SDK';
+window.FloodResourcesUrl = 'http://8.146.208.114:9002';
 
 const baseConfig = {};
 
-const appName = '虚拟地理环境大数据可视化系统';
-const appTitle = '虚拟地理环境大数据可视化系统';
+window.appName = '虚拟地理环境大数据可视化系统';
+window.appTitle = '虚拟地理环境大数据可视化系统';
 
 // const homeView = {longitude: 117.316034, latitude: 42.411409, height: 55150};
-const homeView = {longitude: 108.387, latitude: 30.71, height: 4000000};
+const homeView = { longitude: 108.387, latitude: 30.71, height: 4000000 };
 
-const layerList = [];
+const layerList = [
+    {
+        pid: '22946758-d6c6-a314-861f-f1721554ed46',
+        name: '北京河网',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/河流.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabia_bjriver'
+        }
+    },
+    {
+        pid: 'a279d56b-8a1a-8798-adab-a18218644a69',
+        name: '北京路网',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/道路.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabia_bjroad3'
+        }
+    },
+    {
+        pid: 'adcd05bb-29ba-7026-f824-9257bd400c5a',
+        name: '北京建筑',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/建筑.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabia_jbuilding'
+        }
+    },
+    {
+        pid: '82dfb4af-abb7-a274-7077-c73e44e8ce82',
+        name: '北京交通站点',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/道路.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabia_bjtransports'
+        }
+    },
+    {
+        pid: 'b2d16d6c-612e-10f9-1f07-3db5235ee5a8',
+        name: '天津交通站点',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/道路.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabin_tianjintranpoint'
+        }
+    },
+    {
+        pid: '5c1a6540-5101-7f2f-de25-a1cf17c36c73',
+        name: '天津路网',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/道路.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabin_tianjinroad'
+        }
+    },
+    {
+        pid: '1c514fe7-5453-24cb-bde5-d33d49a40f2e',
+        name: '天津县级区划',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/道路.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabin_tianjincountygbk'
+        }
+    },
+    {
+        pid: '94e367be-7692-c167-9a74-e117d83dd174',
+        name: '天津建筑',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/建筑.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabin_tianjinbuilding'
+        }
+    },
+    {
+        pid: '1eb35f64-654b-05c7-b155-96ccda72b4ab',
+        name: '河北路网',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/道路.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabin_hebeiroad'
+        }
+    },
+    {
+        pid: '67bda2e2-2333-9c55-81da-49580a200265',
+        name: '河北河网',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/道路.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabin_hebeiriver'
+        }
+    },
+    {
+        pid: 'ef3a9828-bec2-cc62-3c11-3e6059a30927',
+        name: '北京市界',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/道路.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabin_beijing'
+        }
+    },
+    {
+        pid: '4ba24a44-1dfd-c88b-2e80-dcdaab097276',
+        name: '北京区级区划',
+        catalog: '矢量数据服务',
+        dataType: 'layer',
+        showInTree: true,
+        show: false,
+        defaultLoad: false,
+        offlineCache: false,
+        resourceImg: './app/ResourceImg/道路.png',
+        netRootPaths: [],
+        properties: {
+            scheme: 'layer-geoserver',
+            url: window.GeoServerLocalUrl,
+            layers: 'topp:SaudiArabin_beijingcountygbk'
+        }
+    }
+];
 const terrainList = [];
 const modelList = [];
 
-const cesium3DTileSetList = [
-    {
-        pid: '80f3778c-c8dc-481b-2122-b90e04fd3104',
-        name: '天一阁',
-        catalog: '三维模型',
-        dataType: 'Cesium3DTile',
-        netRootPaths: [
-            'https://vge-webgl.oss-cn-beijing.aliyuncs.com/encrypt/3DTiles-TianYi/'
-        ],
-        defaultLoad: true,
-        offlineCache: true,
-        decryptionKey: '795bc22d-c487-6fd6-ec77-56849171d53d',
-        properties: {
-            url: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/encrypt/3DTiles-TianYi/tileset.json',
-            maximumScreenSpaceError: 2,
-            offset: {
-                height: 35
-            }
-        }
-    }
-];
-const geoJsonList = [
-    {
-        name: '秦巴边界',
-        catalog: '矢量数据',
-        dataType: 'geoJson',
-        properties: {
-            url: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/GeoJson-China/秦巴边界.geojson'
-        }
-    },
-    {
-        name: '北京路网',
-        catalog: '矢量数据',
-        dataType: 'geoJson',
-        properties: {
-            url: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/GeoJson-China/北京路网.geojson'
-        }
-    },
-    {
-        name: '淮河',
-        catalog: '矢量数据',
-        dataType: 'geoJson',
-        properties: {
-            url: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/GeoJson-China/淮河.geojson'
-        }
-    },
-    {
-        name: '黄河',
-        catalog: '矢量数据',
-        dataType: 'geoJson',
-        properties: {
-            url: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/GeoJson-China/黄河.geojson'
-        }
-    },
-    {
-        name: '黄土高原',
-        catalog: '矢量数据',
-        dataType: 'geoJson',
-        properties: {
-            url: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/GeoJson-China/黄土高原.geojson'
-        }
-    },
-    {
-        name: '京杭大运河',
-        catalog: '矢量数据',
-        dataType: 'geoJson',
-        properties: {
-            url: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/GeoJson-China/京杭大运河.geojson'
-        }
-    },
-    {
-        name: '钱塘江',
-        catalog: '矢量数据',
-        dataType: 'geoJson',
-        properties: {
-            url: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/GeoJson-China/钱塘江.geojson'
-        }
-    },
-    {
-        name: '长江',
-        catalog: '矢量数据',
-        dataType: 'geoJson',
-        properties: {
-            url: 'https://vge-webgl.oss-cn-beijing.aliyuncs.com/GeoJson-China/长江.geojson'
-        }
-    },
-    {
-        name: '省行政区边界',
-        catalog: '矢量数据',
-        dataType: 'geoJson',
-        properties: {
-            url: `./app/demo/水体效果/100000.geoJson`
-        }
-    },
-    {
-        name: '市行政区边界',
-        catalog: '矢量数据',
-        dataType: 'geoJson',
-        properties: {
-            url: `./app/demo/水体效果/第三方.geojson`
-        }
-    }
-];
+const cesium3DTileSetList = [];
+const geoJsonList = [];
 const poiList = [];
 
 baseConfig.GISResourcesUrl = window.GISResourcesUrl;   // GIS资源路径
@@ -130,12 +245,11 @@ baseConfig.cesium3DTileSetList = cesium3DTileSetList;
 baseConfig.geoJsonList = geoJsonList;
 baseConfig.poi = poiList;
 
-// VGEEarth.ConfigTool.addMapBoxOnAliYun(true);
-// VGEEarth.ConfigTool.addTerrainOnAliYun(true);
-
+VGEEarth.ConfigTool.addMapBoxOnAliYun(true);
 VGEEarth.ConfigTool.addAMapSatelliteLayerOnLine(false);
 VGEEarth.ConfigTool.addAMapLayerOnLine(false);
-VGEEarth.ConfigTool.addTerrainOnIon(true);
-VGEEarth.ConfigTool.addBingMapOnIon(true);
+VGEEarth.ConfigTool.addTerrainOnAliYun(true);
+VGEEarth.ConfigTool.addBingMapOnIon(false);
+VGEEarth.ConfigTool.addTianDiTuLayerList(true);
 VGEEarth.ConfigTool.loadConfig(baseConfig);
 

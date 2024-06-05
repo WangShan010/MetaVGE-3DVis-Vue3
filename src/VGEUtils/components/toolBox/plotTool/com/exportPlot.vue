@@ -15,7 +15,7 @@
             </tbody>
         </table>
         <div style="text-align: center">
-            <button class="btn btn-primary" @click="SaveAsKML" style="margin-right: 5px">
+            <button class="btn btn-primary" style="margin-right: 5px" @click="SaveAsKML">
                 导出为 XML
             </button>
             <button class="btn btn-primary" @click="SaveAsGeoJson">
@@ -42,12 +42,12 @@ export default {
     methods: {
         SaveAsGeoJson() {
             plotTool.SaveAsGeoJson(function (msg) {
-                notify({message: msg, status: 'success'});
+                notify({ message: msg, status: 'success' });
             });
         },
         SaveAsKML() {
             plotTool.SaveAsKML(function (msg) {
-                notify({message: msg, status: 'success'});
+                notify({ message: msg, status: 'success' });
             });
         }
     },
@@ -65,9 +65,9 @@ export default {
 
 <style lang="less" scoped>
 #export-plot {
-  padding: 15px;
-  height: 100%;
-  overflow: auto;
-  border: black 1px dashed
+    padding: 15px;
+    height: 100%;
+    overflow: auto;
+    border: black 1px dashed
 }
 </style>

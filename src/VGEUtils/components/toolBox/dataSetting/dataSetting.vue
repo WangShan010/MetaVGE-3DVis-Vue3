@@ -6,12 +6,12 @@
 import dsContent from './ds-content.vue';
 
 export default {
-  name: 'dataSetting',
-  components: {dsContent},
-  computed: {
-    show() {
-      return this.$store.getters.comStatus("dataSetting")
+    name: 'dataSetting',
+    components: { dsContent },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('dataSetting');
+        }
     }
-  }
 };
 </script>

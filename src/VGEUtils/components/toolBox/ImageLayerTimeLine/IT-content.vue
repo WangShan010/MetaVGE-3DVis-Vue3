@@ -8,8 +8,8 @@
     <div id="ImageSliderMana">
         <div id="ImageSliderMana-select">
             <el-select v-model="selGroup" placeholder="请选择数据分组"
-                       style="top: -14px"
-                       size="small">
+                       size="small"
+                       style="top: -14px">
                 <el-option
                     v-for="item in groupList"
                     :key="item"
@@ -20,8 +20,8 @@
         </div>
         <el-slider
             v-model="layerIndex"
-            :max="layersInfo.length-1<1? 1 :layersInfo.length-1"
             :format-tooltip="formatLayerTip"
+            :max="layersInfo.length-1<1? 1 :layersInfo.length-1"
             @change="setLayer"
         >
         </el-slider>
@@ -57,7 +57,7 @@ export default {
     },
     methods: {
         async getSHBLayers() {
-            let {data} = await axios.get(new URL('/VGEEarth/Config/ImageLayerTimeLine/init.json', import.meta.url).href);
+            let { data } = await axios.get(new URL('/VGEEarth/Config/ImageLayerTimeLine/init.json', import.meta.url).href);
             this.layersData = data;
             if (this.layersData.length > 0) {
                 this.selGroup = this.layersData[0].group;
@@ -68,7 +68,7 @@ export default {
         initImageLayerTimeLine() {
             let group = this.layersData.find(item => item.group === this.selGroup);
             let position = group.position;
-            VGEEarth.SceneUtils.viewerFlyToLonLat (position.lon, position.lat, position.height);
+            VGEEarth.SceneUtils.viewerFlyToLonLat(position.lon, position.lat, position.height);
 
             this.layersInfo = group.layers || [];
             this.removeAll();
@@ -76,7 +76,7 @@ export default {
             this.layersInfo.forEach(item => {
                 let layer = earth.viewer3D.imageryLayers.addImageryProvider(this.creatLayer(item));
                 layer.show = false;
-                this.layers.push({name: item.name, time: item.time, layer: layer});
+                this.layers.push({ name: item.name, time: item.time, layer: layer });
             });
 
             this.setLayer(0);
@@ -103,7 +103,7 @@ export default {
 
             let group = this.layersData.find(item => item.group === this.selGroup);
             if (group?.legend) {
-                this.$store.commit('setLegendCurrent', {title: group.group, list: [], img: group.legend});
+                this.$store.commit('setLegendCurrent', { title: group.group, list: [], img: group.legend });
             }
         },
         removeAll() {
@@ -116,7 +116,7 @@ export default {
         }
     },
     async mounted() {
-        VGEEarth.SceneUtils.viewerFlyToLonLat (117.316034, 42.411409, 55150);
+        VGEEarth.SceneUtils.viewerFlyToLonLat(117.316034, 42.411409, 55150);
         await this.getSHBLayers();
     },
     unmounted() {

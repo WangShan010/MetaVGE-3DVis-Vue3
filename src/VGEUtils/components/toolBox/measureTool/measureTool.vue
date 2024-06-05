@@ -12,12 +12,12 @@
 import MsContent from './ms-content.vue';
 
 export default {
-  name: 'measureTool',
-  components: {MsContent},
-  computed: {
-    show() {
-      return this.$store.getters.comStatus("measureTool")
+    name: 'measureTool',
+    components: { MsContent },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('measureTool');
+        }
     }
-  }
 };
 </script>

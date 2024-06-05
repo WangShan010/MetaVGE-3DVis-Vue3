@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import {defineComponent} from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'EntityList'
 });
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 
 </style>

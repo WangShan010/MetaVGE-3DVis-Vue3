@@ -14,12 +14,12 @@
 import FEContent from './fe-content.vue';
 
 export default {
-  name: 'featureEffect',
-  components: {FEContent},
-  computed: {
-    show() {
-      return this.$store.getters.comStatus("featureEffect")
+    name: 'featureEffect',
+    components: { FEContent },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('featureEffect');
+        }
     }
-  }
 };
 </script>

@@ -5,19 +5,19 @@
 ****************************************************************************/
 
 <template>
-  <uvaContent v-if="show"></uvaContent>
+    <uvaContent v-if="show"></uvaContent>
 </template>
 
 <script>
 import uvaContent from './uva-content.vue';
 
 export default {
-  name: 'measureTool',
-  components: {uvaContent},
-  computed: {
-    show() {
-      return this.$store.getters.comStatus('uvaTool');
+    name: 'measureTool',
+    components: { uvaContent },
+    computed: {
+        show() {
+            return this.$store.getters.comStatus('uvaTool');
+        }
     }
-  }
 };
 </script>

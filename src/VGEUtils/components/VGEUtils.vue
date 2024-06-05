@@ -12,6 +12,7 @@ import toolBox from './toolBox/index.vue';
 import { useStore } from 'vuex';
 import LoadBar from './viewer/LoadBar/index.vue';
 
+
 export default {
     name: 'VGEUtils',
     components: {
@@ -26,7 +27,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .vge-utils {
     height: 100%;
     position: relative;

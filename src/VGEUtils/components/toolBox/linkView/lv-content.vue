@@ -22,12 +22,12 @@ import { tabPane, winTabs } from '@/VGEUtils/components/winTabs/index.js';
 
 export default {
     name: 'lv-content',
-    components: {winTabs, tabPane},
+    components: { winTabs, tabPane },
     data() {
         return {
             OLMapLink23dIsOpen: false,
             CesiumMapLink23dIsOpen: false,
-            overViewMapIsOpen: false,
+            overViewMapIsOpen: false
         };
     },
     watch: {
@@ -58,7 +58,7 @@ export default {
     },
     methods: {
         close() {
-            this.$store.commit('setVGEEarthComAction', {name: 'linkView', on_off: 2});
+            this.$store.commit('setVGEEarthComAction', { name: 'linkView', on_off: 2 });
         }
     },
     mounted() {

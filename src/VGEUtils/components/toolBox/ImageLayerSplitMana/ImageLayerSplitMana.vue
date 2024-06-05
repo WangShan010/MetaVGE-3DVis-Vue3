@@ -3,16 +3,16 @@
 </template>
 
 <script>
-import ISContent from "./is-content.vue";
+import ISContent from './is-content.vue';
 
 export default {
-    name: "ImageLayerSplitMana",
+    name: 'ImageLayerSplitMana',
     components: {
         ISContent
     },
     computed: {
         show() {
-            return this.$store.getters.comStatus("ImageLayerSplitMana");
+            return this.$store.getters.comStatus('ImageLayerSplitMana');
         }
     }
 };
