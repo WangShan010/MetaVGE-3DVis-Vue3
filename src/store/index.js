@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 
 
-import VGEEarthStore from '@/store/modules/VGEEarthStore.js';
+import VGEEarthStore from './modules/VGEEarthStore.js';
 
 const store = createStore({
     modules: {

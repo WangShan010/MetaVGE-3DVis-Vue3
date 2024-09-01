@@ -33,9 +33,9 @@ export default {
         }
     },
     mounted() {
-        pointcluster = new VGEEarth.SuperiorEntity.PointCluster1(
+        pointcluster = new VGEEarth.SuperiorEntity.PointClusterGeoJson(
             earth.viewer3D,
-            'http://211.149.185.229:8081/data/cluserPoint.json',
+            './app/vge/cluserPoint.json',
             { isExample: true }
         );
     },

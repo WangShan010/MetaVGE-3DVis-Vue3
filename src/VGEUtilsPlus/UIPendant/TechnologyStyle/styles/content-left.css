@@ -1,0 +1,53 @@
+.content-left {
+    display: flex;
+
+    .left-container {
+        position: absolute;
+        top: calc((105 / 1080) * 100vh);
+        left: calc((10 / 1920) * 100vw);
+        width: calc((478 / 1920) * 100vw);
+        overflow: hidden;
+
+        &.is-fold {
+            transition: all 0.5s;
+            left: -28%;
+        }
+
+        &.not-fold {
+            transition: all 0.5s;
+            left: 14px;
+
+        }
+
+        &.two-left {
+            left: 14px;
+            width: calc((478 / 1920) * 100vw);
+        }
+    }
+
+    .left-container-max-height {
+        height: 87vh;
+    }
+
+    .left-container-min-height {
+        height: calc(87vh - 260px);
+    }
+
+    .button {
+        position: absolute;
+        top: calc((107 / 1080) * 100vh);
+        width: calc((34 / 1920) * 100vw);
+
+        &.right-fold {
+            transition: all 0.5s;
+            left: calc((16 / 1920) * 100vw);
+        }
+
+        &.left-fold {
+            transition: all 0.5s;
+            margin-top: 10px;
+            left: 23.6%;
+            z-index: 60;
+        }
+    }
+}

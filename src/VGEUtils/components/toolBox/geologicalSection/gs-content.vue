@@ -10,7 +10,7 @@
 <template>
     <win-tabs :initCSS="{width: 650,height: 400,left:400,top:300}" @close="close">
         <tab-pane label="地形剖面">
-            <div id="msPane" @mousedown.stop>
+            <div id="msPane">
                 <div>
                     操作：
                     <button class="btn btn-sm btn-success" style="width: 100px;"

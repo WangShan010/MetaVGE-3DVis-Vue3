@@ -39,6 +39,11 @@ const VGEEarthStore = {
         }
     },
     mutations: {
+        setVGEEarthStoreItem(state, { key, value }) {
+            if (JSON.stringify(state[key]) !== JSON.stringify(value)) {
+                state[key] = value;
+            }
+        },
         loadUIConfig(state, UIConfig) {
             state.demoModel = UIConfig.demoModel;
             state.themeColor = UIConfig.themeColor;
@@ -47,7 +52,7 @@ const VGEEarthStore = {
             if (userInfo) {
                 userInfo = JSON.parse(userInfo) || {};
                 state.comActions = UIConfig.comActions.filter(item => item.role === userInfo.useName || item.role === 'all');
-            }else {
+            } else {
                 state.comActions = UIConfig.comActions.filter(item => item.role === 'all');
             }
         },

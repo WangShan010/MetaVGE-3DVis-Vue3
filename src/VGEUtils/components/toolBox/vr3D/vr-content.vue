@@ -1,7 +1,7 @@
 <template>
     <win-tabs :initCSS="{width: 350,height: 250,left:400,top:300}" @close="close">
         <tab-pane label="VR立体屏幕" style="height: 100%">
-            <div style="height: 100%" @mousedown.stop>
+            <div style="height: 100%">
 
                 <div>
                     <el-row>
@@ -87,13 +87,27 @@ export default {
     },
     methods: {
         turnOn() {
-            if (this.open) {
-                this.closeVR3d();
-                this.open = false;
-            } else {
-                this.openVR3d();
-                this.open = true;
-            }
+            // this.$router.push({ path: '/VRScreen' });
+
+            // 打开新页面
+            window.open(window.location.origin + '/#/VRScreen');
+
+            localStorage.setItem('VRScreenData', JSON.stringify({
+                eyeSeparation: this.eyeSeparation,
+                eyeSeparationRange: this.eyeSeparationRange,
+                focalLength: this.focalLength,
+                focalLengthRange: this.focalLengthRange,
+                selScene: this.selScene,
+                cameraInfo: VGEEarth.CameraUtils.getCameraInfo()
+            }));
+
+            // if (this.open) {
+            //     this.closeVR3d();
+            //     this.open = false;
+            // } else {
+            //     this.openVR3d();
+            //     this.open = true;
+            // }
         },
         openVR3d() {
             earth.viewer3D.scene.useWebVR = true;

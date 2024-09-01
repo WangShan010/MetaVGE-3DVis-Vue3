@@ -61,14 +61,4 @@ export default {
     right: 180px !important;
 }
 
-
-/** 导航罗盘 **/
-.compass {
-    top: 140px !important;
-}
-
-/** 放大缩小按钮 **/
-.navigation-controls {
-    top: 240px !important;
-}
 </style>

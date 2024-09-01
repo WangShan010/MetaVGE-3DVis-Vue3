@@ -41,7 +41,7 @@ import Viewer from '@/VGEUtils/components/viewer/viewer.vue';
 import { Delete, Edit, Refresh, Share } from '@element-plus/icons-vue';
 
 export default {
-    name: 'index',
+    name: 'example',
     components: {Viewer},
     data() {
         return {
@@ -86,7 +86,13 @@ export default {
             this.htmlList = await fetch(window.demoServer + '/Demo/htmlList.json').then(res => res.json());
         },
         openDemo(pid) {
-            this.iframeUrl = './app/WebEditor/index.html?demo=' + pid;
+            this.iframeUrl = '';
+            this.$nextTick(() => {
+                this.$router.push({name: 'example', params: {demoPid: pid}});
+                this.iframeUrl = './app/WebEditor/index.html?demo=' + pid;
+                // 标签页标题
+                document.title = this.htmlList.find(item => item.pid === pid).name;
+            });
         },
         handleClick(menuItem) {
             this.openDemo(menuItem.pid);
@@ -101,8 +107,15 @@ export default {
     },
     async mounted() {
         await this.loadHtmlList();
-        this.openDemo(this.menuList[0].list[0].pid);
         window.Sandbox = this.$refs.Sandbox;
+
+        const {demoPid} = this.$route.params;
+
+        if (Number(demoPid) && this.htmlList.length) {
+            this.openDemo(Number(demoPid));
+        }else {
+            this.openDemo(this.menuList[0].list[0].pid);
+        }
     }
 };
 </script>

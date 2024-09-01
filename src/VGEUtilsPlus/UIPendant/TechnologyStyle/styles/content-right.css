@@ -1,0 +1,47 @@
+.content-right {
+    display: flex;
+
+    .right-container {
+        position: absolute;
+        top: calc((105 / 1080) * 100vh);
+        right: 16px;
+        bottom: 50px;
+        width: calc((478 / 1920) * 100vw);
+        overflow: hidden;
+
+        &.is-fold {
+            transition: all 0.5s;
+            right: -28%;
+        }
+
+        &.not-fold {
+            transition: all 0.5s;
+            right: 16px;
+
+        }
+    }
+
+    .button {
+        position: absolute;
+        top: calc((107 / 1080) * 100vh);
+        width: calc((34 / 1920) * 100vw);
+        right: 16px;
+        z-index: 60;
+        margin-top: 10px;
+
+        .folddiv {
+            position: relative;
+            right: 20px;
+        }
+    }
+
+    .right-container-max-height {
+        height: 87vh;
+    }
+
+    .right-container-min-height {
+        height: calc(87vh - 260px);
+    }
+
+
+}

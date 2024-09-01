@@ -1,6 +1,5 @@
 <template>
     <specialEffect></specialEffect>
-    <EarthworkVolume></EarthworkVolume>
     <GeologicalSection></GeologicalSection>
     <skyBoxTool></skyBoxTool>
     <MeasureTool></MeasureTool>
@@ -24,7 +23,6 @@
     <fountainPlot></fountainPlot>
     <smokePlot></smokePlot>
     <resourceTree></resourceTree>
-    <uvaTool></uvaTool>
     <legends></legends>
     <vr3-d></vr3-d>
 </template>
@@ -53,21 +51,17 @@ import firePlot from './particleSystem/firePlot/firePlot.vue';
 import fountainPlot from './particleSystem/fountainPlot/fountainPlot.vue';
 import smokePlot from './particleSystem/smokePlot/smokePlot.vue';
 import resourceTree from './resourceTree/resourceTree.vue';
-import uvaTool from './uvaTool/uvaTool.vue';
 import Legends from '../viewer/legends/legends.vue';
 import Vr3D from './vr3D/vr3D.vue';
-import EarthworkVolume from './earthworkVolume/earthworkVolume.vue';
 import GeologicalSection from './geologicalSection/geologicalSection.vue';
 
 export default {
     components: {
         GeologicalSection,
-        EarthworkVolume,
         Vr3D,
         Legends,
         specialEffect,
         resourceTree,
-        uvaTool,
         skyBoxTool,
         featureEffect,
         visualMarker,

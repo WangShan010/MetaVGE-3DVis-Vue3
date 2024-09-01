@@ -3,7 +3,7 @@
         <!--    <div class="attr-panel-header">-->
         <!--      <span class="attr-panel-header-title">属性编辑</span>-->
         <!--    </div>-->
-        <div class="attr-panel-body" @mousedown.stop>
+        <div class="attr-panel-body">
             <el-form ref="form" label-width="100px" size="small">
                 <el-form-item label="粒子数量">
                     <el-slider

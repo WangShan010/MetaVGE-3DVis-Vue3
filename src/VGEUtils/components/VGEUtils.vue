@@ -2,6 +2,7 @@
     <div class="vge-utils">
         <viewer></viewer>
         <toolBox></toolBox>
+        <tool-box-plus></tool-box-plus>
         <load-bar></load-bar>
     </div>
 </template>
@@ -12,10 +13,12 @@ import toolBox from './toolBox/index.vue';
 import { useStore } from 'vuex';
 import LoadBar from './viewer/LoadBar/index.vue';
 
+import ToolBoxPlus from '@/VGEUtilsPlus/components/toolBox/index.vue';
 
 export default {
     name: 'VGEUtils',
     components: {
+        ToolBoxPlus,
         LoadBar,
         Viewer,
         toolBox

@@ -7,7 +7,7 @@
 <template>
     <win-tabs :initCSS="{width: 310,height: 190,left:400,top:120}" @close="close">
         <tab-pane label="天空盒">
-            <div @mousedown.stop>
+            <div>
                 <div>
                     <el-row class="form-item">
                         <el-col :span="8">

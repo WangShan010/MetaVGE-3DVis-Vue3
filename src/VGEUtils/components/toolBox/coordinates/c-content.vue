@@ -1,10 +1,13 @@
 <template>
     <win-tabs :firstGuide="firstGuide"
-              :initCSS="{width: 320,height: 310,left:450,top:330}"
+			  :initCSS="{width: 340,height: 300,left:1330,top:610}"
               @close="close"
               @openHelp="openHelp">
+		<tab-pane label="坐标标注">
+			<coord-plot></coord-plot>
+		</tab-pane>
         <tab-pane label="坐标定位">
-            <div class="centerXY" @mousedown.stop>
+            <div class="centerXY">
                 <!--radio选择框-->
                 <div>
                     <div class="radio radio-info radio-inline">
@@ -208,9 +211,6 @@
                     <el-button size="small" type="warning" @click="toCopy">复制到粘贴板</el-button>
                 </div>
             </div>
-        </tab-pane>
-        <tab-pane label="坐标标注">
-            <coord-plot></coord-plot>
         </tab-pane>
     </win-tabs>
 </template>

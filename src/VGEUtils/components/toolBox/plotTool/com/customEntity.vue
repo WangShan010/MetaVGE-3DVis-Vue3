@@ -20,12 +20,12 @@
             <div v-for="item in selPlot.paramList">
                 <div style="padding-top: 10px">
                     {{ item.name }}：
-                    <el-select v-if="item.select instanceof Array" v-model="item.value" size="small" style="width: 120px;">
+                    <el-select v-if="item.select instanceof Array" v-model="item.value" size="small" style="width: 160px;">
                         <el-option v-for="item2 in item.select" :key="item2.key" :label="item2.label" :value="item2.value"
                                    clearable>
                         </el-option>
                     </el-select>
-                    <el-input v-else v-model="item.value" :placeholder="item.placeholder || ''" size="small" style="width: 120px" @input="setOption(item)">
+                    <el-input v-else v-model="item.value" :placeholder="item.placeholder || ''" size="small" style="width: 190px" @input="setOption(item)">
                     </el-input>
                 </div>
             </div>

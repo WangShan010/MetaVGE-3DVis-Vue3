@@ -7,12 +7,16 @@
     <link rel="shortcut icon" href="/favicon.ico">
     <title>加载中...</title>
 
+    <!-- 尽量通过 HTML 引入第三方工具库，这样后期优化时可以通过 CDN 进行网络加速，不至于占用过多服务器带宽 -->
+
+<!--    <script async src="https://bj.webgpu.top:3018/script.js" data-website-id="f370b184-4cbd-48e1-855c-c94a00e27ca4"></script>-->
+
     <!-- MapV 需要在 SDK 引入之前载入 -->
     <script src="/VGEEarth/Ext/MapV/^2.0.33/mapv.js"></script>
 
     <!-- Cesium 包 -->
-    <script src="/VGEEarth/Ext/Cesium/^1.117/Cesium.js"></script>
-    <link rel="stylesheet" href="/VGEEarth/Ext/Cesium/^1.117/Widgets/widgets.css">
+    <script src="/VGEEarth/Ext/Cesium/^1.120/Cesium.js"></script>
+    <link rel="stylesheet" href="/VGEEarth/Ext/Cesium/^1.120/Widgets/widgets.css">
     <script src="/VGEEarth/Ext/Cesium-Navigation/^1.1.4/viewerCesiumNavigationMixin.js"></script>
     <script src="/VGEEarth/Src/LTS-Master/VGEEarth-LTS-min.js"></script>
 
@@ -30,16 +34,12 @@
     <script src="/VGEEarth/Ext/echarts/^5.3.4/echarts.min.js"></script>
     <script src="/VGEEarth/Ext/echarts-liquidfill/^3.1.0/echarts-liquidfill.min.js"></script>
 
+    <script src="/VGEEarth/Ext/ReconnectingWebSocket/reconnecting-websocket.js"></script>
+
     <script src="/VGEEarth/Ext/geotiff/geotiff.js"></script>
     <script src="/VGEEarth/Ext/axios/^1.4.0/axios.min.js"></script>
     <script src="/VGEEarth/Ext/proj4/^2.9.0/proj4.js"></script>
-
-    <script>
-        console.log(`%c📜 MetaVGE-3DVis-Vue3 编译版本：2023年12月13日`, 'color: #84709b; font-size: 14px; font-weight: bold;');
-        window.GISResourcesUrl = 'http://8.146.208.114:9001';
-        window.AppBaseUrl = 'http://8.146.208.114:3060';
-        window.demoServer = 'http://8.146.208.114:3000/VGEEarth-SDK';
-    </script>
+    <script src="/VGEEarth/Ext/heatmap/^2.0.5/heatmap.js"></script>
 </head>
 
 <script src="/config/baseConfig.js" type="module"></script>

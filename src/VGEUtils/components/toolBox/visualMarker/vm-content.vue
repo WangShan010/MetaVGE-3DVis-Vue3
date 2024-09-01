@@ -5,7 +5,7 @@
 
 
 <template>
-    <win-tabs :initCSS="{width: 440,height: 400,left:580,top:330}" @close="close">
+    <win-tabs :initCSS="{width: 440,height: 560,left:580,top:330}" @close="close">
         <tab-pane label="视觉标签">
             <div>
                 <input id="choseFile" style="display:none" type="file"/>
@@ -182,8 +182,8 @@ label {
 }
 
 #container {
-    max-height: 250px;
-    overflow-y: scroll;
+    max-height: 450px;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 

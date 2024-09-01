@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div style="max-height: 500px;overflow: auto">
-                <table v-if="paths.length>0" class="roadTable" @mousedown.stop>
+                <table v-if="paths.length>0" class="roadTable">
                     <tr>
                         <td class="center" width="50">方案</td>
                         <td>推荐线路</td>

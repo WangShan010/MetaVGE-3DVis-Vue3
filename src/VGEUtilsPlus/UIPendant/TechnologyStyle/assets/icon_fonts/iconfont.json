@@ -1,0 +1,58 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1793630",
+      "name": "测量",
+      "font_class": "celiang",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
+      "icon_id": "1968821",
+      "name": "测量",
+      "font_class": "celiang1",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "5744733",
+      "name": "home",
+      "font_class": "shouye",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "6677522",
+      "name": "距离测量",
+      "font_class": "juliceliang",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "6967037",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "8718263",
+      "name": "测量",
+      "font_class": "celiang2",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "9923725",
+      "name": "测量类型",
+      "font_class": "celiangleixing",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    }
+  ]
+}

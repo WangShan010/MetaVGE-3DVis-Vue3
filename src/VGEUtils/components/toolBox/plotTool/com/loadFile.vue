@@ -2,7 +2,7 @@
     <div>
         <div class="padding-top">
             <span style="display:inline-block;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;width: 180px">
-              文件路径：{{ fileName }}</span>
+              本地文件：{{ fileName }}</span>
             <button class="btn btn-success pull-right btn-xs" style="margin-top: -4px" @click="inputFileData"><i class="iconfont icon-wenjianjia"></i>导入
             </button>
         </div>
@@ -34,7 +34,3 @@ export default {
     }
 };
 </script>
-
-<style lang="less" scoped>
-
-</style>

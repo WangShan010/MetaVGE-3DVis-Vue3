@@ -1,6 +1,11 @@
 <template>
     <div>
         <div class="entity_arr">
+			<div>
+				<div v-for="item in TableData">
+					{{item}}
+				</div>
+			</div>
             <ul id="GeoJsonTree" class="ztree"></ul>
         </div>
         <div style="text-align: center;padding: 10px">
@@ -102,7 +107,6 @@ export default {
                 });
             });
 
-            console.log(geoJson);
             this.TreeData = TreeData;
             this.initGeoJsonTree();
             console.log('刷新状态');
@@ -213,7 +217,7 @@ export default {
 <style lang="less" scoped>
 .entity_arr {
     padding: 15px;
-    height: 200px;
+    height: 350px;
     overflow: auto;
     border: #949393 1px dashed
 }
