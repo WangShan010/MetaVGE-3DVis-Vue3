@@ -32,8 +32,6 @@ let UIConfig = {
         // 工具箱内模块
         { name: '图上量算', type: 'ToolBoxItem', open: false, comName: 'measureTool', config: { inToolBox: true, iconClass: 'vge-shuipingliangsuan' }, role: 'all' },
         { name: '剖面分析', type: 'ToolBoxItem', open: false, comName: 'geologicalSection', config: { inToolBox: true, iconClass: 'vge-shuipingliangsuan', role: 'all' } },
-        // { name: '土方量算', type: 'ToolBoxItem', open: false, comName: 'earthworkVolume', config: { inToolBox: false, iconClass: 'vge-changjing' }, role: 'admin' },
-        { name: '空间分析', type: 'ToolBoxItem', open: false, comName: 'spatialAnalyze', config: { inToolBox: true, iconClass: 'vge-fenxi' }, role: 'admin' },
         { name: '坐标定位', type: 'ToolBoxItem', open: false, comName: 'coordinates', config: { inToolBox: true, iconClass: 'vge-dingwei' }, role: 'all' },
         { name: '地区导航', type: 'ToolBoxItem', open: false, comName: 'areaNavigation', config: { inToolBox: true, iconClass: 'vge-daohang1' }, role: 'all' },
         { name: '视角书签', type: 'ToolBoxItem', open: false, comName: 'visualMarker', config: { inToolBox: true, iconClass: 'vge-biaoqian' }, role: 'all' },
@@ -47,46 +45,15 @@ let UIConfig = {
         { name: '实时天气', type: 'ToolBoxItem', open: false, comName: 'weather', config: { inToolBox: false, iconClass: 'vge-duoyun' }, role: 'all' },
         { name: '几何特效', type: 'ToolBoxItem', open: false, comName: 'featureEffect', config: { inToolBox: true, iconClass: 'vge-texiao' }, role: 'all' },
         { name: '场景特效', type: 'ToolBoxItem', open: false, comName: 'specialEffect', config: { inToolBox: true, iconClass: 'vge-texiao' }, role: 'all' },
-        { name: '洪水演进', type: 'ToolBoxItem', open: false, comName: 'flood', config: { inToolBox: true, iconClass: 'vge-texiao' }, role: 'all' },
-        { name: '视频融合', type: 'ToolBoxItem', open: false, comName: 'videoShed', config: { inToolBox: false, iconClass: 'vge-texiao' }, role: 'all' },
         { name: '视图管理', type: 'ToolBoxItem', open: false, comName: 'linkView', config: { inToolBox: true, iconClass: 'vge-texiao' }, role: 'all' },
         { name: '粒子系统', type: 'ToolBoxItem', open: false, comName: 'particleSystem', config: { inToolBox: true, iconClass: 'vge-texiao' }, role: 'all' },
         { name: '插件管理', type: 'ToolBoxItem', open: false, comName: 'PluginManagement', config: { inToolBox: true, iconClass: 'vge-texiao' }, role: 'all' },
-        { name: '洪水模型', type: 'ToolBoxItem', open: false, comName: 'floodModel', config: { inToolBox: true, iconClass: 'vge-texiao' }, role: 'all' },
-
-        // 工具类挂件
-        { name: '数据配置', type: 'Pendant', open: false, comName: 'dataSetting', role: 'all' },
-        { name: '可视分析', type: 'Pendant', open: false, comName: 'viewShedStage', role: 'all' },
-        { name: '地表开挖', type: 'Pendant', open: false, comName: 'terrainExcavate', role: 'all' },
-        { name: '限高分析', type: 'Pendant', open: false, comName: 'limitHeight', role: 'all' },
-        { name: '地貌渲染', type: 'Pendant', open: false, comName: 'terrainRendering', role: 'all' },
-        { name: '坡向分析', type: 'Pendant', open: false, comName: 'aspectAnalyze', role: 'all' },
-        { name: '坡度分析', type: 'Pendant', open: false, comName: 'slopeAnalyze', role: 'all' },
-        { name: '风力效应', type: 'Pendant', open: false, comName: 'windEffect', role: 'all' },
-        { name: '山体阴影', type: 'Pendant', open: false, comName: 'hillShade', role: 'all' },
-        { name: '视域分析', type: 'Pendant', open: false, comName: 'viewAnalyze', role: 'all' },
-        { name: '日照分析', type: 'Pendant', open: false, comName: 'sunlightAnalyze', role: 'all' },
-
-        { name: '水文分析', type: 'Pendant', open: false, comName: 'hydrologyAnalyze', role: 'admin' },
-        { name: '三维地层', type: 'Pendant', open: false, comName: 'stratumAnalyze', role: 'admin' },
-        { name: '数据裁切', type: 'Pendant', open: false, comName: 'dataCropping', role: 'admin' },
-        { name: '数据拼接', type: 'Pendant', open: false, comName: 'dataConcatenation', role: 'admin' },
-        { name: '求交分析', type: 'Pendant', open: false, comName: 'intersectAnalysis', role: 'admin' },
-        { name: '缓冲区', type: 'Pendant', open: false, comName: 'bufferAnalysis', role: 'admin' },
-        { name: '差值分析', type: 'Pendant', open: false, comName: 'interpolation', role: 'admin' },
 
         { name: '水体特效', type: 'Pendant', open: false, comName: 'waterSpecial', role: 'all' },
         { name: '火焰粒子', type: 'Pendant', open: false, comName: 'firePlot', role: 'all' },
         { name: '喷泉粒子', type: 'Pendant', open: false, comName: 'fountainPlot', role: 'all' },
         { name: '烟雾粒子', type: 'Pendant', open: false, comName: 'smokePlot', role: 'all' },
         { name: '图例', type: 'Pendant', open: false, comName: 'legend' }
-
-        // 待开发
-        // { name: '我的标记',  open:false, iconClass: 'vge-pin-fill' , role: 'all'},
-        // { name: '地图打印',  open:false, iconClass: 'vge-24gf-printer' , role: 'all'},
-        // { name: '飞行漫游',  open:false, iconClass: 'vge-biaoqian', role: 'all' },
-        // { name: '分屏对比',  open:false, iconClass: 'vge-fenping' , role: 'all'},
-        // { name: '百度街景',  open:false, iconClass: 'vge-jiejing' , role: 'all'},
     ]
 };
 

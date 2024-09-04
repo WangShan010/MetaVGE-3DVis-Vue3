@@ -65,17 +65,17 @@ const router = createRouter({
 
 });
 
-// router.beforeEach((to, from, next) => {
-//     let userInfo = localStorage.getItem('userInfo');
-//     if (userInfo) {
-//         userInfo = JSON.parse(userInfo) || {};
-//         next();
-//     } else if (to.path === '/login' || to.path === '/' || to.path === '/blank' || to.path === '/404') {
-//         next();
-//     } else {
-//         next({ path: '/login' });
-//     }
-// });
+router.beforeEach((to, from, next) => {
+    let userInfo = localStorage.getItem('userInfo');
+    if (userInfo) {
+        userInfo = JSON.parse(userInfo) || {};
+        next();
+    } else if (to.path === '/login' || to.path === '/' || to.path === '/blank' || to.path === '/404') {
+        next();
+    } else {
+        next({ path: '/login' });
+    }
+});
 
 
 export default router;

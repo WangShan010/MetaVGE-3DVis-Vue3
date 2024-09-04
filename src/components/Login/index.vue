@@ -52,9 +52,13 @@ export default {
 		},
 		async loginHandle() {
 			this.loading = true;
-			await new Promise(resolve => setTimeout(resolve, 200));
-			this.$router.push({path: '/TechnologyScreen'});
-			await new Promise(resolve => setTimeout(resolve, 2000));
+			if (this.form.username === 'admin' && this.form.password === 'NhkjYDCjC2MpXeRsrcw3') {
+				localStorage.setItem('userInfo', JSON.stringify({useName: 'admin'}));
+
+				await new Promise(resolve => setTimeout(resolve, 200));
+				this.$router.push({path: '/TechnologyScreen'});
+				await new Promise(resolve => setTimeout(resolve, 2000));
+			}
 			this.loading = false;
 		}
 	},
