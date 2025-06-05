@@ -34,11 +34,11 @@ const cesium3DTileSetList = [
         resourceImg: './app/ResourceImg/倾斜模型.png',
         offlineCache: true,
         netRootPaths: [
-            'https://bj.webgpu.top:3006/DBService/3DTiles-TianYi-en/'
+            'https://nas.vgemap.site:3006/DBService/3DTiles-TianYi-en/'
         ],
         decryptionKey: 'SDcVrdKWEgjKPTGQgZ6zonZ7hLX+IjnF2Y0AwiKLXjewB5todhQ3UskdmWuGRl3FXYRUq37xlkrkmEyg+6Aub29/JH+Ga2AeS6AXTCcp1IMwxWXi4gMUhevgkwHt7AXl3GjsEiQ93HYVq/kXGcYx28aj/VrqPSCADtwjkQI+28Y=',
         properties: {
-            url: 'https://bj.webgpu.top:3006/DBService/3DTiles-TianYi-en/tileset.json',
+            url: 'https://nas.vgemap.site:3006/DBService/3DTiles-TianYi-en/tileset.json',
             maximumScreenSpaceError: 2,
             maximumMemoryUsage: 8192,
             offset: {
@@ -56,11 +56,11 @@ const cesium3DTileSetList = [
         resourceImg: './app/ResourceImg/倾斜模型.png',
         offlineCache: true,
         netRootPaths: [
-            'https://bj.webgpu.top:3006/DBService/3DTile-FeiDong-en/'
+            'https://nas.vgemap.site:3006/DBService/3DTile-FeiDong-en/'
         ],
         decryptionKey: 'SDcVrdKWEgjKPTGQgZ6zonZ7hLX+IjnF2Y0AwiKLXjc5CRgpSDHPq1Uy/7owGn1b9ianW+GH4zUh5CgilKFT0CGrdWHWgQ2q/Gdz8h68Lqa56o242Kg/6bDSn/lq+QGXSiy/vmQabumO/uVMPOWe8W9AAkjuxB22u2oZh69uMIL13Aqkqllwdc9hSQmXPatDNEIMSnBIYxG+Sro7Ou1VbgrLnXFdwal0vOsKdEBWh9E=',
         properties: {
-            url: 'https://bj.webgpu.top:3006/DBService/3DTile-FeiDong-en/tileset.json',
+            url: 'https://nas.vgemap.site:3006/DBService/3DTile-FeiDong-en/tileset.json',
             maximumScreenSpaceError: 2,
             maximumMemoryUsage: 8192,
             offset: {
